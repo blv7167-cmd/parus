@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="sea" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#5aa9a5"/>
+      <stop offset="1" stop-color="#2b5c84"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="64" height="64" rx="16" fill="#0f3b5e"/>
+
+  <!-- sail -->
+  <path d="M30 10c0 0 14 10 14 30H30V10z" fill="#ffffff" opacity="0.95"/>
+  <path d="M30 14c-7 6-11 13-12 26h12V14z" fill="#ffffff" opacity="0.85"/>
+
+  <!-- mast -->
+  <rect x="29" y="10" width="2" height="34" fill="#cfe7ee" opacity="0.8"/>
+
+  <!-- hull -->
+  <path d="M16 44h32c-2 6-7 10-16 10s-14-4-16-10z" fill="url(#sea)"/>
+
+  <!-- wave hint -->
+  <path d="M14 50c4 2 8 2 12 0s8-2 12 0 8 2 12 0" fill="none" stroke="#ffffff" stroke-width="2" opacity="0.25" stroke-linecap="round"/>
+</svg>
