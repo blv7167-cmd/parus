@@ -42,28 +42,28 @@
     <div class="container">
         <div class="gallery">
 
-            <div class="gallery-item" data-lightbox-src="foto/specialists/1.jpg">
+            <div class="gallery-item" data-lightbox-src="foto/specialists/1.jpg" data-title="✅Марков Дмитрий Николаевич.<br>Клинический психолог-аддиктолог.<br>Опыт работы с зависимыми: более 16 лет.">
                 <img src="foto/specialists/1.jpg" alt="">
             </div>
-            <div class="gallery-item" data-lightbox-src="foto/specialists/2.jpg">
+            <div class="gallery-item" data-lightbox-src="foto/specialists/2.jpg" data-title="✅Добров Роман Александрович.<br>Консультант-аддиктолог.<br>Опыт работы с зависимыми: более 3х лет.">
                 <img src="foto/specialists/2.jpg" alt="">
             </div>
-            <div class="gallery-item" data-lightbox-src="foto/specialists/3.jpg">
+            <div class="gallery-item" data-lightbox-src="foto/specialists/3.jpg" data-title="✅ Гиниятов Ильшат Халимович.<br>Заместитель руководителя по хозяйственной части.">
                 <img src="foto/specialists/3.jpg" alt="">
             </div>
-            <div class="gallery-item" data-lightbox-src="foto/specialists/4.jpg">
+            <div class="gallery-item" data-lightbox-src="foto/specialists/4.jpg" data-title="✅ Платов Валерий Германович.<br>Практикующий психолог.<br>Опыт работы с зависимыми: более 4х лет.">
                 <img src="foto/specialists/4.jpg" alt="">
             </div>
-            <div class="gallery-item" data-lightbox-src="foto/specialists/5.jpg">
+            <div class="gallery-item" data-lightbox-src="foto/specialists/5.jpg" data-title="✅Денденкова Светлана Владимировна.<br>Специальный психолог,клинический психолог,педагог -психолог<br>Стаж 15 лет">
                 <img src="foto/specialists/5.jpg" alt="">
             </div>
-            <div class="gallery-item" data-lightbox-src="foto/specialists/6.jpg">
+            <div class="gallery-item" data-lightbox-src="foto/specialists/6.jpg" data-title="✅Фатахова София Шамилевна.<br>Клинический психолог, аддиктолог, травмотерапевт. Практикующий психолог.<br>Стаж работы более 16 лет">
                 <img src="foto/specialists/6.jpg" alt="">
             </div>
-            <div class="gallery-item" data-lightbox-src="foto/specialists/7.jpg">
+            <div class="gallery-item" data-lightbox-src="foto/specialists/7.jpg" data-title="✅Кирюшкин Денис Георгиевич.<br>Програмный руководитель филиала №1.<br>Менеджер по социальной работе.<br>Практикующий психолог.<br>Опыт работы: более 10 лет.">
                 <img src="foto/specialists/7.jpg" alt="">
             </div>
-            <div class="gallery-item" data-lightbox-src="foto/specialists/8.jpg">
+            <div class="gallery-item" data-lightbox-src="foto/specialists/8.jpg" data-title="✅ Мифтахов Ильшат Зарифович.<br>Менеджер по социальной работе.<br>Программный руководитель филиала №2.<br>Практикующий психолог.<br>Опыт работы: более 13 лет.">
                 <img src="foto/specialists/8.jpg" alt="">
             </div>
 
@@ -76,58 +76,58 @@
                 <i class="fas fa-xmark"></i>
             </button>
             <img id="lightbox-img" class="lightbox__img" alt="Просмотр фотографии">
+            <div id="lightbox-caption" class="lightbox__caption"></div>
         </div>
     </div>
 
-    <script>
-        (function () {
-            var lightbox = document.getElementById('lightbox');
-            var lightboxImg = document.getElementById('lightbox-img');
-            if (!lightbox || !lightboxImg) return;
+<script>
+(function () {
+    var lightbox = document.getElementById('lightbox');
+    var lightboxImg = document.getElementById('lightbox-img');
+    var caption = document.getElementById('lightbox-caption');
 
-            var closeBtn = lightbox.querySelector('.lightbox__close');
-            var triggers = Array.prototype.slice.call(document.querySelectorAll('[data-lightbox-src]'));
+    if (!lightbox || !lightboxImg) return;
 
-            function openLightbox(src, alt) {
-                lightboxImg.src = src;
-                lightboxImg.alt = alt || 'Просмотр фотографии';
-                lightbox.classList.remove('hidden');
-                lightbox.setAttribute('aria-hidden', 'false');
-                document.body.style.overflow = 'hidden';
-                closeBtn && closeBtn.focus();
-            }
+    var closeBtn = lightbox.querySelector('.lightbox__close');
+    var triggers = Array.prototype.slice.call(document.querySelectorAll('[data-lightbox-src]'));
 
-            function closeLightbox() {
-                lightbox.classList.add('hidden');
-                lightbox.setAttribute('aria-hidden', 'true');
-                lightboxImg.src = '';
-                document.body.style.overflow = '';
-            }
+    function openLightbox(src, title) {
+        lightboxImg.src = src;
 
-            triggers.forEach(function (btn) {
-                btn.addEventListener('click', function () {
-                    var src = btn.getAttribute('data-lightbox-src');
-                    var img = btn.querySelector('img');
-                    openLightbox(src, img ? img.getAttribute('alt') : '');
-                });
-            });
+        // 🔥 превращаем \n в перенос строки
+        caption.innerHTML = (title || '').replace(/\n/g, '<br>');
 
-            closeBtn && closeBtn.addEventListener('click', closeLightbox);
+        lightbox.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+    }
 
-            lightbox.addEventListener('click', function (e) {
-                // закрытие по клику на затемнение
-                if (e.target === lightbox) closeLightbox();
-            });
+    function closeLightbox() {
+        lightbox.classList.add('hidden');
+        lightboxImg.src = '';
+        caption.innerHTML = '';
+        document.body.style.overflow = '';
+    }
 
-            document.addEventListener('keydown', function (e) {
-                if (e.key === 'Escape' && !lightbox.classList.contains('hidden')) {
-                    closeLightbox();
-                }
-            });
-        })();
-    </script>
+    triggers.forEach(function (el) {
+        el.addEventListener('click', function () {
+            openLightbox(
+                el.getAttribute('data-lightbox-src'),
+                el.getAttribute('data-title')
+            );
+        });
+    });
 
+    closeBtn.addEventListener('click', closeLightbox);
 
+    lightbox.addEventListener('click', function (e) {
+        if (e.target === lightbox) closeLightbox();
+    });
+
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') closeLightbox();
+    });
+})();
+</script>
 <footer class="footer">
     <div class="container">
         <a class="logo" href="index.html" style="color:white;">

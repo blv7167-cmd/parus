@@ -693,3 +693,11 @@ h3 {
 .gallery-item:hover img {
     transform: scale(1.05);
 }
+.lightbox__caption {
+    margin-top: 16px;
+    color: white;
+    text-align: center;
+    font-size: 1rem;
+    line-height: 1.5;
+    max-width: 600px;
+}
