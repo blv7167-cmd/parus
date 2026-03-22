@@ -701,3 +701,42 @@ h3 {
     line-height: 1.5;
     max-width: 600px;
 }
+.gallery-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 16px;
+}
+
+/* затемнение снизу */
+.gallery-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    padding: 12px;
+    color: white;
+    font-size: 0.9rem;
+    line-height: 1.4;
+
+    background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+
+    opacity: 0;
+    transition: 0.3s ease;
+}
+
+/* показываем при наведении */
+.gallery-item:hover .gallery-caption {
+    opacity: 1;
+}
+.gallery-item img {
+    transition: 0.3s ease;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.05);
+}
+
+.gallery-item:hover .gallery-caption {
+    opacity: 1;
+}
