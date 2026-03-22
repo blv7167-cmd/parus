@@ -32,8 +32,8 @@
 <section class="hero" style="padding:40px 0;">
     <div class="container">
         <div class="hero-content">
-            <h1>ЗАГОЛОВОК</h1>
-            <p>Описание раздела</p>
+            <h1>✅ Наши специалисты</h1>
+            <p>Портреты команды профессионалов (8 фото)</p>
         </div>
     </div>
 </section>
@@ -42,43 +42,91 @@
     <div class="container">
         <div class="gallery">
 
-    <div class="gallery-item" data-lightbox-src="foto/specialists/1.jpg">
-        <img src="foto/specialists/1.jpg" alt="">
-    </div>
+            <div class="gallery-item" data-lightbox-src="foto/specialists/1.jpg">
+                <img src="foto/specialists/1.jpg" alt="">
+            </div>
+            <div class="gallery-item" data-lightbox-src="foto/specialists/2.jpg">
+                <img src="foto/specialists/2.jpg" alt="">
+            </div>
+            <div class="gallery-item" data-lightbox-src="foto/specialists/3.jpg">
+                <img src="foto/specialists/3.jpg" alt="">
+            </div>
+            <div class="gallery-item" data-lightbox-src="foto/specialists/4.jpg">
+                <img src="foto/specialists/4.jpg" alt="">
+            </div>
+            <div class="gallery-item" data-lightbox-src="foto/specialists/5.jpg">
+                <img src="foto/specialists/5.jpg" alt="">
+            </div>
+            <div class="gallery-item" data-lightbox-src="foto/specialists/6.jpg">
+                <img src="foto/specialists/6.jpg" alt="">
+            </div>
+            <div class="gallery-item" data-lightbox-src="foto/specialists/7.jpg">
+                <img src="foto/specialists/7.jpg" alt="">
+            </div>
+            <div class="gallery-item" data-lightbox-src="foto/specialists/8.jpg">
+                <img src="foto/specialists/8.jpg" alt="">
+            </div>
 
-
-    <div class="gallery-item" data-lightbox-src="foto/specialists/2.jpg">
-        <img src="foto/specialists/2.jpg" alt="">
-    </div>
-
-    <div class="gallery-item" data-lightbox-src="foto/specialists/3.jpg">
-        <img src="foto/specialists/3.jpg" alt="">
-    </div>
-
-    <div class="gallery-item" data-lightbox-src="foto/specialists/4.jpg">
-        <img src="foto/specialists/4.jpg" alt="">
-    </div>
-
-    <div class="gallery-item" data-lightbox-src="foto/specialists/5.jpg">
-        <img src="foto/specialists/5.jpg" alt="">
-    </div>
-
-    <div class="gallery-item" data-lightbox-src="foto/specialists/6.jpg">
-        <img src="foto/specialists/6.jpg" alt="">
-    </div>
-
-    <div class="gallery-item" data-lightbox-src="foto/specialists/7.jpg">
-        <img src="foto/specialists/7.jpg" alt="">
-    </div>
-
-    <div class="gallery-item" data-lightbox-src="foto/specialists/8.jpg">
-        <img src="foto/specialists/8.jpg" alt="">
-    </div>
-
-</div>
         </div>
     </div>
 </section>
+    <div id="lightbox" class="lightbox hidden" aria-hidden="true">
+        <div class="lightbox__content" role="dialog" aria-modal="true" aria-label="Просмотр фотографии">
+            <button type="button" class="lightbox__close" aria-label="Закрыть">
+                <i class="fas fa-xmark"></i>
+            </button>
+            <img id="lightbox-img" class="lightbox__img" alt="Просмотр фотографии">
+        </div>
+    </div>
+
+    <script>
+        (function () {
+            var lightbox = document.getElementById('lightbox');
+            var lightboxImg = document.getElementById('lightbox-img');
+            if (!lightbox || !lightboxImg) return;
+
+            var closeBtn = lightbox.querySelector('.lightbox__close');
+            var triggers = Array.prototype.slice.call(document.querySelectorAll('[data-lightbox-src]'));
+
+            function openLightbox(src, alt) {
+                lightboxImg.src = src;
+                lightboxImg.alt = alt || 'Просмотр фотографии';
+                lightbox.classList.remove('hidden');
+                lightbox.setAttribute('aria-hidden', 'false');
+                document.body.style.overflow = 'hidden';
+                closeBtn && closeBtn.focus();
+            }
+
+            function closeLightbox() {
+                lightbox.classList.add('hidden');
+                lightbox.setAttribute('aria-hidden', 'true');
+                lightboxImg.src = '';
+                document.body.style.overflow = '';
+            }
+
+            triggers.forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    var src = btn.getAttribute('data-lightbox-src');
+                    var img = btn.querySelector('img');
+                    openLightbox(src, img ? img.getAttribute('alt') : '');
+                });
+            });
+
+            closeBtn && closeBtn.addEventListener('click', closeLightbox);
+
+            lightbox.addEventListener('click', function (e) {
+                // закрытие по клику на затемнение
+                if (e.target === lightbox) closeLightbox();
+            });
+
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && !lightbox.classList.contains('hidden')) {
+                    closeLightbox();
+                }
+            });
+        })();
+    </script>
+
 
 <footer class="footer">
     <div class="container">
