@@ -1,9 +1,124 @@
-<html>
+<!DOCTYPE html>
+<html lang="ru">
 <head>
-    <title>About</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>О центре — Парус</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
-    <h1>About Us</h1>
-    <p>Юридический адрес: 420053, РЕСПУБЛИКА ТАТАРСТАН (ТАТАРСТАН), Г.О. город Казань, ул. сибирский тракт, д. 78 пом 23. Фактический адрес: 420039, РЕСПУБЛИКА ТАТАРСТАН (ТАТАРСТАН), Г.О. город Казань, Улица Профессора Мухамедьярова, 31и341 офис; 3 этаж</p>
+    <header class="header">
+        <div class="container">
+            <a class="logo" href="index.html" style="text-decoration: none;">
+                <i class="fas fa-sailboat"></i>
+                <span>ПАРУС</span>
+            </a>
+            <nav class="nav-menu">
+                <a href="about.html">О центре</a>
+                <a href="program.html">Программа</a>
+                <a href="gallery.html">Галерея</a>
+                <a href="reviews.html">Отзывы</a>
+                <a href="relatives.html">Родственникам</a>
+                <a href="contacts.html">Контакты</a>
+            </nav>
+            <div class="header-contacts">
+                <a href="tel:89375210005" class="phone"><i class="fas fa-phone-alt"></i> 8-(937)-521-00-05</a>
+                <a href="#" class="btn btn-outline" style="padding: 10px 20px;">Заказать звонок</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero" style="padding: 40px 0 50px;">
+        <div class="container">
+            <div class="hero-content">
+                <div class="subhead">Центр когнитивной терапии «Парус»</div>
+                <h1>О центре</h1>
+                <p>Частный реабилитационный центр в Казани, специализирующийся на когнитивно‑поведенческой терапии зависимостей.</p>
+                <div class="hero-buttons">
+                    <a href="program.html" class="btn btn-primary">Смотреть программу</a>
+                    <a href="contacts.html" class="btn btn-outline">Контакты</a>
+                </div>
+            </div>
+            <div class="hero-image" style="min-height: 260px; background-image: url('https://placehold.co/600x400/0f3b5e/white?text=О+центре+Парус');"></div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <h2>О центре «Парус»</h2>
+            <div style="display: flex; gap: 40px; flex-wrap: wrap;">
+                <div style="flex: 2;">
+                    <p style="font-size: 1.2rem; margin-bottom: 1rem; color: var(--primary);">Мы объединяем научный подход, медицинскую этику и домашний уют.</p>
+                    <p>Наша команда — дипломированные психотерапевты, психиатры и консультанты по зависимости. Работаем только с доказательными методами.</p>
+                    <p><i class="fas fa-check-circle text-accent"></i> Юридическое наименование: ООО "Клиника Когнитивной Терапии «Парус»"</p>
+                    <p><i class="fas fa-map-pin text-accent"></i> г. Казань, ул. Агачлык, 14</p>
+                </div>
+                <div style="flex: 1; background: var(--bg-light); border-radius: 32px; padding: 32px;">
+                    <i class="fas fa-brain" style="font-size: 2.5rem; color: var(--accent);"></i>
+                    <h3 style="margin: 16px 0 8px;">Когнитивная терапия</h3>
+                    <p>Измените мышление — изменится жизнь. Работаем с глубинными установками.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <h2>Наши филиалы</h2>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 32px;">
+                <div style="background: var(--bg-light); border-radius: 16px; padding: 32px; border-left: 4px solid var(--primary);">
+                    <div style="display: flex; align-items: center; margin-bottom: 16px;">
+                        <i class="fas fa-male" style="font-size: 2rem; color: var(--primary); margin-right: 12px;"></i>
+                        <h3 style="margin: 0;">Мужской филиал</h3>
+                    </div>
+                    <p style="color: #666; margin-bottom: 12px;">Специализированное отделение для мужчин, где создана атмосфера понимания и поддержки.</p>
+                    <p><i class="fas fa-check-circle text-accent"></i> Индивидуальный подход к каждому пациенту</p>
+                    <p><i class="fas fa-check-circle text-accent"></i> Опытные специалисты мужского коллектива</p>
+                    <p><i class="fas fa-check-circle text-accent"></i> Комфортные условия проживания</p>
+                </div>
+                
+                <div style="background: var(--bg-light); border-radius: 16px; padding: 32px; border-left: 4px solid var(--accent);">
+                    <div style="display: flex; align-items: center; margin-bottom: 16px;">
+                        <i class="fas fa-venus-mars" style="font-size: 2rem; color: var(--accent); margin-right: 12px;"></i>
+                        <h3 style="margin: 0;">Смешанный филиал</h3>
+                    </div>
+                    <p style="color: #666; margin-bottom: 12px;">Открытое отделение для совместного лечения мужчин и женщин с акцентом на групповую терапию.</p>
+                    <p><i class="fas fa-check-circle text-accent"></i> Благоприятная социальная среда</p>
+                    <p><i class="fas fa-check-circle text-accent"></i> Групповые и индивидуальные занятия</p>
+                    <p><i class="fas fa-check-circle text-accent"></i> Развитие навыков взаимодействия</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section section-bg">
+        <div class="container">
+            <h2>Уют и безопасность</h2>
+            <p>Загородная территория, домашняя обстановка, круглосуточное пребывание. Комнаты на 2–3 человека, зона отдыха, спортзал.</p>
+            <div class="gallery">
+                <div class="gallery-item" style="background-image: url('https://placehold.co/400x200/2b5c84/white?text=Жилая+комната');"></div>
+                <div class="gallery-item" style="background-image: url('https://placehold.co/400x200/5aa9a5/white?text=Территория');"></div>
+                <div class="gallery-item" style="background-image: url('https://placehold.co/400x200/0f3b5e/white?text=Зона+отдыха');"></div>
+            </div>
+            <p class="mt-4"><i class="fas fa-map-marker-alt text-accent"></i> Казань, ул. Агачлык, 14. Автобус 90 до ост. «Рассветная».</p>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <a class="logo" href="index.html" style="color: white; text-decoration: none;"><i class="fas fa-sailboat"></i> ПАРУС</a>
+            <div class="footer-links">
+                <a href="#">Политика конфиденциальности</a>
+                <a href="#">Карта сайта</a>
+                <a href="#">Лицензии</a>
+            </div>
+            <small>© 2026 ООО "Клиника Когнитивной Терапии «Парус»"</small>
+        </div>
+    </footer>
 </body>
 </html>
