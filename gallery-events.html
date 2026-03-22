@@ -41,16 +41,16 @@
 <section class="section">
     <div class="container">
         <div class="gallery">
-            <div class="gallery-item" data-lightbox-src="foto/events/1.jpg">
+            <div class="gallery-item" data-lightbox-src="foto/events/1.jpg" data-title='✅Выездное мероприятие в монастырь Раифа'>
                 <img src="foto/events/1.jpg" alt="">
             </div>
-            <div class="gallery-item" data-lightbox-src="foto/events/2.jpg">
+            <div class="gallery-item" data-lightbox-src="foto/events/2.jpg" data-title='Арт-терапия на тему "Я и моя зависимость".<br>Пациенты через рисунок выражают своё отношение и<br>понимание концепции своей проблемы ✅'>
                 <img src="foto/events/2.jpg" alt="">
             </div>
-            <div class="gallery-item" data-lightbox-src="foto/events/3.jpg">
+            <div class="gallery-item" data-lightbox-src="foto/events/3.jpg" data-title='Мероприятие "Спорт-час".<br>У нас ребята имеют возможность восстанавливать не только духовное и эмоциональное здоровье,<br>но и приводить в порядок физическую сферу своей жизни 💪'>
                 <img src="foto/events/3.jpg" alt="">
             </div>
-            <div class="gallery-item" data-lightbox-src="foto/events/4.jpg">
+            <div class="gallery-item" data-lightbox-src="foto/events/4.jpg" data-title='Командная игра в волейбол.<br>Дух соперничества, свежий воздух, яркие эмоции в устойчивой трезвости 😌'>
                 <img src="foto/events/4.jpg" alt="">
             </div>
 
@@ -63,55 +63,57 @@
                 <i class="fas fa-xmark"></i>
             </button>
             <img id="lightbox-img" class="lightbox__img" alt="Просмотр фотографии">
+            <div id="lightbox-caption" class="lightbox__caption"></div>
         </div>
     </div>
 
     <script>
-        (function () {
-            var lightbox = document.getElementById('lightbox');
-            var lightboxImg = document.getElementById('lightbox-img');
-            if (!lightbox || !lightboxImg) return;
+       (function () {
+    var lightbox = document.getElementById('lightbox');
+    var lightboxImg = document.getElementById('lightbox-img');
+    var caption = document.getElementById('lightbox-caption');
 
-            var closeBtn = lightbox.querySelector('.lightbox__close');
-            var triggers = Array.prototype.slice.call(document.querySelectorAll('[data-lightbox-src]'));
+    if (!lightbox || !lightboxImg) return;
 
-            function openLightbox(src, alt) {
-                lightboxImg.src = src;
-                lightboxImg.alt = alt || 'Просмотр фотографии';
-                lightbox.classList.remove('hidden');
-                lightbox.setAttribute('aria-hidden', 'false');
-                document.body.style.overflow = 'hidden';
-                closeBtn && closeBtn.focus();
-            }
+    var closeBtn = lightbox.querySelector('.lightbox__close');
+    var triggers = Array.prototype.slice.call(document.querySelectorAll('[data-lightbox-src]'));
 
-            function closeLightbox() {
-                lightbox.classList.add('hidden');
-                lightbox.setAttribute('aria-hidden', 'true');
-                lightboxImg.src = '';
-                document.body.style.overflow = '';
-            }
+    function openLightbox(src, title) {
+        lightboxImg.src = src;
 
-            triggers.forEach(function (btn) {
-                btn.addEventListener('click', function () {
-                    var src = btn.getAttribute('data-lightbox-src');
-                    var img = btn.querySelector('img');
-                    openLightbox(src, img ? img.getAttribute('alt') : '');
-                });
-            });
+        // 🔥 превращаем \n в перенос строки
+        caption.innerHTML = (title || '').replace(/\n/g, '<br>');
 
-            closeBtn && closeBtn.addEventListener('click', closeLightbox);
+        lightbox.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+    }
 
-            lightbox.addEventListener('click', function (e) {
-                // закрытие по клику на затемнение
-                if (e.target === lightbox) closeLightbox();
-            });
+    function closeLightbox() {
+        lightbox.classList.add('hidden');
+        lightboxImg.src = '';
+        caption.innerHTML = '';
+        document.body.style.overflow = '';
+    }
 
-            document.addEventListener('keydown', function (e) {
-                if (e.key === 'Escape' && !lightbox.classList.contains('hidden')) {
-                    closeLightbox();
-                }
-            });
-        })();
+    triggers.forEach(function (el) {
+        el.addEventListener('click', function () {
+            openLightbox(
+                el.getAttribute('data-lightbox-src'),
+                el.getAttribute('data-title')
+            );
+        });
+    });
+
+    closeBtn.addEventListener('click', closeLightbox);
+
+    lightbox.addEventListener('click', function (e) {
+        if (e.target === lightbox) closeLightbox();
+    });
+
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') closeLightbox();
+    });
+})();
     </script>
 
 <footer class="footer">
