@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Галерея — Парус</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="icon" href="assets/favicon.svg">
+    <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+
+<header class="header">
+    <div class="container">
+        <a class="logo" href="index.html">
+            <i class="fas fa-sailboat"></i>
+            <span>ПАРУС</span>
+        </a>
+        <nav class="nav-menu">
+            <a href="about.html">О центре</a>
+            <a href="program.html">Программа</a>
+            <a href="gallery.html">Галерея</a>
+            <a href="reviews.html">Отзывы</a>
+            <a href="relatives.html">Родственникам</a>
+            <a href="contacts.html">Контакты</a>
+        </nav>
+    </div>
+</header>
+
+<section class="hero" style="padding:40px 0;">
+    <div class="container">
+        <div class="hero-content">
+            <h1>🎭 Мероприятия</h1>
+            <p> События, встречи, групповые занятия (4 фото)</p>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="gallery">
+            <div class="gallery-item" data-lightbox-src="foto/events/1.jpg">
+                <img src="foto/events/1.jpg" alt="">
+            </div>
+            <div class="gallery-item" data-lightbox-src="foto/events/2.jpg">
+                <img src="foto/events/2.jpg" alt="">
+            </div>
+            <div class="gallery-item" data-lightbox-src="foto/events/3.jpg">
+                <img src="foto/events/3.jpg" alt="">
+            </div>
+            <div class="gallery-item" data-lightbox-src="foto/events/4.jpg">
+                <img src="foto/events/4.jpg" alt="">
+            </div>
+
+        </div>
+    </div>
+</section>
+    <div id="lightbox" class="lightbox hidden" aria-hidden="true">
+        <div class="lightbox__content" role="dialog" aria-modal="true" aria-label="Просмотр фотографии">
+            <button type="button" class="lightbox__close" aria-label="Закрыть">
+                <i class="fas fa-xmark"></i>
+            </button>
+            <img id="lightbox-img" class="lightbox__img" alt="Просмотр фотографии">
+        </div>
+    </div>
+
+    <script>
+        (function () {
+            var lightbox = document.getElementById('lightbox');
+            var lightboxImg = document.getElementById('lightbox-img');
+            if (!lightbox || !lightboxImg) return;
+
+            var closeBtn = lightbox.querySelector('.lightbox__close');
+            var triggers = Array.prototype.slice.call(document.querySelectorAll('[data-lightbox-src]'));
+
+            function openLightbox(src, alt) {
+                lightboxImg.src = src;
+                lightboxImg.alt = alt || 'Просмотр фотографии';
+                lightbox.classList.remove('hidden');
+                lightbox.setAttribute('aria-hidden', 'false');
+                document.body.style.overflow = 'hidden';
+                closeBtn && closeBtn.focus();
+            }
+
+            function closeLightbox() {
+                lightbox.classList.add('hidden');
+                lightbox.setAttribute('aria-hidden', 'true');
+                lightboxImg.src = '';
+                document.body.style.overflow = '';
+            }
+
+            triggers.forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    var src = btn.getAttribute('data-lightbox-src');
+                    var img = btn.querySelector('img');
+                    openLightbox(src, img ? img.getAttribute('alt') : '');
+                });
+            });
+
+            closeBtn && closeBtn.addEventListener('click', closeLightbox);
+
+            lightbox.addEventListener('click', function (e) {
+                // закрытие по клику на затемнение
+                if (e.target === lightbox) closeLightbox();
+            });
+
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && !lightbox.classList.contains('hidden')) {
+                    closeLightbox();
+                }
+            });
+        })();
+    </script>
+
+<footer class="footer">
+    <div class="container">
+        <a class="logo" href="index.html" style="color:white;">
+            <i class="fas fa-sailboat"></i> ПАРУС
+        </a>
+        <small>© 2026 Парус</small>
+    </div>
+</footer>
+
+</body>
+</html>
