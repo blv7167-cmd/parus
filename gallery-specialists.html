@@ -3,144 +3,580 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Галерея — Парус</title>
+    <title>Наши специалисты — Парус</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="icon" href="assets/favicon.svg">
-    <link rel="stylesheet" href="assets/styles.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+            color: #1f2b3a;
+            line-height: 1.5;
+            background-color: #ffffff;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        :root {
+            --primary: #0f3b5e;
+            --primary-light: #2b5c84;
+            --accent: #5aa9a5;
+            --bg-light: #f8fafd;
+            --text-dark: #1f2b3a;
+            --text-muted: #4b5f73;
+            --white: #ffffff;
+            --border-light: #e2e8f0;
+        }
+
+        /* шапка */
+        .header {
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border-light);
+            background: white;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .logo i {
+            font-size: 2.2rem;
+            color: var(--accent);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 32px;
+            font-weight: 500;
+            flex-wrap: wrap;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--text-dark);
+            transition: color 0.2s;
+        }
+
+        .nav-menu a:hover {
+            color: var(--primary);
+        }
+
+        /* герой */
+        .hero {
+            background: linear-gradient(135deg, #f0f7fc 0%, #ffffff 100%);
+            padding: 48px 0;
+        }
+
+        .hero-content h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+        }
+
+        /* секции */
+        .section {
+            padding: 60px 0;
+        }
+
+        /* ГАЛЕРЕЯ: новая сетка с постоянными подписями */
+        .specialists-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 40px 30px;
+            margin-top: 20px;
+        }
+
+        /* карточка специалиста */
+        .specialist-card {
+            background: white;
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px -8px rgba(0, 0, 0, 0.08);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            border: 1px solid var(--border-light);
+            cursor: pointer;
+        }
+
+        .specialist-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 24px 40px -16px rgba(15, 59, 94, 0.2);
+        }
+
+        /* фото занимает фиксированную область */
+        .specialist-photo {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            background-color: #eef2f7;
+            overflow: hidden;
+        }
+
+        .specialist-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.3s ease;
+            /* стандартная позиция — центр */
+            object-position: center center;
+        }
+
+        /* специальный класс для фото, где нужно показать верхнюю часть кадра */
+        .specialist-photo img.object-position-top {
+            object-position: center top;  /* смещаем фокус вверх, чтобы видеть лицо/голову */
+        }
+
+        .specialist-card:hover .specialist-photo img {
+            transform: scale(1.02);
+        }
+
+        /* описание ВИДНО сразу, без наведения */
+        .specialist-info {
+            padding: 20px 22px 24px 22px;
+            background: white;
+        }
+
+        .specialist-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 12px;
+            border-left: 4px solid var(--accent);
+            padding-left: 12px;
+        }
+
+        .specialist-desc {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        .specialist-desc i {
+            color: var(--accent);
+            width: 20px;
+            margin-right: 6px;
+        }
+
+        .specialist-desc p {
+            margin-bottom: 8px;
+        }
+
+        .badge-experience {
+            display: inline-block;
+            background: #eef2fa;
+            color: var(--primary);
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 4px 12px;
+            border-radius: 30px;
+            margin-top: 12px;
+        }
+
+        /* ЛАЙТБОКС — улучшенная кнопка закрытия */
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.94);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            transition: opacity 0.25s ease;
+        }
+
+        .lightbox.hidden {
+            display: none;
+        }
+
+        .lightbox__content {
+            position: relative;
+            max-width: 90vw;
+            max-height: 90vh;
+            background: transparent;
+            border-radius: 28px;
+            text-align: center;
+        }
+
+        .lightbox__img {
+            max-width: 100%;
+            max-height: 70vh;
+            object-fit: contain;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .lightbox__caption {
+            margin-top: 20px;
+            background: rgba(15, 59, 94, 0.92);
+            color: white;
+            padding: 14px 28px;
+            border-radius: 60px;
+            font-size: 1rem;
+            line-height: 1.5;
+            backdrop-filter: blur(4px);
+            display: inline-block;
+            max-width: 85%;
+            text-align: center;
+        }
+
+        /* ✨ УЛУЧШЕННАЯ КНОПКА ЗАКРЫТИЯ — всегда видна, с текстом и иконкой */
+        .lightbox__close {
+            position: absolute;
+            top: -60px;
+            right: 0;
+            background: rgba(0, 0, 0, 0.75);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            padding: 10px 24px;
+            border-radius: 50px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.25s ease;
+            backdrop-filter: blur(8px);
+            font-family: inherit;
+        }
+
+        .lightbox__close i {
+            font-size: 1.2rem;
+        }
+
+        .lightbox__close:hover {
+            background: var(--accent);
+            border-color: white;
+            transform: scale(1.02);
+        }
+
+        /* альтернативное размещение для мобильных устройств */
+        @media (max-width: 768px) {
+            .lightbox__close {
+                top: 20px;
+                right: 20px;
+                background: rgba(0, 0, 0, 0.85);
+                padding: 8px 18px;
+                font-size: 0.9rem;
+            }
+            
+            .lightbox__caption {
+                font-size: 0.85rem;
+                max-width: 95%;
+                margin-top: 16px;
+            }
+        }
+
+        /* футер */
+        .footer {
+            background: var(--primary);
+            color: white;
+            padding: 48px 0;
+            margin-top: 40px;
+            border-radius: 40px 40px 0 0;
+        }
+
+        .footer .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .footer .logo {
+            color: white;
+        }
+
+        .footer small {
+            opacity: 0.8;
+        }
+
+        /* адаптив */
+        @media (max-width: 768px) {
+            .header .container {
+                flex-direction: column;
+                gap: 16px;
+            }
+            .nav-menu {
+                justify-content: center;
+                gap: 20px;
+            }
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+            .specialists-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+        }
+    </style>
 </head>
 <body>
 
 <header class="header">
     <div class="container">
-        <a class="logo" href="index.html">
+        <a class="logo" href="#">
             <i class="fas fa-sailboat"></i>
             <span>ПАРУС</span>
         </a>
         <nav class="nav-menu">
-            <a href="about.html">О центре</a>
-            <a href="program.html">Программа</a>
-            <a href="gallery.html">Галерея</a>
-            <a href="reviews.html">Отзывы</a>
-            <a href="relatives.html">Родственникам</a>
-            <a href="contacts.html">Контакты</a>
+            <a href="#">О центре</a>
+            <a href="#">Программа</a>
+            <a href="#">Галерея</a>
+            <a href="#">Отзывы</a>
+            <a href="#">Родственникам</a>
+            <a href="#">Контакты</a>
         </nav>
     </div>
 </header>
 
-<section class="hero" style="padding:40px 0;">
+<section class="hero">
     <div class="container">
         <div class="hero-content">
-            <h1>✅ Наши специалисты</h1>
-            <p>Портреты команды профессионалов (8 фото)</p>
+            <h1>👥 Наши специалисты</h1>
+            <p>Команда профессионалов, которые каждый день помогают вернуть себя. Нажмите на фото для увеличения.</p>
         </div>
     </div>
 </section>
 
 <section class="section">
     <div class="container">
-        <div class="gallery">
-
-            <div class="gallery-item" data-lightbox-src="foto/specialists/1.jpg" data-title="✅Кирюшкин Денис Георгиевич.<br>Програмный руководитель филиала №1.<br>Менеджер по социальной работе.<br>Практикующий психолог.<br>Опыт работы: более 10 лет.">
-                <img src="foto/specialists/1.jpg" alt="">
-                    <div class="gallery-caption">
-                        ✅Кирюшкин Денис Георгиевич.<br>
-                        Програмный руководитель филиала №1.<br>
-                        Менеджер по социальной работе.<br>
-                        Практикующий психолог.<br>
-                        Опыт работы: более 10 лет.
-                    </div>
-            </div>
-            <div class="gallery-item" data-lightbox-src="foto/specialists/2.jpg" data-title="✅Мифтахов Ильшат Зарифович.<br>Менеджер по социальной работе.<br>Программный руководитель филиала №2.<br>Практикующий психолог.<br>Опыт работы: более 13 лет.">
-                <img src="foto/specialists/2.jpg" alt="">
-            </div>
-            <div class="gallery-item" data-lightbox-src="foto/specialists/3.jpg" data-title="✅Марков Дмитрий Николаевич.<br>Клинический психолог-аддиктолог.<br>Опыт работы с зависимыми: более 16 лет.">
-                <img src="foto/specialists/3.jpg" alt="">
-            </div>
-            <div class="gallery-item" data-lightbox-src="foto/specialists/4.jpg" data-title="✅Денденкова Светлана Владимировна.<br>Специальный психолог,клинический психолог,педагог -психолог<br>Стаж 15 лет">
-                <img src="foto/specialists/4.jpg" alt="">
-            </div>
-            <div class="gallery-item" data-lightbox-src="foto/specialists/5.jpg" data-title="✅Фатахова София Шамилевна.<br>Клинический психолог, аддиктолог, травмотерапевт. Практикующий психолог.<br>Стаж работы более 16 лет">
-                <img src="foto/specialists/5.jpg" alt="">
-            </div>
-            <div class="gallery-item" data-lightbox-src="foto/specialists/6.jpg" data-title="✅Платов Валерий Германович.<br>Практикующий психолог.<br>Опыт работы с зависимыми: более 4х лет.">
-                <img src="foto/specialists/6.jpg" alt="">
-            </div>
-            <div class="gallery-item" data-lightbox-src="foto/specialists/7.jpg" data-title="✅Добров Роман Александрович.<br>Консультант-аддиктолог.<br>Опыт работы с зависимыми: более 3х лет.">
-                <img src="foto/specialists/7.jpg" alt="">
-            </div>
-            <div class="gallery-item" data-lightbox-src="foto/specialists/8.jpg" data-title="✅Гиниятов Ильшат Халимович.<br>Заместитель руководителя по хозяйственной части.">
-                <img src="foto/specialists/8.jpg" alt="">
-            </div>
-
+        <div class="specialists-grid" id="specialistsGrid">
+            <!-- Каждый специалист – карточка с фото + описание всегда видимо -->
         </div>
     </div>
 </section>
-    <div id="lightbox" class="lightbox hidden" aria-hidden="true">
-        <div class="lightbox__content" role="dialog" aria-modal="true" aria-label="Просмотр фотографии">
-            <button type="button" class="lightbox__close" aria-label="Закрыть">
-                <i class="fas fa-xmark"></i>
-            </button>
-            <img id="lightbox-img" class="lightbox__img" alt="Просмотр фотографии">
-            <div id="lightbox-caption" class="lightbox__caption"></div>
-        </div>
+
+<!-- ЛАЙТБОКС с улучшенной кнопкой закрытия -->
+<div id="lightbox" class="lightbox hidden" aria-hidden="true">
+    <div class="lightbox__content" role="dialog" aria-modal="true" aria-label="Просмотр специалиста">
+        <button type="button" class="lightbox__close" aria-label="Закрыть">
+            <i class="fas fa-times"></i>
+            <span>Закрыть</span>
+        </button>
+        <img id="lightbox-img" class="lightbox__img" alt="Фото специалиста">
+        <div id="lightbox-caption" class="lightbox__caption"></div>
     </div>
+</div>
 
 <script>
-(function () {
-    var lightbox = document.getElementById('lightbox');
-    var lightboxImg = document.getElementById('lightbox-img');
-    var caption = document.getElementById('lightbox-caption');
+    // Данные специалистов (8 человек) с полным описанием, которое будет видно всегда в карточке
+    const specialists = [
+        {
+            imgSrc: "foto/specialists/1.jpg",
+            name: "Кирюшкин Денис Георгиевич",
+            desc: "Програмный руководитель филиала №1. Менеджер по социальной работе. Практикующий психолог.",
+            experience: "Опыт работы: более 10 лет",
+            objectPosition: "center"
+        },
+        {
+            imgSrc: "foto/specialists/2.jpg",
+            name: "Мифтахов Ильшат Зарифович",
+            desc: "Менеджер по социальной работе. Программный руководитель филиала №2. Практикующий психолог.",
+            experience: "Опыт работы: более 13 лет",
+            objectPosition: "center"
+        },
+        {
+            imgSrc: "foto/specialists/3.jpg",
+            name: "Марков Дмитрий Николаевич",
+            desc: "Клинический психолог-аддиктолог.",
+            experience: "Опыт работы с зависимыми: более 16 лет",
+            objectPosition: "center"
+        },
+        {
+            imgSrc: "foto/specialists/4.jpg",
+            name: "Денденкова Светлана Владимировна",
+            desc: "Специальный психолог, клинический психолог, педагог-психолог.",
+            experience: "Стаж 15 лет",
+            objectPosition: "center"
+        },
+        {
+            imgSrc: "foto/specialists/5.jpg",
+            name: "Фатахова София Шамилевна",
+            desc: "Клинический психолог, аддиктолог, травмотерапевт. Практикующий психолог.",
+            experience: "Стаж работы более 16 лет",
+            objectPosition: "top"  // для пятого специалиста смещаем кадр вверх
+        },
+        {
+            imgSrc: "foto/specialists/6.jpg",
+            name: "Платов Валерий Германович",
+            desc: "Практикующий психолог.",
+            experience: "Опыт работы с зависимыми: более 4х лет",
+            objectPosition: "center"
+        },
+        {
+            imgSrc: "foto/specialists/7.jpg",
+            name: "Добров Роман Александрович",
+            desc: "Консультант-аддиктолог.",
+            experience: "Опыт работы с зависимыми: более 3х лет",
+            objectPosition: "center"
+        },
+        {
+            imgSrc: "foto/specialists/8.jpg",
+            name: "Гиниятов Ильшат Халимович",
+            desc: "Заместитель руководителя по хозяйственной части.",
+            experience: "Обеспечивает комфорт и уют в центре",
+            objectPosition: "center"
+        },
+        {
+            imgSrc: "foto/specialists/9.jpg",
+            name: "Пономарев Юрий Александрович",
+            desc: "Практикующий психолог первичной мотивации",
+            experience: "Опыт работы более 7 лет",
+            objectPosition: "center"
+        }
+    ];
 
-    if (!lightbox || !lightboxImg) return;
+    // Функция рендера галереи
+    function renderSpecialists() {
+        const grid = document.getElementById('specialistsGrid');
+        if (!grid) return;
 
-    var closeBtn = lightbox.querySelector('.lightbox__close');
-    var triggers = Array.prototype.slice.call(document.querySelectorAll('[data-lightbox-src]'));
+        grid.innerHTML = '';
 
-    function openLightbox(src, title) {
+        specialists.forEach((spec) => {
+            const card = document.createElement('div');
+            card.className = 'specialist-card';
+
+            // фото
+            const photoDiv = document.createElement('div');
+            photoDiv.className = 'specialist-photo';
+            const img = document.createElement('img');
+            img.src = spec.imgSrc;
+            img.alt = spec.name;
+            img.loading = 'lazy';
+            
+            // применяем позицию кадра для пятого специалиста
+            if (spec.objectPosition === 'top') {
+                img.classList.add('object-position-top');
+            }
+            
+            photoDiv.appendChild(img);
+
+            // информационный блок
+            const infoDiv = document.createElement('div');
+            infoDiv.className = 'specialist-info';
+
+            const nameDiv = document.createElement('div');
+            nameDiv.className = 'specialist-name';
+            nameDiv.textContent = spec.name;
+
+            const descDiv = document.createElement('div');
+            descDiv.className = 'specialist-desc';
+            descDiv.innerHTML = `
+                <p><i class="fas fa-user-md"></i> ${spec.desc}</p>
+                <span class="badge-experience"><i class="fas fa-briefcase"></i> ${spec.experience}</span>
+            `;
+
+            infoDiv.appendChild(nameDiv);
+            infoDiv.appendChild(descDiv);
+
+            card.appendChild(photoDiv);
+            card.appendChild(infoDiv);
+
+            // клик по карточке открывает лайтбокс
+            card.addEventListener('click', () => {
+                openLightbox(spec.imgSrc, `${spec.name}\n${spec.desc}\n${spec.experience}`);
+            });
+
+            grid.appendChild(card);
+        });
+    }
+
+    // Лайтбокс логика
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxCaption = document.getElementById('lightbox-caption');
+    const closeBtn = lightbox ? lightbox.querySelector('.lightbox__close') : null;
+
+    function openLightbox(src, titleText) {
+        if (!lightbox || !lightboxImg) return;
         lightboxImg.src = src;
-
-        // 🔥 превращаем \n в перенос строки
-        caption.innerHTML = (title || '').replace(/\n/g, '<br>');
-
+        // превращаем переносы строк в <br>
+        const formatted = (titleText || '').replace(/\n/g, '<br>');
+        lightboxCaption.innerHTML = formatted;
         lightbox.classList.remove('hidden');
         document.body.style.overflow = 'hidden';
     }
 
     function closeLightbox() {
+        if (!lightbox) return;
         lightbox.classList.add('hidden');
         lightboxImg.src = '';
-        caption.innerHTML = '';
+        lightboxCaption.innerHTML = '';
         document.body.style.overflow = '';
     }
 
-    triggers.forEach(function (el) {
-        el.addEventListener('click', function () {
-            openLightbox(
-                el.getAttribute('data-lightbox-src'),
-                el.getAttribute('data-title')
-            );
+    // Добавляем обработчик для кнопки закрытия
+    if (closeBtn) {
+        closeBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            closeLightbox();
         });
+    }
+
+    // Закрытие по клику на фон
+    if (lightbox) {
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                closeLightbox();
+            }
+        });
+    }
+
+    // Закрытие по клавише Escape
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && lightbox && !lightbox.classList.contains('hidden')) {
+            closeLightbox();
+        }
     });
 
-    closeBtn.addEventListener('click', closeLightbox);
-
-    lightbox.addEventListener('click', function (e) {
-        if (e.target === lightbox) closeLightbox();
-    });
-
-    document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape') closeLightbox();
-    });
-})();
+    // Запускаем рендер
+    renderSpecialists();
 </script>
+
 <footer class="footer">
     <div class="container">
-        <a class="logo" href="index.html" style="color:white;">
+        <a class="logo" href="#" style="color:white; text-decoration: none;">
             <i class="fas fa-sailboat"></i> ПАРУС
         </a>
-        <small>© 2026 Парус</small>
+        <small>© 2026 Центр когнитивной терапии «Парус» — Казань, ул. Агачлык, 14</small>
     </div>
 </footer>
 
