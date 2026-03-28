@@ -73,3 +73,23 @@ document.addEventListener('DOMContentLoaded', function () {
         declineBtn.addEventListener('click', declineCookies);
     }
 });
+
+// // ===== Управление фиксированным баром при скролле =====
+// let lastScrollTop = 0;
+// const actionBar = document.querySelector('.fixed-action-bar');
+
+// if (actionBar) {
+//     window.addEventListener('scroll', function() {
+//         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        
+//         // Показываем бар при скролле вверх, скрываем при скролле вниз
+//         if (scrollTop > lastScrollTop && scrollTop > 100) {
+//             // Скролл вниз — скрываем
+//             actionBar.classList.add('hide');
+//         } else {
+//             // Скролл вверх — показываем
+//             actionBar.classList.remove('hide');
+//         }
+//         lastScrollTop = scrollTop;
+//     });
+// }
