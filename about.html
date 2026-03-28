@@ -428,6 +428,10 @@
             text-decoration: none;
         }
 
+        .footer a:hover {
+            color: white;
+        }
+
         .footer .container {
             display: flex;
             flex-wrap: wrap;
@@ -439,6 +443,7 @@
         .footer-links {
             display: flex;
             gap: 40px;
+            flex-wrap: wrap;
         }
 
         /* адаптив */
@@ -462,6 +467,13 @@
             .nav-menu {
                 justify-content: center;
                 gap: 20px;
+            }
+            .footer .container {
+                flex-direction: column;
+                text-align: center;
+            }
+            .footer-links {
+                justify-content: center;
             }
         }
 
@@ -627,7 +639,8 @@
         <div class="container">
             <a class="logo" href="index.html" style="color: white; text-decoration: none;"><i class="fas fa-sailboat"></i> ПАРУС</a>
             <div class="footer-links">
-                <a href="#">Политика конфиденциальности</a>
+                <a href="privacy.html">Политика конфиденциальности</a>
+                <a href="terms.html">Пользовательское соглашение</a>
                 <a href="#">Карта сайта</a>
                 <a href="#">Лицензии</a>
             </div>
