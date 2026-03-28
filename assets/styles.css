@@ -3,57 +3,32 @@
   padding: 0;
   box-sizing: border-box;
 }
+
 /* Фоновое изображение для всего сайта */
 body {
-    background-image: url('../foto/Cr8bE1U3.jpg');
-    background-size: cover;
-    background-attachment: fixed;
-    background-position: center center;
-    background-repeat: no-repeat;
-    position: relative;
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  color: #1f2b3a;
+  line-height: 1.5;
+  background-image: url('../foto/Cr8bE1U3.jpg');
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center center;
+  background-repeat: no-repeat;
+  position: relative;
 }
 
 /* Затемнение для читаемости текста */
 body::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(255, 255, 255, 0.52);
-    z-index: -1;
-    pointer-events: none;
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.52);
+  z-index: -1;
+  pointer-events: none;
 }
-
-/* Альтернативный вариант: если нужно более тёмное затемнение для контрастности */
-/* body::before {
-    background: rgba(0, 0, 0, 0.75);
-} */
-
-/* Для элементов с собственным фоном (карточки, шапка и т.д.) оставляем прозрачность или белый фон */
-.header, 
-.section-bg, 
-.card, 
-.specialist-card,
-.infection-card,
-.medical-note,
-.testimonial-card,
-.footer {
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(2px);
-}
-
-/* Для hero-секции можно сделать более прозрачный фон */
-.hero {
-    background: rgba(255, 255, 255, 0.85);
-}
-/* body {
-  font-family: 'Inter', sans-serif;
-  color: #1f2b3a;
-  line-height: 1.5;
-  background-color: #ffffff;
-} */
 
 .container {
   max-width: 1280px;
@@ -63,9 +38,9 @@ body::before {
 
 /* цвета и акценты */
 :root {
-  --primary: #0f3b5e; /* глубокий синий (парус) */
+  --primary: #0f3b5e;
   --primary-light: #2b5c84;
-  --accent: #5aa9a5; /* спокойный морской/природный */
+  --accent: #5aa9a5;
   --bg-light: #f8fafd;
   --text-dark: #1f2b3a;
   --text-muted: #4b5f73;
@@ -93,6 +68,7 @@ h2 {
   position: relative;
   display: inline-block;
 }
+
 h2:after {
   content: '';
   display: block;
@@ -175,6 +151,7 @@ h3 {
   font-size: 1.8rem;
   font-weight: 700;
   color: var(--primary);
+  text-decoration: none;
 }
 
 .logo i {
@@ -186,6 +163,7 @@ h3 {
   display: flex;
   gap: 32px;
   font-weight: 500;
+  flex-wrap: wrap;
 }
 
 .nav-menu a {
@@ -251,8 +229,7 @@ h3 {
 
 .hero-image {
   flex: 1;
-  background: url('https://placehold.co/600x400/2b5c84/white?text=Уютная+территория+Парус')
-    center/cover;
+  background: url('https://placehold.co/600x400/2b5c84/white?text=Уютная+территория+Парус') center/cover;
   border-radius: 32px;
   min-height: 340px;
   box-shadow: 0 30px 40px -20px rgba(0, 0, 0, 0.2);
@@ -273,9 +250,12 @@ h3 {
   box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
   transition: 0.2s ease;
   border: 1px solid var(--border-light);
+  text-decoration: none;
+  color: inherit;
 }
 
 .card:hover {
+  transform: translateY(-6px);
   box-shadow: 0 20px 40px -10px rgba(15, 59, 94, 0.1);
 }
 
@@ -349,7 +329,6 @@ h3 {
   height: 56px;
   border-radius: 56px;
   background: #cbd5e1;
-  background-image: url('https://placehold.co/56x56');
   background-size: cover;
 }
 
@@ -362,7 +341,7 @@ h3 {
   font-size: 0.9rem;
 }
 
-/* карта/контакты */
+/* контакты */
 .contact-row {
   display: flex;
   gap: 40px;
@@ -379,7 +358,7 @@ h3 {
   justify-content: center;
   color: var(--primary);
   font-weight: 500;
-  background-image: url('https://placehold.co/600x280/2b5c84/white?text=Яндекс.Карта+-+ул.+Агачлык,+14');
+  background-image: url('https://placehold.co/600x280/2b5c84/white?text=Яндекс.Карта');
   background-size: cover;
 }
 
@@ -405,6 +384,7 @@ h3 {
   color: white;
   padding: 48px 0;
   border-radius: 40px 40px 0 0;
+  margin-top: 40px;
 }
 
 .footer a {
@@ -412,89 +392,154 @@ h3 {
   text-decoration: none;
 }
 
+.footer a:hover {
+  color: white;
+}
+
 .footer .container {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
+  gap: 20px;
 }
 
 .footer-links {
   display: flex;
   gap: 40px;
+  flex-wrap: wrap;
 }
 
 .footer small {
   opacity: 0.7;
 }
 
-/* мобильная адаптация */
-@media (max-width: 900px) {
-  h1 {
-    font-size: 2.5rem;
-  }
-  h2 {
-    font-size: 2rem;
-  }
-
-  .header .container {
-    flex-direction: column;
-    gap: 16px;
-  }
-  .nav-menu {
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-  }
-  .hero .container {
-    flex-direction: column;
-  }
-  .hero-image {
-    width: 100%;
-    min-height: 280px;
-  }
-  .gallery {
-    grid-template-columns: 1fr 1fr;
-  }
-  .contact-row {
-    flex-direction: column;
-  }
-  .footer .container {
-    flex-direction: column;
-    gap: 24px;
-    text-align: center;
-  }
-}
-
-@media (max-width: 600px) {
-  .gallery {
-    grid-template-columns: 1fr;
-  }
-  .stats-grid {
-    flex-direction: column;
-    gap: 20px;
-  }
-}
-
-/* мелкие утилиты */
-.text-accent {
-  color: var(--accent);
-}
-.mb-2 {
-  margin-bottom: 0.5rem;
-}
-.mt-4 {
-  margin-top: 2rem;
-}
-.badge {
-  background: var(--accent);
+/* Cookie баннер */
+.cookie-banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(15, 59, 94, 0.98);
+  backdrop-filter: blur(10px);
   color: white;
-  padding: 4px 12px;
-  border-radius: 30px;
-  font-size: 0.9rem;
+  padding: 20px 0;
+  z-index: 1000;
+  transform: translateY(100%);
+  transition: transform 0.4s ease-in-out;
+  border-top: 2px solid var(--accent);
+}
+
+.cookie-banner.show {
+  transform: translateY(0);
+}
+
+.cookie-banner .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.cookie-text {
+  flex: 1;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.cookie-text i {
+  font-size: 1.5rem;
+  color: var(--accent);
+  margin-right: 12px;
+  vertical-align: middle;
+}
+
+.cookie-text a {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+.cookie-text a:hover {
+  color: white;
+}
+
+.cookie-buttons {
+  display: flex;
+  gap: 15px;
+  flex-shrink: 0;
+}
+
+.cookie-btn {
+  padding: 10px 24px;
+  border-radius: 40px;
   font-weight: 600;
-  display: inline-block;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+  font-size: 0.9rem;
+}
+
+.cookie-btn-accept {
+  background-color: var(--accent);
+  color: white;
+}
+
+.cookie-btn-accept:hover {
+  background-color: #4a8f8b;
+  transform: scale(1.02);
+}
+
+.cookie-btn-decline {
+  background-color: transparent;
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.cookie-btn-decline:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: white;
+}
+
+/* инфекционные карточки */
+.infections-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  margin-top: 32px;
+}
+
+.infection-card {
+  background: white;
+  border-radius: 24px;
+  padding: 24px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border-left: 4px solid var(--accent);
+  transition: transform 0.2s;
+}
+
+.infection-card:hover {
+  transform: translateY(-4px);
+}
+
+.infection-card i {
+  font-size: 2rem;
+  color: var(--accent);
+  margin-bottom: 16px;
+}
+
+.infection-card h4 {
+  font-size: 1.3rem;
   margin-bottom: 12px;
+  color: var(--primary);
+}
+
+.medical-note {
+  background: #e8f0f5;
+  border-radius: 20px;
+  padding: 24px;
+  margin-top: 32px;
+  border-left: 4px solid var(--primary);
 }
 
 /* формы */
@@ -592,12 +637,6 @@ h3 {
   margin-top: 3px;
 }
 
-@media (max-width: 900px) {
-  .form-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
 /* галерея фото */
 .photo-grid {
   display: grid;
@@ -629,12 +668,7 @@ h3 {
   cursor: zoom-in;
 }
 
-.photo-item button:focus-visible {
-  outline: none;
-  box-shadow: 0 0 0 4px rgba(90, 169, 165, 0.22);
-}
-
-/* просмотр фото (lightbox) */
+/* lightbox */
 .lightbox {
   position: fixed;
   inset: 0;
@@ -690,132 +724,102 @@ h3 {
   background: rgba(43, 92, 132, 0.85);
 }
 
-.lightbox__close:focus-visible {
-  outline: none;
-  box-shadow: 0 0 0 4px rgba(90, 169, 165, 0.28);
+.lightbox__caption {
+  margin-top: 16px;
+  color: white;
+  text-align: center;
+  font-size: 1rem;
+  line-height: 1.5;
+  max-width: 600px;
 }
 
+/* утилиты */
+.text-accent {
+  color: var(--accent);
+}
+
+.mb-2 {
+  margin-bottom: 0.5rem;
+}
+
+.mt-4 {
+  margin-top: 2rem;
+}
+
+.badge {
+  background: var(--accent);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 30px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  display: inline-block;
+  margin-bottom: 12px;
+}
+
+/* адаптив */
 @media (max-width: 900px) {
+  h1 {
+    font-size: 2.5rem;
+  }
+  h2 {
+    font-size: 2rem;
+  }
+  .header .container {
+    flex-direction: column;
+    gap: 16px;
+  }
+  .nav-menu {
+    justify-content: center;
+    gap: 20px;
+  }
+  .hero .container {
+    flex-direction: column;
+  }
+  .hero-image {
+    width: 100%;
+    min-height: 280px;
+  }
+  .gallery {
+    grid-template-columns: 1fr 1fr;
+  }
+  .contact-row {
+    flex-direction: column;
+  }
+  .footer .container {
+    flex-direction: column;
+    text-align: center;
+  }
+  .footer-links {
+    justify-content: center;
+  }
   .photo-grid {
     grid-template-columns: repeat(2, 1fr);
   }
-  .photo-item img {
-    height: 220px;
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+  .cookie-banner .container {
+    flex-direction: column;
+    text-align: center;
+  }
+  .cookie-buttons {
+    justify-content: center;
   }
 }
 
 @media (max-width: 600px) {
+  .gallery {
+    grid-template-columns: 1fr;
+  }
+  .stats-grid {
+    flex-direction: column;
+    gap: 20px;
+  }
   .photo-grid {
     grid-template-columns: 1fr;
   }
   .photo-item img {
     height: 220px;
   }
-}
-.gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 16px;
-}
-
-.gallery-item {
-    position: relative;
-    overflow: hidden;
-    border-radius: 16px;
-    cursor: pointer;
-    aspect-ratio: 4 / 3;
-}
-
-.gallery-item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    transition: transform 0.3s ease;
-}
-
-.gallery-item:hover img {
-    transform: scale(1.05);
-}
-.lightbox__caption {
-    margin-top: 16px;
-    color: white;
-    text-align: center;
-    font-size: 1rem;
-    line-height: 1.5;
-    max-width: 600px;
-}
-.gallery-item {
-    position: relative;
-    overflow: hidden;
-    border-radius: 16px;
-}
-
-/* затемнение снизу */
-.gallery-caption {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-
-    padding: 12px;
-    color: white;
-    font-size: 0.9rem;
-    line-height: 1.4;
-
-    background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
-
-    opacity: 0;
-    transition: 0.3s ease;
-}
-
-/* показываем при наведении */
-.gallery-item:hover .gallery-caption {
-    opacity: 1;
-}
-.gallery-item img {
-    transition: 0.3s ease;
-}
-
-.gallery-item:hover img {
-    transform: scale(1.05);
-}
-
-.gallery-item:hover .gallery-caption {
-    opacity: 1;
-}
-/* Стили для новых блоков */
-.infections-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 24px;
-    margin-top: 32px;
-}
-.infection-card {
-    background: white;
-    border-radius: 24px;
-    padding: 24px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-    border-left: 4px solid var(--accent);
-    transition: transform 0.2s;
-}
-.infection-card:hover {
-    transform: translateY(-4px);
-}
-.infection-card i {
-    font-size: 2rem;
-    color: var(--accent);
-    margin-bottom: 16px;
-}
-.infection-card h4 {
-    font-size: 1.3rem;
-    margin-bottom: 12px;
-    color: var(--primary);
-}
-.medical-note {
-    background: #e8f0f5;
-    border-radius: 20px;
-    padding: 24px;
-    margin-top: 32px;
-    border-left: 4px solid var(--primary);
 }
