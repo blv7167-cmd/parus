@@ -16,6 +16,10 @@ body {
   background-repeat: no-repeat;
   position: relative;
 }
+/* Отступ для основного контента, чтобы не перекрывался фиксированным баром */
+body {
+  padding-bottom: 70px;
+}
 
 /* Затемнение для читаемости текста */
 body::before {
@@ -928,64 +932,92 @@ h3 {
   margin-right: 6px;
 }
 
-/* ===== ОСНОВНОЙ ФУТЕР (внизу страницы) ===== */
+/* ===== ОСНОВНОЙ ФУТЕР (внизу страницы) — КОМПАКТНАЯ ВЕРСИЯ ===== */
 .main-footer {
   background: var(--primary);
   color: white;
-  padding: 48px 0 32px;
+  padding: 32px 0 24px;
   margin-top: 60px;
   border-radius: 40px 40px 0 0;
 }
-fixed-action-bar
+
 .main-footer .container {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  align-items: flex-start;
   gap: 40px;
 }
 
-.footer-logo {
+/* Левая часть с логотипом */
+.footer-left {
+  flex-shrink: 0;
+}
+
+.footer-left .logo {
+  color: white;
+  font-size: 1.5rem;
+  margin-bottom: 8px;
+}
+
+.footer-description {
+  font-size: 0.8rem;
+  opacity: 0.7;
+  line-height: 1.4;
+  margin-top: 4px;
+}
+
+/* Правая часть с адресами */
+.footer-right {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.footer-address {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 8px;
+  text-align: right;
 }
 
-.footer-logo .logo {
-  color: white;
-  font-size: 1.6rem;
-}
-
-.footer-links {
+.address-item {
   display: flex;
-  gap: 60px;
-  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: flex-end;
+  gap: 10px;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.75);
 }
 
-.footer-column h4 {
-  font-size: 1.1rem;
-  margin-bottom: 16px;
+.address-item i {
   color: var(--accent);
+  font-size: 0.85rem;
+  margin-top: 2px;
+  flex-shrink: 0;
 }
 
-.footer-column a {
-  display: block;
-  color: rgba(255, 255, 255, 0.7);
+.address-item span {
+  max-width: 350px;
+  text-align: right;
+}
+
+.address-item a {
+  color: rgba(255, 255, 255, 0.75);
   text-decoration: none;
-  margin-bottom: 10px;
-  transition: color 0.2s;
-  font-size: 0.9rem;
 }
 
-.footer-column a:hover {
+.address-item a:hover {
   color: white;
 }
 
 .footer-bottom {
   border-top: 1px solid rgba(255, 255, 255, 0.1);
-  margin-top: 40px;
-  padding-top: 24px;
+  margin-top: 24px;
+  padding-top: 20px;
   text-align: center;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   color: rgba(255, 255, 255, 0.5);
 }
 
@@ -998,43 +1030,35 @@ fixed-action-bar
   color: white;
 }
 
-/* Отступ для основного контента, чтобы не перекрывался фиксированным баром */
-body {
-  padding-bottom: 80px;
-}
-
 /* Адаптация для мобильных */
 @media (max-width: 768px) {
-  .fixed-action-bar .container {
-      flex-direction: column;
-      text-align: center;
-  }
-  
-  .action-buttons {
-      justify-content: center;
-  }
-  
-  .action-btn {
-      padding: 10px 20px;
-      font-size: 0.9rem;
-  }
-  
-  .work-info {
-      text-align: center;
-  }
-  
   .main-footer .container {
       flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 24px;
+  }
+  body {
+    padding-bottom: 180px;
+  }
+  .footer-right {
+      justify-content: center;
+  }
+  
+  .footer-address {
       text-align: center;
   }
   
-  .footer-links {
+  .address-item {
       justify-content: center;
-      gap: 30px;
   }
   
-  body {
-      padding-bottom: 140px;
+  .address-item span {
+      text-align: center;
+  }
+  
+  .footer-left {
+      text-align: center;
   }
 }
 
