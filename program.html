@@ -14,7 +14,7 @@
 <body>
     <header class="header">
         <div class="container">
-            <a class="logo" href="index.html" style="text-decoration: none;">
+            <a class="logo" href="index.html">
                 <i class="fas fa-sailboat"></i>
                 <span>ПАРУС</span>
             </a>
@@ -52,7 +52,7 @@
         <div class="container">
             <h2>Этапы</h2>
             <div class="cards-grid">
-                <div class="card section-bg"><i class="fas fa-heart"></i><h3>Мотивация и адаптация</h3><p>Преодоление отрицания, индивидуальные сессии с психологом, знакомство с правилами центра.</p></div>
+                <div class="card"><i class="fas fa-heart"></i><h3>Мотивация и адаптация</h3><p>Преодоление отрицания, индивидуальные сессии с психологом, знакомство с правилами центра.</p></div>
                 <div class="card"><i class="fas fa-comments"></i><h3>Основной этап</h3><p>Групповая и индивидуальная когнитивная терапия, работа с автоматическими мыслями.</p></div>
                 <div class="card"><i class="fas fa-seedling"></i><h3>Трудотерапия и навыки</h3><p>Восстановление социальных навыков, творческие и трудовые активности.</p></div>
                 <div class="card"><i class="fas fa-home"></i><h3>Подготовка к возвращению</h3><p>Профилактика срыва, планирование будущего, поддержка родных.</p></div>
@@ -66,9 +66,9 @@
             <div class="cards-grid">
                 <div class="card"><i class="fas fa-heart"></i><h3>Восстановление эмоционального интеллекта</h3><p>Работа с дневником чувств. Помощь в понимании своих эмоций и их влияния на поведение.</p></div>
                 <div class="card"><i class="fas fa-comments"></i><h3>Социальные навыки</h3><p>Улучшение общения и взаимодействия. Обучение навыкам работы в команде и в социальных группах.</p></div>
-                <div class="card"><i class="fas fa-seedling"></i><h3>Обучаем справляться с симпотомами тяги к употреблению ПАВ</h3><p>Учим адекватно реагировать на ситуации, которые могут вызвать ассоциации и воспоминания. </p></div>
-                <div class="card"><i class="fas fa-home"></i><h3>Поддержка родственников</h3><p>Поддержка родственников в процессе лечения и после выхода из центра. Обучение навыкам поддержки и взаимодействия с зависимым человеком.</p></div>
-                <div class="card"><i class="fas fa-home"></i><h3>Восстановление физической сферы </h3><p>физическое состояние напрямую оказывает положительное влияние на эмоциональный фон и мотивацию к трезвости</p></div>            
+                <div class="card"><i class="fas fa-seedling"></i><h3>Обучаем справляться с симптомами тяги</h3><p>Учим адекватно реагировать на ситуации, которые могут вызвать ассоциации и воспоминания.</p></div>
+                <div class="card"><i class="fas fa-home"></i><h3>Поддержка родственников</h3><p>Поддержка родственников в процессе лечения и после выхода из центра.</p></div>
+                <div class="card"><i class="fas fa-dumbbell"></i><h3>Восстановление физической сферы</h3><p>Физическое состояние напрямую влияет на эмоциональный фон и мотивацию к трезвости.</p></div>            
             </div>
         </div>
     </section>
@@ -86,18 +86,66 @@
         </div>
     </section>
 
-
-    <footer class="footer">
+    <!-- ===== ОСНОВНОЙ ФУТЕР ===== -->
+    <footer class="main-footer">
         <div class="container">
-            <a class="logo" href="index.html" style="color: white; text-decoration: none;"><i class="fas fa-sailboat"></i> ПАРУС</a>
-            <div class="footer-links">
-                <a href="privacy.html">Политика конфиденциальности</a>
-                <a href="terms.html">Пользовательское соглашение</a>
-
+            <div class="footer-left">
+                <a class="logo" href="index.html" style="color: white; text-decoration: none;">
+                    <i class="fas fa-sailboat"></i>
+                    <span>ПАРУС</span>
+                </a>
+                <p class="footer-description">Центр когнитивной терапии<br>Казань, работаем с 2013 года</p>
             </div>
-            <small>© 2026 ООО "Клиника Когнитивной Терапии «Парус»"</small>
+            
+            <div class="footer-right">
+                <div class="footer-address">
+                    <div class="address-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Юридический адрес: 420053, Республика Татарстан, г. Казань, ул. Сибирский тракт, д. 78 пом 23.</span>
+                    </div>
+                    <div class="address-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Филиал №1: <a href="#">По запросу</a></span>
+                    </div>
+                    <div class="address-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Филиал №2: <a href="#">По запросу</a></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <div class="container">
+                <p>© 2026 ООО "Клиника Когнитивной Терапии «Парус»". Все права защищены.</p>
+                <p style="margin-top: 8px;">
+                    <a href="privacy.html">Политика конфиденциальности</a> | 
+                    <a href="terms.html">Пользовательское соглашение</a>
+                </p>
+            </div>
         </div>
     </footer>
+
+    <!-- ===== ФИКСИРОВАННЫЙ БАР ===== -->
+    <div class="fixed-action-bar" id="actionBar">
+        <div class="container">
+            <div class="action-buttons">
+                <a href="tel:89375210005" class="action-btn action-btn-call">
+                    <i class="fas fa-phone-alt"></i> Позвонить
+                </a>
+                <a href="https://t.me/parus_center_bot" target="_blank" class="action-btn action-btn-telegram">
+                    <i class="fab fa-telegram"></i> Написать в Telegram
+                </a>
+                <a href="https://max.ru/join/eQHll3JM1boZPlxsAH3zQyRp16h70o-PBpdESR2ab7s" target="_blank" class="action-btn action-btn-MAX">
+                    <i class="fas fa-star"></i> Написать в MAX
+                </a>
+            </div>
+            <div class="work-info">
+                <i class="fas fa-clock"></i> Круглосуточно, без выходных<br>
+                <span style="font-size: 0.75rem;">Анонимно. Бесплатная консультация</span>
+            </div>
+        </div>
+    </div>
 
     <!-- Cookie баннер -->
     <div id="cookieBanner" class="cookie-banner">
@@ -105,7 +153,7 @@
             <div class="cookie-text">
                 <i class="fas fa-cookie-bite"></i>
                 <strong>Мы используем cookie-файлы</strong><br>
-                Продолжая использовать наш сайт, вы соглашаетесь на сбор и обработку cookie-файлов. Это помогает нам улучшать работу сайта, анализировать трафик и предоставлять вам лучший сервис. Подробнее в 
+                Продолжая использовать наш сайт, вы соглашаетесь на сбор и обработку cookie-файлов. Подробнее в 
                 <a href="privacy.html">Политике конфиденциальности</a> и 
                 <a href="terms.html">Пользовательском соглашении</a>.
             </div>

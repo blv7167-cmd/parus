@@ -14,7 +14,7 @@
 <body>
     <header class="header">
         <div class="container">
-            <a class="logo" href="index.html" style="text-decoration: none;">
+            <a class="logo" href="index.html">
                 <i class="fas fa-sailboat"></i>
                 <span>ПАРУС</span>
             </a>
@@ -33,126 +33,120 @@
         </div>
     </header>
 
+    <section class="hero" style="padding: 40px 0 50px;">
+        <div class="container">
+            <div class="hero-content">
+                <div class="subhead">Фотогалерея</div>
+                <h1>Галерея</h1>
+                <p>Выберите категорию для просмотра фотографий нашего центра</p>
+                <div class="hero-buttons">
+                    <a href="contacts.html" class="btn btn-primary">Связаться с нами</a>
+                    <a href="program.html" class="btn btn-outline">Программа</a>
+                </div>
+            </div>
+            <div class="hero-image" style="min-height: 260px; background-image: url('https://placehold.co/600x400/2b5c84/white?text=Галерея+Парус');"></div>
+        </div>
+    </section>
 
- <section class="section section-bg">
-    <div class="container">
-        <h2>Галерея</h2>
-        <p style="font-size: 1.1rem; margin-bottom: 2rem; color: var(--text-secondary);">Выберите категорию для просмотра фотографий</p>
-        
-        <div class="cards-grid">
-            <div class="card" style="text-align: center;">
-                <a href="gallery-external.html" style="text-decoration: none; color: inherit; display: block;">
+    <section class="section section-bg">
+        <div class="container">
+            <h2>Выберите категорию</h2>
+            <p style="font-size: 1.1rem; margin-bottom: 2rem;">Фотографии территории, жилых помещений, мероприятий и наших специалистов</p>
+            
+            <div class="cards-grid">
+                <a class="card" href="gallery-external.html" style="text-decoration: none; color: inherit; text-align: center;">
                     <i class="fas fa-tree" style="font-size: 2.5rem; color: var(--accent); margin-bottom: 1rem;"></i>
                     <h3>🌳 Внешняя локация</h3>
                     <p>Территория, ландшафт, внешний вид центра (10 фото)</p>
                 </a>
-            </div>
-            
-            <div class="card" style="text-align: center;">
-                <a href="gallery-residential.html" style="text-decoration: none; color: inherit; display: block;">
+                
+                <a class="card" href="gallery-residential.html" style="text-decoration: none; color: inherit; text-align: center;">
                     <i class="fas fa-home" style="font-size: 2.5rem; color: var(--accent); margin-bottom: 1rem;"></i>
                     <h3>🏡 Жилые помещения</h3>
                     <p>Комнаты, спальни, зоны отдыха (10 фото)</p>
                 </a>
-            </div>
-            
-            <div class="card" style="text-align: center;">
-                <a href="gallery-events.html" style="text-decoration: none; color: inherit; display: block;">
+                
+                <a class="card" href="gallery-events.html" style="text-decoration: none; color: inherit; text-align: center;">
                     <i class="fas fa-images" style="font-size: 2.5rem; color: var(--accent); margin-bottom: 1rem;"></i>
                     <h3>🎭 Мероприятия</h3>
                     <p>События, встречи, групповые занятия (4 фото)</p>
                 </a>
-            </div>
-            
-            <div class="card" style="text-align: center;">
-                <a href="gallery-specialists.html" style="text-decoration: none; color: inherit; display: block;">
+                
+                <a class="card" href="gallery-specialists.html" style="text-decoration: none; color: inherit; text-align: center;">
                     <i class="fas fa-users" style="font-size: 2.5rem; color: var(--accent); margin-bottom: 1rem;"></i>
                     <h3>✅ Наши специалисты</h3>
                     <p>Портреты команды профессионалов (8 фото)</p>
                 </a>
-            </div>
-            
-            <div class="card" style="text-align: center;">
-                <a href="gallery-branch2.html" style="text-decoration: none; color: inherit; display: block;">
+                
+                <a class="card" href="gallery-branch2.html" style="text-decoration: none; color: inherit; text-align: center;">
                     <i class="fas fa-building" style="font-size: 2.5rem; color: var(--accent); margin-bottom: 1rem;"></i>
                     <h3>🏡 Филиал №2</h3>
                     <p>Помещения второго филиала (5 фото)</p>
                 </a>
             </div>
-
         </div>
-    </div>
-</section>
+    </section>
 
-    <div id="lightbox" class="lightbox hidden" aria-hidden="true">
-        <div class="lightbox__content" role="dialog" aria-modal="true" aria-label="Просмотр фотографии">
-            <button type="button" class="lightbox__close" aria-label="Закрыть">
-                <i class="fas fa-xmark"></i>
-            </button>
-            <img id="lightbox-img" class="lightbox__img" alt="Просмотр фотографии">
-        </div>
-    </div>
-
-    <script>
-        (function () {
-            var lightbox = document.getElementById('lightbox');
-            var lightboxImg = document.getElementById('lightbox-img');
-            if (!lightbox || !lightboxImg) return;
-
-            var closeBtn = lightbox.querySelector('.lightbox__close');
-            var triggers = Array.prototype.slice.call(document.querySelectorAll('[data-lightbox-src]'));
-
-            function openLightbox(src, alt) {
-                lightboxImg.src = src;
-                lightboxImg.alt = alt || 'Просмотр фотографии';
-                lightbox.classList.remove('hidden');
-                lightbox.setAttribute('aria-hidden', 'false');
-                document.body.style.overflow = 'hidden';
-                closeBtn && closeBtn.focus();
-            }
-
-            function closeLightbox() {
-                lightbox.classList.add('hidden');
-                lightbox.setAttribute('aria-hidden', 'true');
-                lightboxImg.src = '';
-                document.body.style.overflow = '';
-            }
-
-            triggers.forEach(function (btn) {
-                btn.addEventListener('click', function () {
-                    var src = btn.getAttribute('data-lightbox-src');
-                    var img = btn.querySelector('img');
-                    openLightbox(src, img ? img.getAttribute('alt') : '');
-                });
-            });
-
-            closeBtn && closeBtn.addEventListener('click', closeLightbox);
-
-            lightbox.addEventListener('click', function (e) {
-                // закрытие по клику на затемнение
-                if (e.target === lightbox) closeLightbox();
-            });
-
-            document.addEventListener('keydown', function (e) {
-                if (e.key === 'Escape' && !lightbox.classList.contains('hidden')) {
-                    closeLightbox();
-                }
-            });
-        })();
-    </script>
-
-    <footer class="footer">
+    <!-- ===== ОСНОВНОЙ ФУТЕР ===== -->
+    <footer class="main-footer">
         <div class="container">
-            <a class="logo" href="index.html" style="color: white; text-decoration: none;"><i class="fas fa-sailboat"></i> ПАРУС</a>
-            <div class="footer-links">
-                <a href="privacy.html">Политика конфиденциальности</a>
-                <a href="terms.html">Пользовательское соглашение</a>
-                <a href="#">Карта сайта</a>
-                <a href="#">Лицензии</a>
+            <div class="footer-left">
+                <a class="logo" href="index.html" style="color: white; text-decoration: none;">
+                    <i class="fas fa-sailboat"></i>
+                    <span>ПАРУС</span>
+                </a>
+                <p class="footer-description">Центр когнитивной терапии<br>Казань, работаем с 2013 года</p>
             </div>
-            <small>© 2026 ООО "Клиника Когнитивной Терапии «Парус»"</small>
+            
+            <div class="footer-right">
+                <div class="footer-address">
+                    <div class="address-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Юридический адрес: 420053, Республика Татарстан, г. Казань, ул. Сибирский тракт, д. 78 пом 23.</span>
+                    </div>
+                    <div class="address-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Филиал №1: <a href="#">По запросу</a></span>
+                    </div>
+                    <div class="address-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Филиал №2: <a href="#">По запросу</a></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <div class="container">
+                <p>© 2026 ООО "Клиника Когнитивной Терапии «Парус»". Все права защищены.</p>
+                <p style="margin-top: 8px;">
+                    <a href="privacy.html">Политика конфиденциальности</a> | 
+                    <a href="terms.html">Пользовательское соглашение</a>
+                </p>
+            </div>
         </div>
     </footer>
+
+    <!-- ===== ФИКСИРОВАННЫЙ БАР ===== -->
+    <div class="fixed-action-bar" id="actionBar">
+        <div class="container">
+            <div class="action-buttons">
+                <a href="tel:89375210005" class="action-btn action-btn-call">
+                    <i class="fas fa-phone-alt"></i> Позвонить
+                </a>
+                <a href="https://t.me/parus_center_bot" target="_blank" class="action-btn action-btn-telegram">
+                    <i class="fab fa-telegram"></i> Написать в Telegram
+                </a>
+                <a href="https://max.ru/join/eQHll3JM1boZPlxsAH3zQyRp16h70o-PBpdESR2ab7s" target="_blank" class="action-btn action-btn-MAX">
+                    <i class="fas fa-star"></i> Написать в MAX
+                </a>
+            </div>
+            <div class="work-info">
+                <i class="fas fa-clock"></i> Круглосуточно, без выходных<br>
+                <span style="font-size: 0.75rem;">Анонимно. Бесплатная консультация</span>
+            </div>
+        </div>
+    </div>
 
     <!-- Cookie баннер -->
     <div id="cookieBanner" class="cookie-banner">
@@ -160,7 +154,7 @@
             <div class="cookie-text">
                 <i class="fas fa-cookie-bite"></i>
                 <strong>Мы используем cookie-файлы</strong><br>
-                Продолжая использовать наш сайт, вы соглашаетесь на сбор и обработку cookie-файлов. Это помогает нам улучшать работу сайта, анализировать трафик и предоставлять вам лучший сервис. Подробнее в 
+                Продолжая использовать наш сайт, вы соглашаетесь на сбор и обработку cookie-файлов. Подробнее в 
                 <a href="privacy.html">Политике конфиденциальности</a> и 
                 <a href="terms.html">Пользовательском соглашении</a>.
             </div>

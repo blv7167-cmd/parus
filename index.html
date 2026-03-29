@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Парус — Центр когнитивной терапии и реабилитации</title>
-    <!-- Шрифты и иконки -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
@@ -13,13 +12,12 @@
     <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
-    <!-- ШАПКА -->
     <header class="header">
         <div class="container">
-            <div class="logo">
+            <a class="logo" href="index.html">
                 <i class="fas fa-sailboat"></i>
                 <span>ПАРУС</span>
-            </div>
+            </a>
             <nav class="nav-menu">
                 <a href="about.html">О центре</a>
                 <a href="program.html">Программа</a>
@@ -35,7 +33,6 @@
         </div>
     </header>
 
-    <!-- ПЕРВЫЙ ЭКРАН (Hero) -->
     <section class="hero">
         <div class="container">
             <div class="hero-content">
@@ -43,7 +40,7 @@
                 <h1>Помогаем вернуть себя</h1>
                 <p>Научный подход, доказательная медицина и бережное возвращение к полноценной жизни. Работаем более 10 лет.</p>
                 <div class="hero-buttons">
-                    <a href="#" class="btn btn-primary">Получить консультацию</a>
+                    <a href="contacts.html" class="btn btn-primary">Получить консультацию</a>
                     <a href="program.html" class="btn btn-outline">Программа реабилитации</a>
                 </div>
                 <div style="margin-top: 24px;">
@@ -55,7 +52,6 @@
         </div>
     </section>
 
-    <!-- БЫСТРЫЕ РАЗДЕЛЫ -->
     <section class="section">
         <div class="container">
             <h2>Разделы</h2>
@@ -89,19 +85,66 @@
         </div>
     </section>
 
-    <!-- ПОДВАЛ -->
-    <footer class="footer">
+    <!-- ===== ОСНОВНОЙ ФУТЕР ===== -->
+    <footer class="main-footer">
         <div class="container">
-            <div class="logo" style="color: white;"><i class="fas fa-sailboat"></i> ПАРУС</div>
-            <div class="footer-links">
-                <a href="privacy.html">Политика конфиденциальности</a>
-                <a href="terms.html">Пользовательское соглашение</a>
-                <a href="#">Карта сайта</a>
-                <a href="#">Лицензии</a>
+            <div class="footer-left">
+                <a class="logo" href="index.html" style="color: white; text-decoration: none;">
+                    <i class="fas fa-sailboat"></i>
+                    <span>ПАРУС</span>
+                </a>
+                <p class="footer-description">Центр когнитивной терапии<br>Казань, работаем с 2013 года</p>
             </div>
-            <small>© 2026 ООО "Клиника Когнитивной Терапии «Парус»"</small>
+            
+            <div class="footer-right">
+                <div class="footer-address">
+                    <div class="address-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Юридический адрес: 420053, Республика Татарстан, г. Казань, ул. Сибирский тракт, д. 78 пом 23.</span>
+                    </div>
+                    <div class="address-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Филиал №1: <a href="#">По запросу</a></span>
+                    </div>
+                    <div class="address-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Филиал №2: <a href="#">По запросу</a></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <div class="container">
+                <p>© 2026 ООО "Клиника Когнитивной Терапии «Парус»". Все права защищены.</p>
+                <p style="margin-top: 8px;">
+                    <a href="privacy.html">Политика конфиденциальности</a> | 
+                    <a href="terms.html">Пользовательское соглашение</a>
+                </p>
+            </div>
         </div>
     </footer>
+
+    <!-- ===== ФИКСИРОВАННЫЙ БАР ===== -->
+    <div class="fixed-action-bar" id="actionBar">
+        <div class="container">
+            <div class="action-buttons">
+                <a href="tel:89375210005" class="action-btn action-btn-call">
+                    <i class="fas fa-phone-alt"></i> Позвонить
+                </a>
+                <a href="https://t.me/parus_center_bot" target="_blank" class="action-btn action-btn-telegram">
+                    <i class="fab fa-telegram"></i> Написать в Telegram
+                </a>
+                <a href="https://max.ru/join/eQHll3JM1boZPlxsAH3zQyRp16h70o-PBpdESR2ab7s" target="_blank" class="action-btn action-btn-MAX">
+                    <i class="fas fa-star"></i> Написать в MAX
+                </a>
+            </div>
+            <div class="work-info">
+                <i class="fas fa-clock"></i> Круглосуточно, без выходных<br>
+                <span style="font-size: 0.75rem;">Анонимно. Бесплатная консультация</span>
+            </div>
+        </div>
+    </div>
 
     <!-- Cookie баннер -->
     <div id="cookieBanner" class="cookie-banner">
@@ -109,7 +152,7 @@
             <div class="cookie-text">
                 <i class="fas fa-cookie-bite"></i>
                 <strong>Мы используем cookie-файлы</strong><br>
-                Продолжая использовать наш сайт, вы соглашаетесь на сбор и обработку cookie-файлов. Это помогает нам улучшать работу сайта, анализировать трафик и предоставлять вам лучший сервис. Подробнее в 
+                Продолжая использовать наш сайт, вы соглашаетесь на сбор и обработку cookie-файлов. Подробнее в 
                 <a href="privacy.html">Политике конфиденциальности</a> и 
                 <a href="terms.html">Пользовательском соглашении</a>.
             </div>

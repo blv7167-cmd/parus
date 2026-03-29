@@ -15,12 +15,8 @@ body {
   background-position: center center;
   background-repeat: no-repeat;
   position: relative;
+  padding-bottom: 70px;  /* ← отступ для фиксированного бара */
 }
-/* Отступ для основного контента, чтобы не перекрывался фиксированным баром */
-body {
-  padding-bottom: 70px;
-}
-
 /* Затемнение для читаемости текста */
 body::before {
   content: '';
