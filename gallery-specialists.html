@@ -4,590 +4,132 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Наша команда — Парус</title>
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            background-image: url('./foto/bg.jpg');
-            background-size: cover;
-            background-attachment: fixed;
-            background-position: center center;
-            background-repeat: no-repeat;
-            position: relative;
-        }
-
-        /* Затемнение фона для читаемости текста */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.5);
-            z-index: -1;
-            pointer-events: none;
-        }
-
-        .container {
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
-
-        :root {
-            --primary: #0f3b5e;
-            --primary-light: #2b5c84;
-            --accent: #5aa9a5;
-            --bg-light: #f8fafd;
-            --text-dark: #1f2b3a;
-            --text-muted: #4b5f73;
-            --white: #ffffff;
-            --border-light: #e2e8f0;
-        }
-
-        /* шапка */
-        .header {
-            padding: 20px 0;
-            border-bottom: 1px solid var(--border-light);
-            background: white;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .header .container {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--primary);
-            text-decoration: none;
-        }
-
-        .logo i {
-            font-size: 2.2rem;
-            color: var(--accent);
-        }
-
-        .nav-menu {
-            display: flex;
-            gap: 32px;
-            font-weight: 500;
-            flex-wrap: wrap;
-        }
-
-        .nav-menu a {
-            text-decoration: none;
-            color: var(--text-dark);
-            transition: color 0.2s;
-        }
-
-        .nav-menu a:hover {
-            color: var(--primary);
-        }
-
-        /* герой */
-        .hero {
-            background: linear-gradient(135deg, #f0f7fc 0%, #ffffff 100%);
-            padding: 48px 0;
-        }
-
-        .hero-content h1 {
-            font-size: 2.8rem;
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-
-        .hero-content p {
-            font-size: 1.2rem;
-            color: var(--text-muted);
-        }
-
-        /* секции */
-        .section {
-            padding: 60px 0;
-        }
-
-        /* ГАЛЕРЕЯ: новая сетка с постоянными подписями */
-        .specialists-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 40px 30px;
-            margin-top: 20px;
-        }
-
-        /* карточка специалиста */
-        .specialist-card {
-            background: white;
-            border-radius: 28px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px -8px rgba(0, 0, 0, 0.08);
-            transition: transform 0.25s ease, box-shadow 0.25s ease;
-            border: 1px solid var(--border-light);
-            cursor: pointer;
-        }
-
-        .specialist-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 24px 40px -16px rgba(15, 59, 94, 0.2);
-        }
-
-        /* фото занимает фиксированную область */
-        .specialist-photo {
-            width: 100%;
-            aspect-ratio: 1 / 1;
-            background-color: #eef2f7;
-            overflow: hidden;
-        }
-
-        .specialist-photo img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-            transition: transform 0.3s ease;
-            /* стандартная позиция — центр */
-            object-position: center center;
-        }
-
-        /* специальный класс для фото, где нужно показать верхнюю часть кадра */
-        .specialist-photo img.object-position-top {
-            object-position: center top;  /* смещаем фокус вверх, чтобы видеть лицо/голову */
-        }
-
-        .specialist-card:hover .specialist-photo img {
-            transform: scale(1.02);
-        }
-
-        /* описание ВИДНО сразу, без наведения */
-        .specialist-info {
-            padding: 20px 22px 24px 22px;
-            background: white;
-        }
-
-        .specialist-name {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 12px;
-            border-left: 4px solid var(--accent);
-            padding-left: 12px;
-        }
-
-        .specialist-desc {
-            font-size: 0.95rem;
-            color: var(--text-muted);
-            line-height: 1.5;
-        }
-
-        .specialist-desc i {
-            color: var(--accent);
-            width: 20px;
-            margin-right: 6px;
-        }
-
-        .specialist-desc p {
-            margin-bottom: 8px;
-        }
-
-        .badge-experience {
-            display: inline-block;
-            background: #eef2fa;
-            color: var(--primary);
-            font-size: 0.8rem;
-            font-weight: 600;
-            padding: 4px 12px;
-            border-radius: 30px;
-            margin-top: 12px;
-        }
-
-        /* ЛАЙТБОКС — улучшенная кнопка закрытия */
-        .lightbox {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.94);
-            backdrop-filter: blur(8px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-            transition: opacity 0.25s ease;
-        }
-
-        .lightbox.hidden {
-            display: none;
-        }
-
-        .lightbox__content {
-            position: relative;
-            max-width: 90vw;
-            max-height: 90vh;
-            background: transparent;
-            border-radius: 28px;
-            text-align: center;
-        }
-
-        .lightbox__img {
-            max-width: 100%;
-            max-height: 70vh;
-            object-fit: contain;
-            border-radius: 20px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-        }
-
-        .lightbox__caption {
-            margin-top: 20px;
-            background: rgba(15, 59, 94, 0.92);
-            color: white;
-            padding: 14px 28px;
-            border-radius: 60px;
-            font-size: 1rem;
-            line-height: 1.5;
-            backdrop-filter: blur(4px);
-            display: inline-block;
-            max-width: 85%;
-            text-align: center;
-        }
-
-        /* ✨ УЛУЧШЕННАЯ КНОПКА ЗАКРЫТИЯ — всегда видна, с текстом и иконкой */
-        .lightbox__close {
-            position: absolute;
-            top: -60px;
-            right: 0;
-            background: rgba(0, 0, 0, 0.75);
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            color: white;
-            font-size: 1rem;
-            font-weight: 600;
-            padding: 10px 24px;
-            border-radius: 50px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            transition: all 0.25s ease;
-            backdrop-filter: blur(8px);
-            font-family: inherit;
-        }
-
-        .lightbox__close i {
-            font-size: 1.2rem;
-        }
-
-        .lightbox__close:hover {
-            background: var(--accent);
-            border-color: white;
-            transform: scale(1.02);
-        }
-
-        /* альтернативное размещение для мобильных устройств */
-        @media (max-width: 768px) {
-            .lightbox__close {
-                top: 20px;
-                right: 20px;
-                background: rgba(0, 0, 0, 0.85);
-                padding: 8px 18px;
-                font-size: 0.9rem;
-            }
-            
-            .lightbox__caption {
-                font-size: 0.85rem;
-                max-width: 95%;
-                margin-top: 16px;
-            }
-        }
-
-        /* футер */
-        .footer {
-            background: var(--primary);
-            color: white;
-            padding: 48px 0;
-            margin-top: 40px;
-            border-radius: 40px 40px 0 0;
-        }
-
-        .footer .container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .footer .logo {
-            color: white;
-        }
-
-        .footer small {
-            opacity: 0.8;
-        }
-
-        /* адаптив */
-        @media (max-width: 768px) {
-            .header .container {
-                flex-direction: column;
-                gap: 16px;
-            }
-            .nav-menu {
-                justify-content: center;
-                gap: 20px;
-            }
-            .hero-content h1 {
-                font-size: 2rem;
-            }
-            .specialists-grid {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
-        }
-    </style>
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
+    <header class="header">
+        <div class="container">
+            <a class="logo" href="index.html">
+                <i class="fas fa-sailboat"></i>
+                <span>ПАРУС</span>
+            </a>
+            <nav class="nav-menu">
+                <a href="about.html">О центре</a>
+                <a href="program.html">Программа</a>
+                <a href="gallery.html">Галерея</a>
+                <a href="reviews.html">Отзывы</a>
+                <a href="relatives.html">Родственникам</a>
+                <a href="contacts.html">Контакты</a>
+            </nav>
+            <div class="header-contacts">
+                <a href="tel:89375210005" class="phone"><i class="fas fa-phone-alt"></i> 8-(937)-521-00-05</a>
+                <a href="#" class="btn btn-outline" style="padding: 10px 20px;">Заказать звонок</a>
+            </div>
+        </div>
+    </header>
 
-<header class="header">
-    <div class="container">
-        <a class="logo" href="#">
-            <i class="fas fa-sailboat"></i>
-            <span>ПАРУС</span>
-        </a>
-        <nav class="nav-menu">
-            <a href="about.html">О центре</a>
-            <a href="program.html">Программа</a>
-            <a href="gallery.html">Галерея</a>
-            <a href="reviews.html">Отзывы</a>
-            <a href="relatives.html">Родственникам</a>
-            <a href="contacts.html">Контакты</a>
-        </nav>
-    </div>
-</header>
+    <section class="hero" style="padding: 40px 0 50px;">
+        <div class="container">
+            <div class="hero-content">
+                <div class="subhead">Наша команда</div>
+                <h1>👥 Специалисты центра «Парус»</h1>
+                <p>Опытные специалисты клиники "Парус" имеют многолетний стаж работы с зависимыми людьми. Наша главная миссия — найти индивидуальный подход к каждой семье, обратившейся за помощью именно к нам.</p>
+                <div class="hero-buttons">
+                    <a href="contacts.html" class="btn btn-primary">Связаться с нами</a>
+                    <a href="program.html" class="btn btn-outline">Программа</a>
+                </div>
+            </div>
+            <div class="hero-image" style="min-height: 260px; background-image: url('https://placehold.co/600x400/0f3b5e/white?text=Наша+команда');"></div>
+        </div>
+    </section>
 
-<section class="hero">
-    <div class="container">
-        <div class="hero-content">
-            <h1>👥 Наша команда</h1>
-            <p>Опытные специалисты клиники "Парус" имеют многолетний стаж работы с зависимыми людьми. Наша главная миссия-найти индивидуальный подход к каждой семье, обратившейся за помощью именно к нам 🙏</p>
-            <p>Нажмите на фото для увеличения.</p>
+    <section class="section section-bg">
+        <div class="container">
+            <h2>Наши специалисты</h2>
+            <p style="font-size: 1.1rem; margin-bottom: 2rem;">Нажмите на фото для увеличения</p>
+            <div class="specialists-grid" id="specialistsGrid">
+                <!-- Специалисты будут добавлены через JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Лайтбокс -->
+    <div id="lightbox" class="lightbox hidden" aria-hidden="true">
+        <div class="lightbox__content" role="dialog" aria-modal="true" aria-label="Просмотр специалиста">
+            <button type="button" class="lightbox__close" aria-label="Закрыть">
+                <i class="fas fa-times"></i>
+                <span>Закрыть</span>
+            </button>
+            <img id="lightbox-img" class="lightbox__img" alt="Фото специалиста">
+            <div id="lightbox-caption" class="lightbox__caption"></div>
         </div>
     </div>
-</section>
 
-<section class="section">
-    <div class="container">
-        <div class="specialists-grid" id="specialistsGrid">
-            <!-- Каждый специалист – карточка с фото + описание всегда видимо -->
+    <!-- ===== ОСНОВНОЙ ФУТЕР ===== -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-left">
+                <a class="logo" href="index.html" style="color: white; text-decoration: none;">
+                    <i class="fas fa-sailboat"></i>
+                    <span>ПАРУС</span>
+                </a>
+                <p class="footer-description">Центр когнитивной терапии<br>Казань, работаем с 2013 года</p>
+            </div>
+            
+            <div class="footer-right">
+                <div class="footer-address">
+                    <div class="address-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Юридический адрес: 420053, Республика Татарстан, г. Казань, ул. Сибирский тракт, д. 78 пом 23.</span>
+                    </div>
+                    <div class="address-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Филиал №1: <a href="#">По запросу</a></span>
+                    </div>
+                    <div class="address-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Филиал №2: <a href="#">По запросу</a></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <div class="container">
+                <p>© 2026 ООО "Клиника Когнитивной Терапии «Парус»". Все права защищены.</p>
+                <p style="margin-top: 8px;">
+                    <a href="privacy.html">Политика конфиденциальности</a> | 
+                    <a href="terms.html">Пользовательское соглашение</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===== ФИКСИРОВАННЫЙ БАР С КНОПКАМИ ===== -->
+    <div class="fixed-action-bar" id="actionBar">
+        <div class="container">
+            <div class="action-buttons">
+                <a href="tel:89375210005" class="action-btn action-btn-call">
+                    <i class="fas fa-phone-alt"></i> Позвонить
+                </a>
+                <a href="https://t.me/parus_center_bot" target="_blank" class="action-btn action-btn-telegram">
+                    <i class="fab fa-telegram"></i> Написать в Telegram
+                </a>
+                <a href="https://max.ru/join/eQHll3JM1boZPlxsAH3zQyRp16h70o-PBpdESR2ab7s" target="_blank" class="action-btn action-btn-MAX">
+                    <i class="fas fa-star"></i> Написать в MAX
+                </a>
+            </div>
+            <div class="work-info">
+                <i class="fas fa-clock"></i> Круглосуточно, без выходных<br>
+                <span style="font-size: 0.75rem;">Анонимно. Бесплатная консультация</span>
+            </div>
         </div>
     </div>
-</section>
-
-<!-- ЛАЙТБОКС с улучшенной кнопкой закрытия -->
-<div id="lightbox" class="lightbox hidden" aria-hidden="true">
-    <div class="lightbox__content" role="dialog" aria-modal="true" aria-label="Просмотр специалиста">
-        <button type="button" class="lightbox__close" aria-label="Закрыть">
-            <i class="fas fa-times"></i>
-            <span>Закрыть</span>
-        </button>
-        <img id="lightbox-img" class="lightbox__img" alt="Фото специалиста">
-        <div id="lightbox-caption" class="lightbox__caption"></div>
-    </div>
-</div>
-
-<script>
-    // Данные специалистов (8 человек) с полным описанием, которое будет видно всегда в карточке
-    const specialists = [
-        {
-            imgSrc: "foto/specialists/1.jpg",
-            name: "Кирюшкин Денис Георгиевич",
-            desc: "Програмный руководитель.",
-            experience: "Опыт работы с зависимыми: более 10 лет",
-            objectPosition: "center"
-        },
-        {
-            imgSrc: "foto/specialists/2.jpg",
-            name: "Мифтахов Ильшат Зарифович",
-            desc: "Практикующий психолог.",
-            experience: "Опыт работы с зависимыми: более 13 лет",
-            objectPosition: "center"
-        },
-        {
-            imgSrc: "foto/specialists/3.jpg",
-            name: "Марков Дмитрий Николаевич",
-            desc: "Клинический психолог.",
-            experience: "Опыт работы с зависимыми: более 16 лет",
-            objectPosition: "center"
-        },
-        {
-            imgSrc: "foto/specialists/4.jpg",
-            name: "Денденкова Светлана Владимировна",
-            desc: "Клинический психолог.",
-            experience: "Опыт работы с зависимыми: более 15 лет",
-            objectPosition: "center"
-        },
-        {
-            imgSrc: "foto/specialists/5.jpg",
-            name: "Фатахова София Шамилевна",
-            desc: "Клинический психолог.",
-            experience: "Опыт работы с зависимыми: более 16 лет",
-            objectPosition: "top"  // для пятого специалиста смещаем кадр вверх
-        },
-        {
-            imgSrc: "foto/specialists/6.jpg",
-            name: "Платов Валерий Германович",
-            desc: "Практикующий психолог.",
-            experience: "Опыт работы с зависимыми: более 4х лет",
-            objectPosition: "center"
-        },
-        {
-            imgSrc: "foto/specialists/7.jpg",
-            name: "Добров Роман Александрович",
-            desc: "Аддиктолог.",
-            experience: "Опыт работы с зависимыми: более 3х лет",
-            objectPosition: "center"
-        },
-        {
-            imgSrc: "foto/specialists/9.jpg",
-            name: "Пономарев Юрий Александрович",
-            desc: "Практикующий психолог.",
-            experience: "Опыт работы с зависимыми: более 7 лет",
-            objectPosition: "center"
-        }
-    ];
-
-    // Функция рендера галереи
-    function renderSpecialists() {
-        const grid = document.getElementById('specialistsGrid');
-        if (!grid) return;
-
-        grid.innerHTML = '';
-
-        specialists.forEach((spec) => {
-            const card = document.createElement('div');
-            card.className = 'specialist-card';
-
-            // фото
-            const photoDiv = document.createElement('div');
-            photoDiv.className = 'specialist-photo';
-            const img = document.createElement('img');
-            img.src = spec.imgSrc;
-            img.alt = spec.name;
-            img.loading = 'lazy';
-            
-            // применяем позицию кадра для пятого специалиста
-            if (spec.objectPosition === 'top') {
-                img.classList.add('object-position-top');
-            }
-            
-            photoDiv.appendChild(img);
-
-            // информационный блок
-            const infoDiv = document.createElement('div');
-            infoDiv.className = 'specialist-info';
-
-            const nameDiv = document.createElement('div');
-            nameDiv.className = 'specialist-name';
-            nameDiv.textContent = spec.name;
-
-            const descDiv = document.createElement('div');
-            descDiv.className = 'specialist-desc';
-            descDiv.innerHTML = `
-                <p><i class="fas fa-user-md"></i> ${spec.desc}</p>
-                <span class="badge-experience"><i class="fas fa-briefcase"></i> ${spec.experience}</span>
-            `;
-
-            infoDiv.appendChild(nameDiv);
-            infoDiv.appendChild(descDiv);
-
-            card.appendChild(photoDiv);
-            card.appendChild(infoDiv);
-
-            // клик по карточке открывает лайтбокс
-            card.addEventListener('click', () => {
-                openLightbox(spec.imgSrc, `${spec.name}\n${spec.desc}\n${spec.experience}`);
-            });
-
-            grid.appendChild(card);
-        });
-    }
-
-    // Лайтбокс логика
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = document.getElementById('lightbox-img');
-    const lightboxCaption = document.getElementById('lightbox-caption');
-    const closeBtn = lightbox ? lightbox.querySelector('.lightbox__close') : null;
-
-    function openLightbox(src, titleText) {
-        if (!lightbox || !lightboxImg) return;
-        lightboxImg.src = src;
-        // превращаем переносы строк в <br>
-        const formatted = (titleText || '').replace(/\n/g, '<br>');
-        lightboxCaption.innerHTML = formatted;
-        lightbox.classList.remove('hidden');
-        document.body.style.overflow = 'hidden';
-    }
-
-    function closeLightbox() {
-        if (!lightbox) return;
-        lightbox.classList.add('hidden');
-        lightboxImg.src = '';
-        lightboxCaption.innerHTML = '';
-        document.body.style.overflow = '';
-    }
-
-    // Добавляем обработчик для кнопки закрытия
-    if (closeBtn) {
-        closeBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            closeLightbox();
-        });
-    }
-
-    // Закрытие по клику на фон
-    if (lightbox) {
-        lightbox.addEventListener('click', (e) => {
-            if (e.target === lightbox) {
-                closeLightbox();
-            }
-        });
-    }
-
-    // Закрытие по клавише Escape
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && lightbox && !lightbox.classList.contains('hidden')) {
-            closeLightbox();
-        }
-    });
-
-    // Запускаем рендер
-    renderSpecialists();
-</script>
-
-<footer class="footer">
-    <div class="container">
-        <a class="logo" href="#" style="color:white; text-decoration: none;">
-            <i class="fas fa-sailboat"></i> ПАРУС
-        </a>
-        <small>© 2026 Центр когнитивной терапии «Парус» — Казань, ул. Агачлык, 14</small>
-    </div>
-</footer>
 
     <!-- Cookie баннер -->
     <div id="cookieBanner" class="cookie-banner">
@@ -595,7 +137,7 @@
             <div class="cookie-text">
                 <i class="fas fa-cookie-bite"></i>
                 <strong>Мы используем cookie-файлы</strong><br>
-                Продолжая использовать наш сайт, вы соглашаетесь на сбор и обработку cookie-файлов. Это помогает нам улучшать работу сайта, анализировать трафик и предоставлять вам лучший сервис. Подробнее в 
+                Продолжая использовать наш сайт, вы соглашаетесь на сбор и обработку cookie-файлов. Подробнее в 
                 <a href="privacy.html">Политике конфиденциальности</a> и 
                 <a href="terms.html">Пользовательском соглашении</a>.
             </div>
@@ -607,5 +149,165 @@
     </div>
 
     <script src="assets/cookie.js"></script>
+    
+    <script>
+        // Данные специалистов
+        const specialists = [
+            {
+                imgSrc: "foto/specialists/1.jpg",
+                name: "Кирюшкин Денис Георгиевич",
+                desc: "Программный руководитель.",
+                experience: "Опыт работы с зависимыми: более 10 лет",
+                objectPosition: "center"
+            },
+            {
+                imgSrc: "foto/specialists/2.jpg",
+                name: "Мифтахов Ильшат Зарифович",
+                desc: "Практикующий психолог.",
+                experience: "Опыт работы с зависимыми: более 13 лет",
+                objectPosition: "center"
+            },
+            {
+                imgSrc: "foto/specialists/3.jpg",
+                name: "Марков Дмитрий Николаевич",
+                desc: "Клинический психолог.",
+                experience: "Опыт работы с зависимыми: более 16 лет",
+                objectPosition: "center"
+            },
+            {
+                imgSrc: "foto/specialists/4.jpg",
+                name: "Денденкова Светлана Владимировна",
+                desc: "Клинический психолог.",
+                experience: "Опыт работы с зависимыми: более 15 лет",
+                objectPosition: "center"
+            },
+            {
+                imgSrc: "foto/specialists/5.jpg",
+                name: "Фатахова София Шамилевна",
+                desc: "Клинический психолог.",
+                experience: "Опыт работы с зависимыми: более 16 лет",
+                objectPosition: "top"
+            },
+            {
+                imgSrc: "foto/specialists/6.jpg",
+                name: "Платов Валерий Германович",
+                desc: "Практикующий психолог.",
+                experience: "Опыт работы с зависимыми: более 4 лет",
+                objectPosition: "center"
+            },
+            {
+                imgSrc: "foto/specialists/7.jpg",
+                name: "Добров Роман Александрович",
+                desc: "Аддиктолог.",
+                experience: "Опыт работы с зависимыми: более 3 лет",
+                objectPosition: "center"
+            },
+            {
+                imgSrc: "foto/specialists/9.jpg",
+                name: "Пономарев Юрий Александрович",
+                desc: "Практикующий психолог.",
+                experience: "Опыт работы с зависимыми: более 7 лет",
+                objectPosition: "center"
+            }
+        ];
+
+        // Функция рендера галереи
+        function renderSpecialists() {
+            const grid = document.getElementById('specialistsGrid');
+            if (!grid) return;
+
+            grid.innerHTML = '';
+
+            specialists.forEach((spec) => {
+                const card = document.createElement('div');
+                card.className = 'specialist-card';
+
+                const photoDiv = document.createElement('div');
+                photoDiv.className = 'specialist-photo';
+                const img = document.createElement('img');
+                img.src = spec.imgSrc;
+                img.alt = spec.name;
+                img.loading = 'lazy';
+                
+                if (spec.objectPosition === 'top') {
+                    img.classList.add('object-position-top');
+                }
+                
+                photoDiv.appendChild(img);
+
+                const infoDiv = document.createElement('div');
+                infoDiv.className = 'specialist-info';
+
+                const nameDiv = document.createElement('div');
+                nameDiv.className = 'specialist-name';
+                nameDiv.textContent = spec.name;
+
+                const descDiv = document.createElement('div');
+                descDiv.className = 'specialist-desc';
+                descDiv.innerHTML = `
+                    <p><i class="fas fa-user-md"></i> ${spec.desc}</p>
+                    <span class="badge-experience"><i class="fas fa-briefcase"></i> ${spec.experience}</span>
+                `;
+
+                infoDiv.appendChild(nameDiv);
+                infoDiv.appendChild(descDiv);
+
+                card.appendChild(photoDiv);
+                card.appendChild(infoDiv);
+
+                card.addEventListener('click', () => {
+                    openLightbox(spec.imgSrc, `${spec.name}\n${spec.desc}\n${spec.experience}`);
+                });
+
+                grid.appendChild(card);
+            });
+        }
+
+        // Лайтбокс логика
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxCaption = document.getElementById('lightbox-caption');
+        const closeBtn = lightbox ? lightbox.querySelector('.lightbox__close') : null;
+
+        function openLightbox(src, titleText) {
+            if (!lightbox || !lightboxImg) return;
+            lightboxImg.src = src;
+            const formatted = (titleText || '').replace(/\n/g, '<br>');
+            lightboxCaption.innerHTML = formatted;
+            lightbox.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            if (!lightbox) return;
+            lightbox.classList.add('hidden');
+            lightboxImg.src = '';
+            lightboxCaption.innerHTML = '';
+            document.body.style.overflow = '';
+        }
+
+        if (closeBtn) {
+            closeBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                closeLightbox();
+            });
+        }
+
+        if (lightbox) {
+            lightbox.addEventListener('click', (e) => {
+                if (e.target === lightbox) {
+                    closeLightbox();
+                }
+            });
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && lightbox && !lightbox.classList.contains('hidden')) {
+                closeLightbox();
+            }
+        });
+
+        renderSpecialists();
+    </script>
 </body>
 </html>

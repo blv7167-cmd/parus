@@ -47,8 +47,31 @@ body::before {
   --white: #ffffff;
   --border-light: #e2e8f0;
 }
-.specialist-photo {
+/* ===== СПЕЦИАЛИСТЫ (ГАЛЕРЕЯ СПЕЦИАЛИСТОВ) ===== */
+.specialists-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 40px 30px;
+  margin-top: 20px;
+}
 
+.specialist-card {
+  background: white;
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px -8px rgba(0, 0, 0, 0.08);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  border: 1px solid var(--border-light);
+  cursor: pointer;
+}
+
+.specialist-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 40px -16px rgba(15, 59, 94, 0.2);
+}
+
+/* Фото специалиста */
+.specialist-photo {
   width: 100%;
   aspect-ratio: 1 / 1;
   background: linear-gradient(135deg, #e8f0f5 0%, #d4e2ea 100%);
@@ -63,7 +86,67 @@ body::before {
   height: 100%;
   object-fit: cover;
   display: block;
-  background: linear-gradient(135deg, #e8f0f5 0%, #d4e2ea 100%);
+  transition: transform 0.3s ease;
+  object-position: center center;
+}
+
+/* Для фото, где нужно сместить фокус вверх */
+.specialist-photo img.object-position-top {
+  object-position: center top;
+}
+
+.specialist-card:hover .specialist-photo img {
+  transform: scale(1.02);
+}
+
+/* Информация о специалисте */
+.specialist-info {
+  padding: 20px 22px 24px 22px;
+  background: white;
+}
+
+.specialist-name {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 12px;
+  border-left: 4px solid var(--accent);
+  padding-left: 12px;
+}
+
+.specialist-desc {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.specialist-desc i {
+  color: var(--accent);
+  width: 20px;
+  margin-right: 6px;
+}
+
+.specialist-desc p {
+  margin-bottom: 8px;
+}
+
+.badge-experience {
+  display: inline-block;
+  background: #eef2fa;
+  color: var(--primary);
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 30px;
+  margin-top: 12px;
+}
+
+/* Адаптация для мобильных */
+@media (max-width: 768px) {
+  .specialists-grid {
+      grid-template-columns: 1fr;
+      gap: 30px;
+  }
 }
 /* типографика */
 h1,
@@ -316,12 +399,42 @@ h3 {
 }
 
 .gallery-item {
+  position: relative;
   border-radius: 24px;
-  height: 200px;
-  background-color: var(--primary-light);
-  background-size: cover;
-  background-position: center;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  cursor: pointer;
+  background: linear-gradient(135deg, #e8f0f5 0%, #d4e2ea 100%);
+  aspect-ratio: 4 / 3;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.gallery-item:hover img {
+  transform: scale(1.05);
+}
+
+/* Опционально: затемнение и подпись при наведении */
+.gallery-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+  color: white;
+  padding: 12px;
+  font-size: 0.85rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.gallery-item:hover .gallery-caption {
+  opacity: 1;
 }
 
 /* отзыв */
