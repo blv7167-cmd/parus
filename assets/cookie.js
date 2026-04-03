@@ -32,15 +32,13 @@
         document.body.style.overflow = 'hidden';
     }
     
-    // Функция для привязки кнопки закрытия (будет вызываться несколько раз)
+    // Функция для привязки кнопки закрытия
     function bindSuccessCloseButton() {
         const successCloseBtn = document.getElementById('successClose');
         if (successCloseBtn) {
-            console.log('Привязываем кнопку successClose (прямая привязка)');
-            // Убираем все старые обработчики
+            console.log('Привязываем кнопку successClose');
             const newBtn = successCloseBtn.cloneNode(true);
             successCloseBtn.parentNode.replaceChild(newBtn, successCloseBtn);
-            // Привязываем новый обработчик
             newBtn.onclick = function(e) {
                 e.preventDefault();
                 e.stopPropagation();
@@ -48,12 +46,33 @@
                 closeModal();
                 return false;
             };
-            // Добавляем также атрибут для надёжности
-            newBtn.setAttribute('data-close-modal', 'true');
         } else {
-            console.log('Кнопка successClose не найдена, повторная попытка через 100ms');
             setTimeout(bindSuccessCloseButton, 100);
         }
+    }
+    
+    // Привязка всех кнопок, которые открывают модальное окно
+    function bindAllOpenButtons() {
+        // Кнопка с id="openModalBtn" (существующая)
+        const openBtn = document.getElementById('openModalBtn');
+        if (openBtn) {
+            openBtn.onclick = openModal;
+            console.log('Привязана кнопка #openModalBtn');
+        }
+        
+        // Все кнопки с классом "open-modal-btn"
+        const openBtns = document.querySelectorAll('.open-modal-btn');
+        openBtns.forEach(btn => {
+            btn.onclick = openModal;
+            console.log('Привязана кнопка .open-modal-btn');
+        });
+        
+        // Все кнопки с атрибутом data-modal-open
+        const dataBtns = document.querySelectorAll('[data-modal-open]');
+        dataBtns.forEach(btn => {
+            btn.onclick = openModal;
+            console.log('Привязана кнопка [data-modal-open]');
+        });
     }
     
     if (document.readyState === 'loading') {
@@ -66,7 +85,6 @@
         console.log('Инициализация модального окна');
         
         modal = document.getElementById('callbackModal');
-        const openBtn = document.getElementById('openModalBtn');
         const closeBtn = document.getElementById('modalClose');
         formContainer = document.getElementById('modalForm');
         successContainer = document.getElementById('modalSuccess');
@@ -77,18 +95,18 @@
             return;
         }
         
-        if (!openBtn) {
-            console.error('Кнопка openModalBtn не найдена!');
-            return;
-        }
+        // Привязываем все кнопки открытия
+        bindAllOpenButtons();
         
-        openBtn.onclick = openModal;
+        // Закрытие по крестику
         if (closeBtn) closeBtn.onclick = closeModal;
         
+        // Закрытие по клику на фон
         modal.onclick = function(event) {
             if (event.target === modal) closeModal();
         };
         
+        // Закрытие по Escape
         document.onkeydown = function(event) {
             if (event.key === 'Escape' && modal.style.display === 'flex') closeModal();
         };
@@ -96,6 +114,7 @@
         // Первая привязка кнопки закрытия
         bindSuccessCloseButton();
         
+        // Отправка формы
         if (form) {
             form.onsubmit = async function(event) {
                 event.preventDefault();
@@ -137,7 +156,6 @@
                 if (successContainer) successContainer.classList.add('show');
                 if (submitBtn) submitBtn.disabled = false;
                 
-                // После показа success-блока привязываем кнопку снова
                 setTimeout(bindSuccessCloseButton, 50);
             };
         }
