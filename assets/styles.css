@@ -1591,3 +1591,16 @@ h4 {
   cursor: pointer;
   pointer-events: auto;
 }
+
+/* ===== КНОПКА "СВЯЗАТЬСЯ С НАМИ" В ACTION BAR ===== */
+.action-btn-callback {
+  background-color: var(--accent);
+  color: white;
+  box-shadow: 0 4px 12px rgba(90, 169, 165, 0.3);
+}
+
+.action-btn-callback:hover {
+  background-color: var(--accent-light);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(90, 169, 165, 0.4);
+}

@@ -10,6 +10,73 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="assets/styles.css">
+    <style>
+        /* Дополнительные стили для контактных карточек */
+        .contact-cards {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-top: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .contact-card {
+            background: white;
+            border-radius: 20px;
+            padding: 24px 16px;
+            text-align: center;
+            text-decoration: none;
+            color: var(--text-dark);
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-light);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+        
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+            border-color: var(--accent);
+        }
+        
+        .contact-card i {
+            font-size: 2.5rem;
+            margin-bottom: 12px;
+            display: inline-block;
+        }
+        
+        .contact-card .card-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+        }
+        
+        .contact-card .card-desc {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+        
+        /* Цвета для иконок */
+        .contact-card.phone i { color: var(--primary); }
+        .contact-card.vk i { color: var(--vk-color); }
+        .contact-card.max i { color: #6200EA; }
+        .contact-card.callback i { color: var(--accent); }
+        
+        @media (max-width: 768px) {
+            .contact-cards {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+            .contact-card {
+                padding: 16px 12px;
+            }
+            .contact-card i {
+                font-size: 1.8rem;
+            }
+            .contact-card .card-title {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <header class="header">
@@ -28,7 +95,7 @@
             </nav>
             <div class="header-contacts">
                 <a href="tel:89375210005" class="phone"><i class="fas fa-phone-alt"></i> 8-(937)-521-00-05</a>
-                <a href="#" class="btn btn-outline" id="openModalBtn">Заказать звонок</a>
+                <a href="#" class="btn btn-outline open-modal-btn">Заказать звонок</a>
             </div>
         </div>
     </header>
@@ -50,6 +117,35 @@
 
     <section class="section">
         <div class="container">
+            <h2>Свяжитесь с нами</h2>
+            
+            <!-- Кнопки-карточки для быстрой связи -->
+            <div class="contact-cards">
+                <a href="tel:89375210005" class="contact-card phone">
+                    <i class="fas fa-phone-alt"></i>
+                    <div class="card-title">Позвонить</div>
+                    <div class="card-desc">8-(937)-521-00-05<br>Круглосуточно</div>
+                </a>
+                
+                <a href="https://vk.ru/parus716" target="_blank" class="contact-card vk">
+                    <i class="fab fa-vk"></i>
+                    <div class="card-title">Сообщество VK</div>
+                    <div class="card-desc">Подписывайтесь,<br>будьте в курсе</div>
+                </a>
+                
+                <a href="https://max.ru/join/eQHll3JM1boZPlxsAH3zQyRp16h70o-PBpdESR2ab7s" target="_blank" class="contact-card max">
+                    <i class="fas fa-comment-dots"></i>
+                    <div class="card-title">Канал в MAX</div>
+                    <div class="card-desc">Напишите нам<br>в MAX мессенджер</div>
+                </a>
+                
+                <a href="#" class="contact-card callback open-modal-btn">
+                    <i class="fas fa-headset"></i>
+                    <div class="card-title">Заказать звонок</div>
+                    <div class="card-desc">Мы перезвоним<br>в ближайшее время</div>
+                </a>
+            </div>
+            
             <h2>Приезжайте и знакомьтесь</h2>
             <div class="contact-row">
                 <div style="flex: 1;">
@@ -72,9 +168,6 @@
                     <p><i class="fas fa-phone"></i> <a href="tel:89375210005" style="text-decoration:none; color: inherit;">8-(937)-521-00-05</a> (круглосуточно)</p>
                     <p><i class="fab fa-vk"></i> <a href="https://vk.ru/parus716" target="_blank" style="text-decoration:none; color: inherit;">ВКонтакте</a></p>
                     <p><i class="fas fa-comment-dots"></i> <a href="https://max.ru/join/eQHll3JM1boZPlxsAH3zQyRp16h70o-PBpdESR2ab7s" target="_blank" style="text-decoration:none; color: inherit;">MAX</a></p>
-                    <div style="margin-top: 24px;">
-                        <a href="#" class="btn btn-primary" id="contactCallBtn">Связаться с нами</a>
-                    </div>
                 </div>
             </div>
         </div>
@@ -180,7 +273,7 @@
                     </p>
                 </form>
             </div>
-            <div id="modalSucc                    <a href="mailto:parus.kazan@mail.ru" class="btn btn-outline">Написать письмо</a>ess" class="modal__success">
+            <div id="modalSuccess" class="modal__success">
                 <i class="fas fa-check-circle"></i>
                 <h3>Заявка отправлена!</h3>
                 <p>Спасибо за доверие. Наш специалист свяжется с вами в ближайшее время.</p>
@@ -190,67 +283,5 @@
     </div>
 
     <script src="assets/cookie.js"></script>
-    <script>
-        (function() {
-            const modal = document.getElementById('callbackModal');
-            const openBtn = document.getElementById('openModalBtn');
-            const contactBtn = document.getElementById('contactCallBtn');
-            const closeBtn = document.getElementById('modalClose');
-            const form = document.getElementById('callbackForm');
-            const formContainer = document.getElementById('modalForm');
-            const successContainer = document.getElementById('modalSuccess');
-            const successClose = document.getElementById('successClose');
-            
-            function openModal() {
-                modal.classList.add('show');
-                document.body.style.overflow = 'hidden';
-            }
-            function closeModal() {
-                modal.classList.remove('show');
-                document.body.style.overflow = '';
-                form.reset();
-                formContainer.style.display = 'block';
-                successContainer.classList.remove('show');
-            }
-            function handleSubmit(e) {
-                e.preventDefault();
-                const phone = document.getElementById('userPhone').value.trim();
-                if (!phone) {
-                    alert('Пожалуйста, введите номер телефона');
-                    return;
-                }
-                formContainer.style.display = 'none';
-                successContainer.classList.add('show');
-            }
-            if (openBtn) openBtn.addEventListener('click', openModal);
-            if (contactBtn) contactBtn.addEventListener('click', openModal);
-            if (closeBtn) closeBtn.addEventListener('click', closeModal);
-            if (successClose) successClose.addEventListener('click', closeModal);
-            if (form) form.addEventListener('submit', handleSubmit);
-            if (modal) {
-                modal.addEventListener('click', function(e) {
-                    if (e.target === modal) closeModal();
-                });
-            }
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape' && modal && modal.classList.contains('show')) closeModal();
-            });
-        })();
-
-        (function() {
-            const banner = document.getElementById('cookieBanner');
-            const acceptBtn = document.getElementById('cookieAccept');
-            const declineBtn = document.getElementById('cookieDecline');
-            if (!localStorage.getItem('cookieConsent')) {
-                setTimeout(() => banner.classList.add('show'), 500);
-            }
-            function setConsent(accepted) {
-                localStorage.setItem('cookieConsent', accepted ? 'accepted' : 'declined');
-                banner.classList.remove('show');
-            }
-            if (acceptBtn) acceptBtn.addEventListener('click', () => setConsent(true));
-            if (declineBtn) declineBtn.addEventListener('click', () => setConsent(false));
-        })();
-    </script>
 </body>
 </html>
