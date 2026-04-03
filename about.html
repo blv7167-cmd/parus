@@ -40,7 +40,7 @@
                 <h1>О центре</h1>
                 <p>Частный реабилитационный центр в Казани, специализирующийся на когнитивно‑поведенческой терапии зависимостей.</p>
                 <div class="hero-buttons">
-                    <a href="program.html" class="btn btn-primary">Смотреть программу</a>
+
                     <a href="contacts.html" class="btn btn-outline">Контакты</a>
                 </div>
             </div>
@@ -107,7 +107,6 @@
         </div>
     </section>
 
-    <!-- Футер -->
     <footer class="main-footer">
         <div class="container">
             <div class="footer-left">
@@ -145,7 +144,6 @@
         </div>
     </footer>
 
-    <!-- Фиксированный action bar -->
     <div class="fixed-action-bar" id="actionBar">
         <div class="container">
             <div class="action-buttons">
@@ -166,7 +164,6 @@
         </div>
     </div>
 
-    <!-- Cookie баннер -->
     <div id="cookieBanner" class="cookie-banner">
         <div class="container">
             <div class="cookie-text">
@@ -183,7 +180,6 @@
         </div>
     </div>
 
-    <!-- Модальное окно -->
     <div id="callbackModal" class="modal">
         <div class="modal__content">
             <div class="modal__bg"></div>
@@ -221,78 +217,5 @@
     </div>
 
     <script src="assets/cookie.js"></script>
-    <script>
-        // Модальное окно для заказа звонка
-        (function() {
-            const modal = document.getElementById('callbackModal');
-            const openBtn = document.getElementById('openModalBtn');
-            const closeBtn = document.getElementById('modalClose');
-            const form = document.getElementById('callbackForm');
-            const formContainer = document.getElementById('modalForm');
-            const successContainer = document.getElementById('modalSuccess');
-            const successClose = document.getElementById('successClose');
-            
-            function openModal() {
-                modal.classList.add('show');
-                document.body.style.overflow = 'hidden';
-            }
-            
-            function closeModal() {
-                modal.classList.remove('show');
-                document.body.style.overflow = '';
-                form.reset();
-                formContainer.style.display = 'block';
-                successContainer.classList.remove('show');
-            }
-            
-            function handleSubmit(e) {
-                e.preventDefault();
-                const phone = document.getElementById('userPhone').value.trim();
-                if (!phone) {
-                    alert('Пожалуйста, введите номер телефона');
-                    return;
-                }
-                console.log('Заявка на звонок:', {
-                    name: document.getElementById('userName').value.trim() || 'Не указано',
-                    phone: phone,
-                    question: document.getElementById('userQuestion').value
-                });
-                formContainer.style.display = 'none';
-                successContainer.classList.add('show');
-            }
-            
-            if (openBtn) openBtn.addEventListener('click', openModal);
-            if (closeBtn) closeBtn.addEventListener('click', closeModal);
-            if (successClose) successClose.addEventListener('click', closeModal);
-            if (form) form.addEventListener('submit', handleSubmit);
-            if (modal) {
-                modal.addEventListener('click', function(e) {
-                    if (e.target === modal) closeModal();
-                });
-            }
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape' && modal && modal.classList.contains('show')) closeModal();
-            });
-        })();
-
-        // Cookie баннер
-        (function() {
-            const banner = document.getElementById('cookieBanner');
-            const acceptBtn = document.getElementById('cookieAccept');
-            const declineBtn = document.getElementById('cookieDecline');
-            
-            if (!localStorage.getItem('cookieConsent')) {
-                setTimeout(() => banner.classList.add('show'), 500);
-            }
-            
-            function setConsent(accepted) {
-                localStorage.setItem('cookieConsent', accepted ? 'accepted' : 'declined');
-                banner.classList.remove('show');
-            }
-            
-            if (acceptBtn) acceptBtn.addEventListener('click', () => setConsent(true));
-            if (declineBtn) declineBtn.addEventListener('click', () => setConsent(false));
-        })();
-    </script>
 </body>
 </html>

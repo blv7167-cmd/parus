@@ -1,0 +1,22 @@
+
+Running check 'Шаг 1: Подготовка'
+=================
+APT Repositories:
+=================
+Repos:
+  No active apt repos in: /etc/apt/sources.list
+  No active apt repos in: /etc/apt/sources.list.d/cursor.list
+  Active apt repos in: /etc/apt/sources.list.d/google-chrome.list
+    1: deb [arch=amd64] https://dl.google.com/linux/chrome/deb/ stable main
+  No active apt repos in: /etc/apt/sources.list.d/max.list
+  No active apt repos in: /etc/apt/sources.list.d/mozilla.list
+  Active apt repos in: /etc/apt/sources.list.d/official-package-repositories.list
+    1: deb https://fastly.linuxmint.io virginia main upstream import backport
+    2: deb http://archive.ubuntu.com/ubuntu jammy main restricted universe multiverse
+    3: deb http://archive.ubuntu.com/ubuntu jammy-updates main restricted universe multiverse
+    4: deb http://archive.ubuntu.com/ubuntu jammy-backports main restricted universe multiverse
+    5: deb http://security.ubuntu.com/ubuntu/ jammy-security main restricted universe multiverse
+  No active apt repos in: /etc/apt/sources.list.d/skype-stable.list
+  No active apt repos in: /etc/apt/sources.list.d/teamviewer.list
+=================
+mintupgrade-inhibit-power: процесс не найден

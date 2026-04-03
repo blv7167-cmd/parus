@@ -28,7 +28,7 @@
             </nav>
             <div class="header-contacts">
                 <a href="tel:89375210005" class="phone"><i class="fas fa-phone-alt"></i> 8-(937)-521-00-05</a>
-                <a href="#" class="btn btn-outline" style="padding: 10px 20px;">Заказать звонок</a>
+                <a href="#" class="btn btn-outline" id="openModalBtn">Заказать звонок</a>
             </div>
         </div>
     </header>
@@ -53,7 +53,7 @@
             <h2>Приезжайте и знакомьтесь</h2>
             <div class="contact-row">
                 <div style="flex: 1;">
-                    <a href="https://yandex.ru/maps/-/CPVPyLn-" target="_blank" style="display: block;">
+                    <a href="https://yandex.ru/maps/-/CPVPyLn-" target="_blank">
                         <img src="https://static-maps.yandex.ru/1.x/?ll=49.206116,55.512451&size=600,400&z=12&l=map&pt=49.206116,55.512451,pm2rdl" 
                              alt="Карта проезда к центру Парус"
                              style="width: 100%; height: auto; border-radius: 32px; border: 1px solid var(--border-light); box-shadow: 0 10px 30px -10px rgba(0,0,0,0.1);">
@@ -70,27 +70,25 @@
                     <p><i class="fas fa-map-pin"></i> Филиал №1: По запросу</p>
                     <p><i class="fas fa-map-pin"></i> Филиал №2: По запросу</p>
                     <p><i class="fas fa-phone"></i> <a href="tel:89375210005" style="text-decoration:none; color: inherit;">8-(937)-521-00-05</a> (круглосуточно)</p>
-                    <p><i class="fab fa-vk"></i> <a href="https://vk.ru/parus716" style="text-decoration:none; color: inherit;">ВКонтакте</a></p>
-                    <p><i class="fas fa-star"></i> <a href="https://max.ru/join/eQHll3JM1boZPlxsAH3zQyRp16h70o-PBpdESR2ab7s" style="text-decoration:none; color: inherit;">MAX</a></p>
+                    <p><i class="fab fa-vk"></i> <a href="https://vk.ru/parus716" target="_blank" style="text-decoration:none; color: inherit;">ВКонтакте</a></p>
+                    <p><i class="fas fa-comment-dots"></i> <a href="https://max.ru/join/eQHll3JM1boZPlxsAH3zQyRp16h70o-PBpdESR2ab7s" target="_blank" style="text-decoration:none; color: inherit;">MAX</a></p>
                     <div style="margin-top: 24px;">
-                        <a href="#" class="btn btn-primary">Связаться с нами</a>
+                        <a href="#" class="btn btn-primary" id="contactCallBtn">Связаться с нами</a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ===== ОСНОВНОЙ ФУТЕР ===== -->
     <footer class="main-footer">
         <div class="container">
             <div class="footer-left">
-                <a class="logo" href="index.html" style="color: white; text-decoration: none;">
+                <a class="logo" href="index.html">
                     <i class="fas fa-sailboat"></i>
                     <span>ПАРУС</span>
                 </a>
                 <p class="footer-description">Центр когнитивной терапии<br>Казань, работаем с 2013 года</p>
             </div>
-            
             <div class="footer-right">
                 <div class="footer-address">
                     <div class="address-item">
@@ -108,7 +106,6 @@
                 </div>
             </div>
         </div>
-        
         <div class="footer-bottom">
             <div class="container">
                 <p>© 2026 ООО "Клиника Когнитивной Терапии «Парус»". Все права защищены.</p>
@@ -120,18 +117,17 @@
         </div>
     </footer>
 
-    <!-- ===== ФИКСИРОВАННЫЙ БАР ===== -->
-    <div class="fixed-action-bar" id="actionBar">
+    <div class="fixed-action-bar">
         <div class="container">
             <div class="action-buttons">
                 <a href="tel:89375210005" class="action-btn action-btn-call">
                     <i class="fas fa-phone-alt"></i> Позвонить
                 </a>
-                <a href="https://t.me/parus_center_bot" target="_blank" class="action-btn action-btn-telegram">
-                    <i class="fab fa-telegram"></i> Написать в Telegram
+                <a href="https://vk.ru/parus716" target="_blank" class="action-btn action-btn-vk">
+                    <i class="fab fa-vk"></i> Написать в VK
                 </a>
-                <a href="https://max.ru/join/eQHll3JM1boZPlxsAH3zQyRp16h70o-PBpdESR2ab7s" target="_blank" class="action-btn action-btn-MAX">
-                    <i class="fas fa-star"></i> Написать в MAX
+                <a href="https://max.ru/join/eQHll3JM1boZPlxsAH3zQyRp16h70o-PBpdESR2ab7s" target="_blank" class="action-btn action-btn-max">
+                    <i class="fas fa-comment-dots"></i> Написать в MAX
                 </a>
             </div>
             <div class="work-info">
@@ -141,7 +137,6 @@
         </div>
     </div>
 
-    <!-- Cookie баннер -->
     <div id="cookieBanner" class="cookie-banner">
         <div class="container">
             <div class="cookie-text">
@@ -158,6 +153,104 @@
         </div>
     </div>
 
+    <div id="callbackModal" class="modal">
+        <div class="modal__content">
+            <div class="modal__bg"></div>
+            <button class="modal__close" id="modalClose">&times;</button>
+            <div id="modalForm" class="modal__form">
+                <h2 class="modal__title">Заказать звонок</h2>
+                <p class="modal__subtitle">Оставьте свои данные, и мы свяжемся с вами в ближайшее время</p>
+                <form id="callbackForm">
+                    <div class="modal__field">
+                        <label for="userName">Ваше имя</label>
+                        <input type="text" id="userName" name="name" placeholder="Например, Александр" required>
+                    </div>
+                    <div class="modal__field">
+                        <label for="userPhone">Номер телефона *</label>
+                        <input type="tel" id="userPhone" name="phone" placeholder="+7 (___) ___-__-__" required>
+                    </div>
+                    <div class="modal__field">
+                        <label for="userQuestion">Ваш вопрос (необязательно)</label>
+                        <textarea id="userQuestion" name="question" placeholder="Опишите, что вас беспокоит..."></textarea>
+                    </div>
+                    <button type="submit" class="modal__btn">Отправить заявку</button>
+                    <p class="modal__privacy">
+                        Нажимая на кнопку, вы соглашаетесь с 
+                        <a href="privacy.html">Политикой конфиденциальности</a>
+                    </p>
+                </form>
+            </div>
+            <div id="modalSucc                    <a href="mailto:parus.kazan@mail.ru" class="btn btn-outline">Написать письмо</a>ess" class="modal__success">
+                <i class="fas fa-check-circle"></i>
+                <h3>Заявка отправлена!</h3>
+                <p>Спасибо за доверие. Наш специалист свяжется с вами в ближайшее время.</p>
+                <button class="modal__btn" id="successClose">Закрыть</button>
+            </div>
+        </div>
+    </div>
+
     <script src="assets/cookie.js"></script>
+    <script>
+        (function() {
+            const modal = document.getElementById('callbackModal');
+            const openBtn = document.getElementById('openModalBtn');
+            const contactBtn = document.getElementById('contactCallBtn');
+            const closeBtn = document.getElementById('modalClose');
+            const form = document.getElementById('callbackForm');
+            const formContainer = document.getElementById('modalForm');
+            const successContainer = document.getElementById('modalSuccess');
+            const successClose = document.getElementById('successClose');
+            
+            function openModal() {
+                modal.classList.add('show');
+                document.body.style.overflow = 'hidden';
+            }
+            function closeModal() {
+                modal.classList.remove('show');
+                document.body.style.overflow = '';
+                form.reset();
+                formContainer.style.display = 'block';
+                successContainer.classList.remove('show');
+            }
+            function handleSubmit(e) {
+                e.preventDefault();
+                const phone = document.getElementById('userPhone').value.trim();
+                if (!phone) {
+                    alert('Пожалуйста, введите номер телефона');
+                    return;
+                }
+                formContainer.style.display = 'none';
+                successContainer.classList.add('show');
+            }
+            if (openBtn) openBtn.addEventListener('click', openModal);
+            if (contactBtn) contactBtn.addEventListener('click', openModal);
+            if (closeBtn) closeBtn.addEventListener('click', closeModal);
+            if (successClose) successClose.addEventListener('click', closeModal);
+            if (form) form.addEventListener('submit', handleSubmit);
+            if (modal) {
+                modal.addEventListener('click', function(e) {
+                    if (e.target === modal) closeModal();
+                });
+            }
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && modal && modal.classList.contains('show')) closeModal();
+            });
+        })();
+
+        (function() {
+            const banner = document.getElementById('cookieBanner');
+            const acceptBtn = document.getElementById('cookieAccept');
+            const declineBtn = document.getElementById('cookieDecline');
+            if (!localStorage.getItem('cookieConsent')) {
+                setTimeout(() => banner.classList.add('show'), 500);
+            }
+            function setConsent(accepted) {
+                localStorage.setItem('cookieConsent', accepted ? 'accepted' : 'declined');
+                banner.classList.remove('show');
+            }
+            if (acceptBtn) acceptBtn.addEventListener('click', () => setConsent(true));
+            if (declineBtn) declineBtn.addEventListener('click', () => setConsent(false));
+        })();
+    </script>
 </body>
 </html>

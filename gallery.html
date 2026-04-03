@@ -28,7 +28,7 @@
             </nav>
             <div class="header-contacts">
                 <a href="tel:89375210005" class="phone"><i class="fas fa-phone-alt"></i> 8-(937)-521-00-05</a>
-                <a href="#" class="btn btn-outline" style="padding: 10px 20px;">Заказать звонок</a>
+                <a href="#" class="btn btn-outline" id="openModalBtn">Заказать звонок</a>
             </div>
         </div>
     </header>
@@ -41,7 +41,6 @@
                 <p>Выберите категорию для просмотра фотографий нашего центра</p>
                 <div class="hero-buttons">
                     <a href="contacts.html" class="btn btn-primary">Связаться с нами</a>
-                    <a href="program.html" class="btn btn-outline">Программа</a>
                 </div>
             </div>
             <div class="hero-image" style="min-height: 260px; background-image: url('https://placehold.co/600x400/2b5c84/white?text=Галерея+Парус');"></div>
@@ -54,32 +53,32 @@
             <p style="font-size: 1.1rem; margin-bottom: 2rem;">Фотографии территории, жилых помещений, мероприятий и наших специалистов</p>
             
             <div class="cards-grid">
-                <a class="card" href="gallery-external.html" style="text-decoration: none; color: inherit; text-align: center;">
-                    <i class="fas fa-tree" style="font-size: 2.5rem; color: var(--accent); margin-bottom: 1rem;"></i>
+                <a class="card" href="gallery-external.html">
+                    <i class="fas fa-tree"></i>
                     <h3>🌳 Внешняя локация</h3>
                     <p>Территория, ландшафт, внешний вид центра (10 фото)</p>
                 </a>
                 
-                <a class="card" href="gallery-residential.html" style="text-decoration: none; color: inherit; text-align: center;">
-                    <i class="fas fa-home" style="font-size: 2.5rem; color: var(--accent); margin-bottom: 1rem;"></i>
+                <a class="card" href="gallery-residential.html">
+                    <i class="fas fa-home"></i>
                     <h3>🏡 Жилые помещения</h3>
                     <p>Комнаты, спальни, зоны отдыха (10 фото)</p>
                 </a>
                 
-                <a class="card" href="gallery-events.html" style="text-decoration: none; color: inherit; text-align: center;">
-                    <i class="fas fa-images" style="font-size: 2.5rem; color: var(--accent); margin-bottom: 1rem;"></i>
+                <a class="card" href="gallery-events.html">
+                    <i class="fas fa-images"></i>
                     <h3>🎭 Мероприятия</h3>
                     <p>События, встречи, групповые занятия (4 фото)</p>
                 </a>
                 
-                <a class="card" href="gallery-specialists.html" style="text-decoration: none; color: inherit; text-align: center;">
-                    <i class="fas fa-users" style="font-size: 2.5rem; color: var(--accent); margin-bottom: 1rem;"></i>
+                <a class="card" href="gallery-specialists.html">
+                    <i class="fas fa-users"></i>
                     <h3>✅ Наша команда</h3>
                     <p>Портреты команды профессионалов (8 фото)</p>
                 </a>
                 
-                <a class="card" href="gallery-branch2.html" style="text-decoration: none; color: inherit; text-align: center;">
-                    <i class="fas fa-building" style="font-size: 2.5rem; color: var(--accent); margin-bottom: 1rem;"></i>
+                <a class="card" href="gallery-branch2.html">
+                    <i class="fas fa-building"></i>
                     <h3>🏡 Филиал №2</h3>
                     <p>Помещения второго филиала (5 фото)</p>
                 </a>
@@ -87,17 +86,15 @@
         </div>
     </section>
 
-    <!-- ===== ОСНОВНОЙ ФУТЕР ===== -->
     <footer class="main-footer">
         <div class="container">
             <div class="footer-left">
-                <a class="logo" href="index.html" style="color: white; text-decoration: none;">
+                <a class="logo" href="index.html">
                     <i class="fas fa-sailboat"></i>
                     <span>ПАРУС</span>
                 </a>
                 <p class="footer-description">Центр когнитивной терапии<br>Казань, работаем с 2013 года</p>
             </div>
-            
             <div class="footer-right">
                 <div class="footer-address">
                     <div class="address-item">
@@ -115,7 +112,6 @@
                 </div>
             </div>
         </div>
-        
         <div class="footer-bottom">
             <div class="container">
                 <p>© 2026 ООО "Клиника Когнитивной Терапии «Парус»". Все права защищены.</p>
@@ -127,18 +123,17 @@
         </div>
     </footer>
 
-    <!-- ===== ФИКСИРОВАННЫЙ БАР ===== -->
-    <div class="fixed-action-bar" id="actionBar">
+    <div class="fixed-action-bar">
         <div class="container">
             <div class="action-buttons">
                 <a href="tel:89375210005" class="action-btn action-btn-call">
                     <i class="fas fa-phone-alt"></i> Позвонить
                 </a>
-                <a href="https://t.me/parus_center_bot" target="_blank" class="action-btn action-btn-telegram">
-                    <i class="fab fa-telegram"></i> Написать в Telegram
+                <a href="https://vk.ru/parus716" target="_blank" class="action-btn action-btn-vk">
+                    <i class="fab fa-vk"></i> Написать в VK
                 </a>
-                <a href="https://max.ru/join/eQHll3JM1boZPlxsAH3zQyRp16h70o-PBpdESR2ab7s" target="_blank" class="action-btn action-btn-MAX">
-                    <i class="fas fa-star"></i> Написать в MAX
+                <a href="https://max.ru/join/eQHll3JM1boZPlxsAH3zQyRp16h70o-PBpdESR2ab7s" target="_blank" class="action-btn action-btn-max">
+                    <i class="fas fa-comment-dots"></i> Написать в MAX
                 </a>
             </div>
             <div class="work-info">
@@ -148,7 +143,6 @@
         </div>
     </div>
 
-    <!-- Cookie баннер -->
     <div id="cookieBanner" class="cookie-banner">
         <div class="container">
             <div class="cookie-text">
@@ -165,6 +159,102 @@
         </div>
     </div>
 
+    <div id="callbackModal" class="modal">
+        <div class="modal__content">
+            <div class="modal__bg"></div>
+            <button class="modal__close" id="modalClose">&times;</button>
+            <div id="modalForm" class="modal__form">
+                <h2 class="modal__title">Заказать звонок</h2>
+                <p class="modal__subtitle">Оставьте свои данные, и мы свяжемся с вами в ближайшее время</p>
+                <form id="callbackForm">
+                    <div class="modal__field">
+                        <label for="userName">Ваше имя</label>
+                        <input type="text" id="userName" name="name" placeholder="Например, Александр" required>
+                    </div>
+                    <div class="modal__field">
+                        <label for="userPhone">Номер телефона *</label>
+                        <input type="tel" id="userPhone" name="phone" placeholder="+7 (___) ___-__-__" required>
+                    </div>
+                    <div class="modal__field">
+                        <label for="userQuestion">Ваш вопрос (необязательно)</label>
+                        <textarea id="userQuestion" name="question" placeholder="Опишите, что вас беспокоит..."></textarea>
+                    </div>
+                    <button type="submit" class="modal__btn">Отправить заявку</button>
+                    <p class="modal__privacy">
+                        Нажимая на кнопку, вы соглашаетесь с 
+                        <a href="privacy.html">Политикой конфиденциальности</a>
+                    </p>
+                </form>
+            </div>
+            <div id="modalSuccess" class="modal__success">
+                <i class="fas fa-check-circle"></i>
+                <h3>Заявка отправлена!</h3>
+                <p>Спасибо за доверие. Наш специалист свяжется с вами в ближайшее время.</p>
+                <button class="modal__btn" id="successClose">Закрыть</button>
+            </div>
+        </div>
+    </div>
+
     <script src="assets/cookie.js"></script>
+    <script>
+        (function() {
+            const modal = document.getElementById('callbackModal');
+            const openBtn = document.getElementById('openModalBtn');
+            const closeBtn = document.getElementById('modalClose');
+            const form = document.getElementById('callbackForm');
+            const formContainer = document.getElementById('modalForm');
+            const successContainer = document.getElementById('modalSuccess');
+            const successClose = document.getElementById('successClose');
+            
+            function openModal() {
+                modal.classList.add('show');
+                document.body.style.overflow = 'hidden';
+            }
+            function closeModal() {
+                modal.classList.remove('show');
+                document.body.style.overflow = '';
+                form.reset();
+                formContainer.style.display = 'block';
+                successContainer.classList.remove('show');
+            }
+            function handleSubmit(e) {
+                e.preventDefault();
+                const phone = document.getElementById('userPhone').value.trim();
+                if (!phone) {
+                    alert('Пожалуйста, введите номер телефона');
+                    return;
+                }
+                formContainer.style.display = 'none';
+                successContainer.classList.add('show');
+            }
+            if (openBtn) openBtn.addEventListener('click', openModal);
+            if (closeBtn) closeBtn.addEventListener('click', closeModal);
+            if (successClose) successClose.addEventListener('click', closeModal);
+            if (form) form.addEventListener('submit', handleSubmit);
+            if (modal) {
+                modal.addEventListener('click', function(e) {
+                    if (e.target === modal) closeModal();
+                });
+            }
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && modal && modal.classList.contains('show')) closeModal();
+            });
+        })();
+
+        (function() {
+            const banner = document.getElementById('cookieBanner');
+            const acceptBtn = document.getElementById('cookieAccept');
+            const declineBtn = document.getElementById('cookieDecline');
+            if (!localStorage.getItem('cookieConsent')) {
+                setTimeout(() => banner.classList.add('show'), 500);
+            }
+            function setConsent(accepted) {
+                localStorage.setItem('cookieConsent', accepted ? 'accepted' : 'declined');
+                banner.classList.remove('show');
+            }
+            if (acceptBtn) acceptBtn.addEventListener('click', () => setConsent(true));
+            if (declineBtn) declineBtn.addEventListener('click', () => setConsent(false));
+        })();
+    </script>
 </body>
 </html>
