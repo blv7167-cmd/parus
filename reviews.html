@@ -28,7 +28,7 @@
             </nav>
             <div class="header-contacts">
                 <a href="tel:89375210005" class="phone"><i class="fas fa-phone-alt"></i> 8-(937)-521-00-05</a>
-                <a href="#" class="btn btn-outline" id="openModalBtn">Заказать звонок</a>
+                <a href="#" class="btn btn-outline open-modal-btn">Заказать звонок</a>
             </div>
         </div>
     </header>
@@ -41,7 +41,6 @@
                 <p>Реальные впечатления выпускников и родственников о пути восстановления.</p>
                 <div class="hero-buttons">
                     <a href="#" class="btn btn-primary open-modal-btn">Связаться с нами</a>
-                    
                 </div>
             </div>
             <div class="hero-image" style="min-height: 260px; background-image: url('https://placehold.co/600x400/5aa9a5/white?text=Отзывы+Парус');"></div>
@@ -206,6 +205,9 @@
                 <a href="https://max.ru/join/eQHll3JM1boZPlxsAH3zQyRp16h70o-PBpdESR2ab7s" target="_blank" class="action-btn action-btn-max">
                     <i class="fas fa-comment-dots"></i> Написать в MAX
                 </a>
+                <a href="#" class="action-btn action-btn-callback open-modal-btn">
+                    <i class="fas fa-headset"></i> Связаться с нами
+                </a>
             </div>
             <div class="work-info">
                 <i class="fas fa-clock"></i> Круглосуточно, без выходных<br>
@@ -268,65 +270,6 @@
 
     <script src="assets/cookie.js"></script>
     <script>
-        (function() {
-            const modal = document.getElementById('callbackModal');
-            const openBtn = document.getElementById('openModalBtn');
-            const closeBtn = document.getElementById('modalClose');
-            const form = document.getElementById('callbackForm');
-            const formContainer = document.getElementById('modalForm');
-            const successContainer = document.getElementById('modalSuccess');
-            const successClose = document.getElementById('successClose');
-            
-            function openModal() {
-                modal.classList.add('show');
-                document.body.style.overflow = 'hidden';
-            }
-            function closeModal() {
-                modal.classList.remove('show');
-                document.body.style.overflow = '';
-                form.reset();
-                formContainer.style.display = 'block';
-                successContainer.classList.remove('show');
-            }
-            function handleSubmit(e) {
-                e.preventDefault();
-                const phone = document.getElementById('userPhone').value.trim();
-                if (!phone) {
-                    alert('Пожалуйста, введите номер телефона');
-                    return;
-                }
-                formContainer.style.display = 'none';
-                successContainer.classList.add('show');
-            }
-            if (openBtn) openBtn.addEventListener('click', openModal);
-            if (closeBtn) closeBtn.addEventListener('click', closeModal);
-            if (successClose) successClose.addEventListener('click', closeModal);
-            if (form) form.addEventListener('submit', handleSubmit);
-            if (modal) {
-                modal.addEventListener('click', function(e) {
-                    if (e.target === modal) closeModal();
-                });
-            }
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape' && modal && modal.classList.contains('show')) closeModal();
-            });
-        })();
-
-        (function() {
-            const banner = document.getElementById('cookieBanner');
-            const acceptBtn = document.getElementById('cookieAccept');
-            const declineBtn = document.getElementById('cookieDecline');
-            if (!localStorage.getItem('cookieConsent')) {
-                setTimeout(() => banner.classList.add('show'), 500);
-            }
-            function setConsent(accepted) {
-                localStorage.setItem('cookieConsent', accepted ? 'accepted' : 'declined');
-                banner.classList.remove('show');
-            }
-            if (acceptBtn) acceptBtn.addEventListener('click', () => setConsent(true));
-            if (declineBtn) declineBtn.addEventListener('click', () => setConsent(false));
-        })();
-
         (function() {
             var form = document.getElementById('review-form');
             var success = document.getElementById('review-success');

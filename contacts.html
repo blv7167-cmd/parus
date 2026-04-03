@@ -11,7 +11,6 @@
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="assets/styles.css">
     <style>
-        /* Дополнительные стили для контактных карточек */
         .contact-cards {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -19,7 +18,6 @@
             margin-top: 40px;
             margin-bottom: 40px;
         }
-        
         .contact-card {
             background: white;
             border-radius: 20px;
@@ -31,36 +29,29 @@
             border: 1px solid var(--border-light);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
         }
-        
         .contact-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
             border-color: var(--accent);
         }
-        
         .contact-card i {
             font-size: 2.5rem;
             margin-bottom: 12px;
             display: inline-block;
         }
-        
         .contact-card .card-title {
             font-weight: 700;
             font-size: 1.1rem;
             margin-bottom: 8px;
         }
-        
         .contact-card .card-desc {
             font-size: 0.8rem;
             color: var(--text-muted);
         }
-        
-        /* Цвета для иконок */
         .contact-card.phone i { color: var(--primary); }
         .contact-card.vk i { color: var(--vk-color); }
         .contact-card.max i { color: #6200EA; }
         .contact-card.callback i { color: var(--accent); }
-        
         @media (max-width: 768px) {
             .contact-cards {
                 grid-template-columns: repeat(2, 1fr);
@@ -106,10 +97,7 @@
                 <div class="subhead">Как нас найти</div>
                 <h1>Контакты</h1>
                 <p>Приезжайте и знакомьтесь. Мы на связи круглосуточно.</p>
-                <div class="hero-buttons">
-                    <a href="tel:89375210005" class="btn btn-primary">Позвонить</a>
-                    <a href="mailto:parus.kazan@mail.ru" class="btn btn-outline">Написать письмо</a>
-                </div>
+
             </div>
             <div class="hero-image" style="min-height: 260px; background-image: url('https://placehold.co/600x400/2b5c84/white?text=Контакты+Парус');"></div>
         </div>
@@ -118,27 +106,22 @@
     <section class="section">
         <div class="container">
             <h2>Свяжитесь с нами</h2>
-            
-            <!-- Кнопки-карточки для быстрой связи -->
             <div class="contact-cards">
                 <a href="tel:89375210005" class="contact-card phone">
                     <i class="fas fa-phone-alt"></i>
                     <div class="card-title">Позвонить</div>
                     <div class="card-desc">8-(937)-521-00-05<br>Круглосуточно</div>
                 </a>
-                
                 <a href="https://vk.ru/parus716" target="_blank" class="contact-card vk">
                     <i class="fab fa-vk"></i>
                     <div class="card-title">Сообщество VK</div>
                     <div class="card-desc">Подписывайтесь,<br>будьте в курсе</div>
                 </a>
-                
                 <a href="https://max.ru/join/eQHll3JM1boZPlxsAH3zQyRp16h70o-PBpdESR2ab7s" target="_blank" class="contact-card max">
                     <i class="fas fa-comment-dots"></i>
                     <div class="card-title">Канал в MAX</div>
                     <div class="card-desc">Напишите нам<br>в MAX мессенджер</div>
                 </a>
-                
                 <a href="#" class="contact-card callback open-modal-btn">
                     <i class="fas fa-headset"></i>
                     <div class="card-title">Заказать звонок</div>
@@ -221,6 +204,9 @@
                 </a>
                 <a href="https://max.ru/join/eQHll3JM1boZPlxsAH3zQyRp16h70o-PBpdESR2ab7s" target="_blank" class="action-btn action-btn-max">
                     <i class="fas fa-comment-dots"></i> Написать в MAX
+                </a>
+                <a href="#" class="action-btn action-btn-callback open-modal-btn">
+                    <i class="fas fa-headset"></i> Связаться с нами
                 </a>
             </div>
             <div class="work-info">
