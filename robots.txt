@@ -1,0 +1,15 @@
+User-agent: *
+Allow: /
+Disallow: /assets/components/
+Disallow: /foto/
+Disallow: /send_message
+Disallow: /send_review
+
+Sitemap: https://rc-parusa.ru/sitemap.xml
+
+# Дополнительные правила для SEO
+Host: https://rc-parusa.ru
+
+# Запрещаем индексацию дублей
+Disallow: /*.bak$
+Disallow: /*.gz$

@@ -3,271 +3,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Контакты — Парус</title>
+    <title>Контакты центра реабилитации зависимых «Парус» | Казань</title>
+    <meta name="description" content="Адрес и телефон центра реабилитации зависимых «Парус» в Казани. Круглосуточная поддержка. Анонимная консультация по вопросам наркомании и алкоголизма.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-    <link rel="stylesheet" href="assets/styles.css">
-    <style>
-        .contact-cards {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-            margin-top: 40px;
-            margin-bottom: 40px;
-        }
-        .contact-card {
-            background: white;
-            border-radius: 20px;
-            padding: 24px 16px;
-            text-align: center;
-            text-decoration: none;
-            color: var(--text-dark);
-            transition: all 0.3s ease;
-            border: 1px solid var(--border-light);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-        }
-        .contact-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
-            border-color: var(--accent);
-        }
-        .contact-card i {
-            font-size: 2.5rem;
-            margin-bottom: 12px;
-            display: inline-block;
-        }
-        .contact-card .card-title {
-            font-weight: 700;
-            font-size: 1.1rem;
-            margin-bottom: 8px;
-        }
-        .contact-card .card-desc {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-        }
-        .contact-card.phone i { color: var(--primary); }
-        .contact-card.vk i { color: var(--vk-color); }
-        .contact-card.max i { color: #6200EA; }
-        .contact-card.callback i { color: var(--accent); }
-        @media (max-width: 768px) {
-            .contact-cards {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 15px;
-            }
-            .contact-card {
-                padding: 16px 12px;
-            }
-            .contact-card i {
-                font-size: 1.8rem;
-            }
-            .contact-card .card-title {
-                font-size: 0.9rem;
-            }
-        }
-    </style>
+    <link rel="icon" href="assets/icon_big.png" type="image/svg+xml">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <script type="text/javascript">
+        (function(m,e,t,r,i,k,a){ m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)}; m[i].l=1*new Date(); for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}} k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})(window,document,'script','https://mc.yandex.ru/metrika/tag.js','ym');
+        ym(108393368,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",referrer:document.referrer,url:location.href,accurateTrackBounce:true,trackLinks:true});
+    </script>
+    <noscript><div><img loading="lazy" src="https://mc.yandex.ru/watch/108393368" style="position:absolute; left:-9999px;" /></div></noscript>
 </head>
 <body>
-    <header class="header">
-        <div class="container">
-            <a class="logo" href="index.html">
-                <i class="fas fa-sailboat"></i>
-                <span>ПАРУС</span>
-            </a>
-            <nav class="nav-menu">
-                <a href="about.html">О центре</a>
-                <a href="program.html">Программа</a>
-                <a href="gallery.html">Галерея</a>
-                <a href="reviews.html">Отзывы</a>
-                <a href="relatives.html">Родственникам</a>
-                <a href="contacts.html">Контакты</a>
-            </nav>
-            <div class="header-contacts">
-                <a href="tel:89375210005" class="phone"><i class="fas fa-phone-alt"></i> 8-(937)-521-00-05</a>
-                <a href="#" class="btn btn-outline open-modal-btn">Заказать звонок</a>
-            </div>
-        </div>
-    </header>
 
-    <section class="hero" style="padding: 40px 0 50px;">
-        <div class="container">
-            <div class="hero-content">
-                <div class="subhead">Как нас найти</div>
-                <h1>Контакты</h1>
-                <p>Приезжайте и знакомьтесь. Мы на связи круглосуточно.</p>
+    <div id="header"></div>
 
-            </div>
-            <div class="hero-image" style="min-height: 260px; background-image: url('https://placehold.co/600x400/2b5c84/white?text=Контакты+Парус');"></div>
-        </div>
-    </section>
-
-    <section class="section">
-        <div class="container">
-            <h2>Свяжитесь с нами</h2>
-            <div class="contact-cards">
-                <a href="tel:89375210005" class="contact-card phone">
-                    <i class="fas fa-phone-alt"></i>
-                    <div class="card-title">Позвонить</div>
-                    <div class="card-desc">8-(937)-521-00-05<br>Круглосуточно</div>
-                </a>
-                <a href="https://vk.ru/parus716" target="_blank" class="contact-card vk">
-                    <i class="fab fa-vk"></i>
-                    <div class="card-title">Сообщество VK</div>
-                    <div class="card-desc">Подписывайтесь,<br>будьте в курсе</div>
-                </a>
-                <a href="https://max.ru/join/eQHll3JM1boZPlxsAH3zQyRp16h70o-PBpdESR2ab7s" target="_blank" class="contact-card max">
-                    <i class="fas fa-comment-dots"></i>
-                    <div class="card-title">Канал в MAX</div>
-                    <div class="card-desc">Напишите нам<br>в MAX мессенджер</div>
-                </a>
-                <a href="#" class="contact-card callback open-modal-btn">
-                    <i class="fas fa-headset"></i>
-                    <div class="card-title">Заказать звонок</div>
-                    <div class="card-desc">Мы перезвоним<br>в ближайшее время</div>
-                </a>
-            </div>
-            
-            <h2>Приезжайте и знакомьтесь</h2>
-            <div class="contact-row">
-                <div style="flex: 1;">
-                    <a href="https://yandex.ru/maps/-/CPVPyLn-" target="_blank">
-                        <img src="https://static-maps.yandex.ru/1.x/?ll=49.206116,55.512451&size=600,400&z=12&l=map&pt=49.206116,55.512451,pm2rdl" 
-                             alt="Карта проезда к центру Парус"
-                             style="width: 100%; height: auto; border-radius: 32px; border: 1px solid var(--border-light); box-shadow: 0 10px 30px -10px rgba(0,0,0,0.1);">
-                    </a>
-                    <p style="text-align: center; margin-top: 12px; font-size: 0.85rem;">
-                        <a href="https://yandex.ru/maps/-/CPVPyLn-" target="_blank" style="color: var(--accent); text-decoration: none;">
-                            <i class="fas fa-external-link-alt"></i> Открыть карту в Яндекс.Картах
-                        </a>
-                    </p>
-                </div>
-                <div class="contact-details">
-                    <p><i class="fas fa-map-pin"></i> Юридический адрес: 420053, Республика Татарстан, г. Казань, ул. Сибирский тракт, д. 78 пом 23.</p>
-                    <p><i class="fas fa-map-pin"></i> <a target="_blank" href="https://yandex.ru/maps/-/CPVPyLn-" style="text-decoration:none; color: inherit;">Посмотреть на карте →</a></p>
-                    <p><i class="fas fa-map-pin"></i> Филиал №1: По запросу</p>
-                    <p><i class="fas fa-map-pin"></i> Филиал №2: По запросу</p>
-                    <p><i class="fas fa-phone"></i> <a href="tel:89375210005" style="text-decoration:none; color: inherit;">8-(937)-521-00-05</a> (круглосуточно)</p>
-                    <p><i class="fab fa-vk"></i> <a href="https://vk.ru/parus716" target="_blank" style="text-decoration:none; color: inherit;">ВКонтакте</a></p>
-                    <p><i class="fas fa-comment-dots"></i> <a href="https://max.ru/join/eQHll3JM1boZPlxsAH3zQyRp16h70o-PBpdESR2ab7s" target="_blank" style="text-decoration:none; color: inherit;">MAX</a></p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <footer class="main-footer">
-        <div class="container">
-            <div class="footer-left">
-                <a class="logo" href="index.html">
-                    <i class="fas fa-sailboat"></i>
-                    <span>ПАРУС</span>
-                </a>
-                <p class="footer-description">Центр когнитивной терапии<br>Казань, работаем с 2013 года</p>
-            </div>
-            <div class="footer-right">
-                <div class="footer-address">
-                    <div class="address-item">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <span>Юридический адрес: 420053, Республика Татарстан, г. Казань, ул. Сибирский тракт, д. 78 пом 23.</span>
-                    </div>
-                    <div class="address-item">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <span>Филиал №1: <a href="#">По запросу</a></span>
-                    </div>
-                    <div class="address-item">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <span>Филиал №2: <a href="#">По запросу</a></span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="footer-bottom">
+    <main>
+        <section class="hero" style="padding: 40px 0 50px;">
             <div class="container">
-                <p>© 2026 ООО "Клиника Когнитивной Терапии «Парус»". Все права защищены.</p>
-                <p style="margin-top: 8px;">
-                    <a href="privacy.html">Политика конфиденциальности</a> | 
-                    <a href="terms.html">Пользовательское соглашение</a>
-                </p>
+                <div class="hero-content">
+                    <div class="subhead">Как нас найти</div>
+                    <h1>Контакты</h1>
+                    <p>Приезжайте и знакомьтесь. Мы на связи круглосуточно.</p>
+                </div>
+                <div class="hero-image" style="min-height: 260px; background-image: url('https://placehold.co/600x400/2b5c84/white?text=Дайте+себе+шанс+прямо+сейчас');"></div>
             </div>
-        </div>
-    </footer>
+        </section>
 
-    <div class="fixed-action-bar">
-        <div class="container">
-            <div class="action-buttons">
-                <a href="tel:89375210005" class="action-btn action-btn-call">
-                    <i class="fas fa-phone-alt"></i> Позвонить
-                </a>
-                <a href="https://vk.ru/parus716" target="_blank" class="action-btn action-btn-vk">
-                    <i class="fab fa-vk"></i> Написать в VK
-                </a>
-                <a href="https://max.ru/join/eQHll3JM1boZPlxsAH3zQyRp16h70o-PBpdESR2ab7s" target="_blank" class="action-btn action-btn-max">
-                    <i class="fas fa-comment-dots"></i> Написать в MAX
-                </a>
-                <a href="#" class="action-btn action-btn-callback open-modal-btn">
-                    <i class="fas fa-headset"></i> Связаться с нами
-                </a>
-            </div>
-            <div class="work-info">
-                <i class="fas fa-clock"></i> Круглосуточно, без выходных<br>
-                <span style="font-size: 0.75rem;">Анонимно. Бесплатная консультация</span>
-            </div>
-        </div>
-    </div>
+        <section class="section">
+            <div class="container">
+                <h2>Свяжитесь с нами</h2>
+                <div class="contact-cards">
+                    <a href="tel:+79375210005" class="contact-card phone">
+                        <i class="fas fa-phone-alt"></i>
+                        <div class="card-title">Позвонить</div>
+                        <div class="card-desc">+7 (937) 521-00-05<br>Круглосуточно</div>
+                    </a>
+                    <a href="https://vk.com/parus716" target="_blank" class="contact-card vk">
+                        <i class="fab fa-vk"></i>
+                        <div class="card-title">Сообщество VK</div>
+                        <div class="card-desc">Подписывайтесь,<br>будьте в курсе</div>
+                    </a>
+                    <a href="#" class="contact-card callback open-modal-btn">
+                        <i class="fas fa-headset"></i>
+                        <div class="card-title">Заказать звонок</div>
+                        <div class="card-desc">Мы перезвоним<br>в ближайшее время</div>
+                    </a>
+                </div>
 
-    <div id="cookieBanner" class="cookie-banner">
-        <div class="container">
-            <div class="cookie-text">
-                <i class="fas fa-cookie-bite"></i>
-                <strong>Мы используем cookie-файлы</strong><br>
-                Продолжая использовать наш сайт, вы соглашаетесь на сбор и обработку cookie-файлов. Подробнее в 
-                <a href="privacy.html">Политике конфиденциальности</a> и 
-                <a href="terms.html">Пользовательском соглашении</a>.
-            </div>
-            <div class="cookie-buttons">
-                <button id="cookieAccept" class="cookie-btn cookie-btn-accept">Принять</button>
-                <button id="cookieDecline" class="cookie-btn cookie-btn-decline">Отклонить</button>
-            </div>
-        </div>
-    </div>
-
-    <div id="callbackModal" class="modal">
-        <div class="modal__content">
-            <div class="modal__bg"></div>
-            <button class="modal__close" id="modalClose">&times;</button>
-            <div id="modalForm" class="modal__form">
-                <h2 class="modal__title">Заказать звонок</h2>
-                <p class="modal__subtitle">Оставьте свои данные, и мы свяжемся с вами в ближайшее время</p>
-                <form id="callbackForm">
-                    <div class="modal__field">
-                        <label for="userName">Ваше имя</label>
-                        <input type="text" id="userName" name="name" placeholder="Например, Александр" required>
+                <h2>Приезжайте и знакомьтесь</h2>
+                <div class="contact-row">
+                    <div style="flex: 1;">
+                        <iframe src="https://yandex.ru/map-widget/v1/?ll=49.206116,55.512451&z=16&pt=49.206116,55.512451" width="100%" height="400" frameborder="0" style="border-radius: 32px;"></iframe>
+                        <p style="text-align: center; margin-top: 12px; font-size: 0.85rem;">
+                            <a href="https://yandex.ru/maps/-/CPVPyLn-" target="_blank" style="color: var(--accent); text-decoration: none;">
+                                <i class="fas fa-external-link-alt"></i> Открыть карту в Яндекс.Картах
+                            </a>
+                        </p>
                     </div>
-                    <div class="modal__field">
-                        <label for="userPhone">Номер телефона *</label>
-                        <input type="tel" id="userPhone" name="phone" placeholder="+7 (___) ___-__-__" required>
+                    <div class="contact-details">
+                        <p><i class="fas fa-map-pin"></i> Юридический адрес: 420053, Республика Татарстан, г. Казань, ул. Сибирский тракт, д. 78 пом 23.</p>
+                        <p><i class="fas fa-map-pin"></i><a target="_blank" href="https://yandex.ru/maps/-/CPVPyLn-" style="text-decoration:none; color: inherit;">Посмотреть на карте →</a></p>
+                        <p><i class="fas fa-map-pin"></i> Филиал №1: По запросу</p>
+                        <p><i class="fas fa-map-pin"></i> Филиал №2: По запросу</p>
+                        <p><i class="fas fa-phone"></i><a href="tel:+79375210005" style="text-decoration:none; color: inherit;">+7 (937) 521-00-05</a> (круглосуточно)</p>
+                        <p><i class="fab fa-vk"></i><a href="https://vk.com/parus716" target="_blank" style="text-decoration:none; color: inherit;">ВКонтакте</a></p>
                     </div>
-                    <div class="modal__field">
-                        <label for="userQuestion">Ваш вопрос (необязательно)</label>
-                        <textarea id="userQuestion" name="question" placeholder="Опишите, что вас беспокоит..."></textarea>
-                    </div>
-                    <button type="submit" class="modal__btn">Отправить заявку</button>
-                    <p class="modal__privacy">
-                        Нажимая на кнопку, вы соглашаетесь с 
-                        <a href="privacy.html">Политикой конфиденциальности</a>
-                    </p>
-                </form>
+                </div>
             </div>
-            <div id="modalSuccess" class="modal__success">
-                <i class="fas fa-check-circle"></i>
-                <h3>Заявка отправлена!</h3>
-                <p>Спасибо за доверие. Наш специалист свяжется с вами в ближайшее время.</p>
-                <button class="modal__btn" id="successClose">Закрыть</button>
-            </div>
-        </div>
-    </div>
+        </section>
+    </main>
 
-    <script src="assets/cookie.js"></script>
+    <div id="footer"></div>
+    <div id="actionBar"></div>
+    <div id="cookieBanner"></div>
+    <div id="callbackModal"></div>
+
+    <script src="assets/js/main.js" defer></script>
+    <script>
+        async function loadComponent(elementId, url) {
+            try {
+                const response = await fetch(url);
+                const html = await response.text();
+                document.getElementById(elementId).innerHTML = html;
+            } catch (error) {
+                console.error(`Ошибка загрузки ${url}:`, error);
+            }
+        }
+        document.addEventListener('DOMContentLoaded', () => {
+            loadComponent('header', 'assets/components/header.html');
+            loadComponent('footer', 'assets/components/footer.html');
+            loadComponent('actionBar', 'assets/components/action-bar.html');
+            loadComponent('cookieBanner', 'assets/components/cookie-banner.html');
+            loadComponent('callbackModal', 'assets/components/modal.html');
+        });
+    </script>
 </body>
 </html>
