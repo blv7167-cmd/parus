@@ -44,7 +44,6 @@
             if (formContainer) formContainer.style.display = 'none';
             if (successContainer) successContainer.classList.add('show');
             
-            // Отправка на сервер (если нужно)
             var formData = new URLSearchParams();
             formData.append('name', document.getElementById('userName')?.value.trim() || '');
             formData.append('phone', phone);
@@ -61,7 +60,6 @@
             });
         }
         
-        // Навешиваем обработчики на все кнопки
         for (var i = 0; i < btns.length; i++) {
             btns[i].onclick = openModal;
         }
@@ -79,21 +77,36 @@
         };
     }
     
-    // Cookie баннер
+    // Cookie баннер — ИСПРАВЛЕННАЯ ВЕРСИЯ
     function initCookieBanner() {
         var banner = document.getElementById('cookieBanner');
         var acceptBtn = document.getElementById('cookieAccept');
         var declineBtn = document.getElementById('cookieDecline');
         
-        if (!banner) return;
+        console.log('initCookieBanner вызван, banner:', !!banner);
+        console.log('acceptBtn:', !!acceptBtn, 'declineBtn:', !!declineBtn);
         
-        if (!localStorage.getItem('cookieConsent')) {
-            setTimeout(function() { banner.classList.add('show'); }, 500);
+        if (!banner) {
+            console.log('Баннер не найден, повторная попытка через 500ms');
+            setTimeout(initCookieBanner, 500);
+            return;
+        }
+        
+        // Проверяем, есть ли сохранённое согласие
+        var consent = localStorage.getItem('cookieConsent');
+        console.log('Сохранённое согласие:', consent);
+        
+        if (!consent) {
+            console.log('Показываем баннер');
+            banner.classList.add('show');
+        } else {
+            console.log('Баннер не показываем, уже есть согласие');
         }
         
         function setConsent(accepted) {
             localStorage.setItem('cookieConsent', accepted ? 'accepted' : 'declined');
             banner.classList.remove('show');
+            console.log('Согласие установлено:', accepted ? 'accepted' : 'declined');
         }
         
         if (acceptBtn) acceptBtn.onclick = function() { setConsent(true); };
@@ -142,25 +155,32 @@
             const response = await fetch(url);
             const html = await response.text();
             document.getElementById(elementId).innerHTML = html;
+            console.log('Загружен компонент:', url);
+            return true;
         } catch (error) {
             console.error('Ошибка загрузки ' + url + ':', error);
+            return false;
         }
     }
     
     // Старт после загрузки DOM
     document.addEventListener('DOMContentLoaded', function() {
-        loadComponent('header', 'assets/components/header.html');
-        loadComponent('footer', 'assets/components/footer.html');
-        loadComponent('actionBar', 'assets/components/action-bar.html');
-        loadComponent('cookieBanner', 'assets/components/cookie-banner.html');
-        loadComponent('callbackModal', 'assets/components/modal.html');
-        
-        // Инициализируем модальное окно с задержкой (ждём загрузки компонентов)
-        setTimeout(function() {
+        // Загружаем все компоненты и ждём их полной загрузки
+        Promise.all([
+            loadComponent('header', 'assets/components/header.html'),
+            loadComponent('footer', 'assets/components/footer.html'),
+            loadComponent('actionBar', 'assets/components/action-bar.html'),
+            loadComponent('cookieBanner', 'assets/components/cookie-banner.html'),
+            loadComponent('callbackModal', 'assets/components/modal.html')
+        ]).then(function() {
+            console.log('Все компоненты загружены, запускаем инициализацию');
+            // Теперь все компоненты точно в DOM
             initModal();
             initCookieBanner();
             initReviewForm();
             initActionBar();
-        }, 300);
+        }).catch(function(error) {
+            console.error('Ошибка при загрузке компонентов:', error);
+        });
     });
 })();
