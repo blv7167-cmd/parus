@@ -7,7 +7,7 @@
     <meta name="description" content="Программа психологической реабилитации зависимых в центре «Парус». Когнитивно-поведенческая терапия при наркомании и алкоголизме. Этапы: мотивация, терапия, социализация.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="icon" href="assets/icon_big.png" type="image/svg+xml">
     <link rel="stylesheet" href="assets/css/styles.css">
@@ -114,10 +114,11 @@
     <div id="footer"></div>
     <div id="actionBar"></div>
     <div id="cookieBanner"></div>
-    <div id="callbackModal"></div>
+    <div id="callbackModal" class="modal"></div>
 
     <script src="assets/js/main.js" defer></script>
     <script>
+        // Функция загрузки компонентов
         async function loadComponent(elementId, url) {
             try {
                 const response = await fetch(url);
@@ -127,12 +128,89 @@
                 console.error(`Ошибка загрузки ${url}:`, error);
             }
         }
+        
+        // Загружаем компоненты и инициализируем модальное окно
         document.addEventListener('DOMContentLoaded', () => {
-            loadComponent('header', 'assets/components/header.html');
-            loadComponent('footer', 'assets/components/footer.html');
-            loadComponent('actionBar', 'assets/components/action-bar.html');
-            loadComponent('cookieBanner', 'assets/components/cookie-banner.html');
-            loadComponent('callbackModal', 'assets/components/modal.html');
+            Promise.all([
+                loadComponent('header', 'assets/components/header.html'),
+                loadComponent('footer', 'assets/components/footer.html'),
+                loadComponent('actionBar', 'assets/components/action-bar.html'),
+                loadComponent('cookieBanner', 'assets/components/cookie-banner.html'),
+                loadComponent('callbackModal', 'assets/components/modal.html')
+            ]).then(() => {
+                // ВСЕ КОМПОНЕНТЫ ЗАГРУЖЕНЫ — инициализируем модальное окно
+                console.log('Все компоненты загружены, инициализируем модальное окно');
+                
+                var modal = document.getElementById('callbackModal');
+                var btns = document.querySelectorAll('.open-modal-btn');
+                var closeBtn = document.getElementById('modalClose');
+                var form = document.getElementById('callbackForm');
+                var formContainer = document.getElementById('modalForm');
+                var successContainer = document.getElementById('modalSuccess');
+                var successClose = document.getElementById('successClose');
+                
+                console.log('Модальное окно:', !!modal);
+                console.log('Кнопок open-modal-btn найдено:', btns.length);
+                
+                if (!modal) {
+                    console.error('Модальное окно не найдено!');
+                    return;
+                }
+                
+                function openModal(e) {
+                    if (e) e.preventDefault();
+                    modal.classList.add('show');
+                    document.body.style.overflow = 'hidden';
+                    console.log('Модальное окно ОТКРЫТО');
+                }
+                
+                function closeModal() {
+                    modal.classList.remove('show');
+                    document.body.style.overflow = '';
+                    if (form) form.reset();
+                    if (formContainer) formContainer.style.display = 'block';
+                    if (successContainer) successContainer.classList.remove('show');
+                }
+                
+                function handleSubmit(e) {
+                    e.preventDefault();
+                    var phone = document.getElementById('userPhone')?.value.trim();
+                    if (!phone) {
+                        alert('Пожалуйста, введите номер телефона');
+                        return;
+                    }
+                    if (formContainer) formContainer.style.display = 'none';
+                    if (successContainer) successContainer.classList.add('show');
+                    
+                    var formData = new URLSearchParams();
+                    formData.append('name', document.getElementById('userName')?.value.trim() || '');
+                    formData.append('phone', phone);
+                    formData.append('question', document.getElementById('userQuestion')?.value.trim() || '');
+                    formData.append('page', window.location.pathname);
+                    formData.append('timestamp', new Date().toISOString());
+                    
+                    fetch('/send_message', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                        body: formData.toString()
+                    }).catch(function(error) {
+                        console.error('Ошибка отправки:', error);
+                    });
+                }
+                
+                // Навешиваем обработчики
+                btns.forEach(function(btn) {
+                    btn.addEventListener('click', openModal);
+                });
+                if (closeBtn) closeBtn.addEventListener('click', closeModal);
+                if (successClose) successClose.addEventListener('click', closeModal);
+                if (form) form.addEventListener('submit', handleSubmit);
+                if (modal) modal.addEventListener('click', function(e) {
+                    if (e.target === modal) closeModal();
+                });
+                
+                console.log('Инициализация завершена, обработано кнопок:', btns.length);
+            });
         });
     </script>
 </body>

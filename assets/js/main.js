@@ -1,26 +1,166 @@
-(function(){let modal,formContainer,successContainer;function closeModal(){if(modal){modal.style.display='none';modal.style.opacity='0';modal.classList.remove('show');}
-document.body.style.overflow='';const form=document.getElementById('callbackForm');if(form)form.reset();if(formContainer)formContainer.style.display='block';if(successContainer)successContainer.classList.remove('show');const submitBtn=form?form.querySelector('button[type="submit"]'):null;if(submitBtn){submitBtn.disabled=false;submitBtn.textContent='Отправить заявку';}}
-function openModal(event){if(event)event.preventDefault();if(modal){modal.style.display='flex';modal.style.opacity='1';modal.classList.add('show');}
-document.body.style.overflow='hidden';}
-function bindSuccessCloseButton(){const successCloseBtn=document.getElementById('successClose');if(successCloseBtn){const newBtn=successCloseBtn.cloneNode(true);successCloseBtn.parentNode.replaceChild(newBtn,successCloseBtn);newBtn.onclick=function(e){e.preventDefault();e.stopPropagation();closeModal();return false;};}else{setTimeout(bindSuccessCloseButton,100);}}
-function bindAllOpenButtons(){const openBtn=document.getElementById('openModalBtn');if(openBtn)openBtn.onclick=openModal;const openBtns=document.querySelectorAll('.open-modal-btn');openBtns.forEach(btn=>{btn.onclick=openModal;});const dataBtns=document.querySelectorAll('[data-modal-open]');dataBtns.forEach(btn=>{btn.onclick=openModal;});}
-function initModal(){modal=document.getElementById('callbackModal');const closeBtn=document.getElementById('modalClose');formContainer=document.getElementById('modalForm');successContainer=document.getElementById('modalSuccess');const form=document.getElementById('callbackForm');if(!modal)return;bindAllOpenButtons();if(closeBtn)closeBtn.onclick=closeModal;modal.onclick=function(event){if(event.target===modal)closeModal();};document.onkeydown=function(event){if(event.key==='Escape'&&modal.style.display==='flex')closeModal();};bindSuccessCloseButton();if(form){form.onsubmit=async function(event){event.preventDefault();const name=document.getElementById('userName')?.value.trim()||'';const phone=document.getElementById('userPhone')?.value.trim()||'';const question=document.getElementById('userQuestion')?.value.trim()||'';if(!phone){alert('Пожалуйста, введите номер телефона');return;}
-const submitBtn=form.querySelector('button[type="submit"]');if(submitBtn){submitBtn.disabled=true;submitBtn.textContent='Отправка...';}
-const formData=new URLSearchParams();formData.append('name',name||'Не указано');formData.append('phone',phone);formData.append('question',question||'');formData.append('page',window.location.pathname||'/');formData.append('timestamp',new Date().toISOString());try{await fetch('/send_message',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:formData.toString()});}catch(error){console.error('Ошибка:',error);}
-if(formContainer)formContainer.style.display='none';if(successContainer)successContainer.classList.add('show');if(submitBtn)submitBtn.disabled=false;setTimeout(bindSuccessCloseButton,50);};}}
-if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',initModal);}else{initModal();}})();(function(){function setCookie(name,value,days){const date=new Date();date.setTime(date.getTime()+(days*24*60*60*1000));document.cookie=name+"="+(value||"")+"; expires="+date.toUTCString()+"; path=/";}
-function getCookie(name){const nameEQ=name+"=";const ca=document.cookie.split(';');for(let i=0;i<ca.length;i++){let c=ca[i];while(c.charAt(0)===' ')c=c.substring(1,c.length);if(c.indexOf(nameEQ)===0)return c.substring(nameEQ.length,c.length);}
-return null;}
-function hideBanner(){const banner=document.getElementById('cookieBanner');if(banner)banner.classList.remove('show');}
-function checkCookieConsent(){const consent=getCookie('cookie_consent');if(consent==='accepted'||consent==='declined'){hideBanner();}else{const banner=document.getElementById('cookieBanner');if(banner)setTimeout(()=>banner.classList.add('show'),500);}}
-function acceptCookies(){setCookie('cookie_consent','accepted',365);hideBanner();}
-function declineCookies(){setCookie('cookie_consent','declined',365);hideBanner();}
-function initCookieBanner(){checkCookieConsent();const acceptBtn=document.getElementById('cookieAccept');const declineBtn=document.getElementById('cookieDecline');if(acceptBtn)acceptBtn.addEventListener('click',acceptCookies);if(declineBtn)declineBtn.addEventListener('click',declineCookies);}
-if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',initCookieBanner);}else{initCookieBanner();}})();(function(){function initReviewForm(){const reviewForm=document.getElementById('review-form');const reviewSuccess=document.getElementById('review-success');if(!reviewForm||!reviewSuccess)return;reviewForm.addEventListener('submit',async(e)=>{e.preventDefault();const name=document.getElementById('review-name')?.value.trim()||'';const contact=document.getElementById('review-contact')?.value.trim()||'';const role=document.getElementById('review-role')?.value||'';const rating=document.getElementById('review-rating')?.value||'';const message=document.getElementById('review-text')?.value.trim()||'';const consent=document.getElementById('review-consent')?.checked||false;if(!name||!message||!rating||!consent){alert('Пожалуйста, заполните все обязательные поля');return;}
-const submitBtn=reviewForm.querySelector('button[type="submit"]');if(submitBtn){submitBtn.disabled=true;submitBtn.textContent='Отправка...';}
-const formData=new URLSearchParams();formData.append('name',name);formData.append('contact',contact);formData.append('role',role);formData.append('rating',rating);formData.append('message',message);formData.append('page',window.location.pathname);formData.append('timestamp',new Date().toISOString());try{await fetch('/send_review',{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:formData.toString()});}catch(error){console.error('Ошибка отправки отзыва:',error);}
-reviewSuccess.classList.remove('hidden');reviewForm.reset();if(submitBtn){submitBtn.disabled=false;submitBtn.textContent='Отправить отзыв';}
-setTimeout(()=>reviewSuccess.classList.add('hidden'),5000);});}
-if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',initReviewForm);}else{initReviewForm();}})();(function(){function initActionBar(){const actionBar=document.querySelector('.fixed-action-bar');if(!actionBar)return;let lastScrollTop=0;window.addEventListener('scroll',()=>{const scrollTop=window.pageYOffset||document.documentElement.scrollTop;if(scrollTop>lastScrollTop&&scrollTop>100){actionBar.classList.add('hide');}else{actionBar.classList.remove('hide');}
-lastScrollTop=scrollTop;});}
-if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',initActionBar);}else{initActionBar();}})();
+(function() {
+    // Инициализация модального окна
+    function initModal() {
+        var modal = document.getElementById('callbackModal');
+        var btns = document.querySelectorAll('.open-modal-btn');
+        var closeBtn = document.getElementById('modalClose');
+        var form = document.getElementById('callbackForm');
+        var formContainer = document.getElementById('modalForm');
+        var successContainer = document.getElementById('modalSuccess');
+        var successClose = document.getElementById('successClose');
+        
+        if (!modal) {
+            console.log('Модальное окно не найдено, повторная попытка через 500ms');
+            setTimeout(initModal, 500);
+            return;
+        }
+        
+        console.log('Модальное окно найдено, кнопок:', btns.length);
+        
+        function openModal(e) {
+            if (e) e.preventDefault();
+            modal.classList.add('show');
+            document.body.style.overflow = 'hidden';
+            console.log('Модальное окно открыто');
+        }
+        
+        function closeModal() {
+            modal.classList.remove('show');
+            document.body.style.overflow = '';
+            if (form) form.reset();
+            if (formContainer) formContainer.style.display = 'block';
+            if (successContainer) successContainer.classList.remove('show');
+            console.log('Модальное окно закрыто');
+        }
+        
+        function handleSubmit(e) {
+            e.preventDefault();
+            var phone = document.getElementById('userPhone')?.value.trim();
+            if (!phone) {
+                alert('Пожалуйста, введите номер телефона');
+                return;
+            }
+            console.log('Отправка заявки, телефон:', phone);
+            if (formContainer) formContainer.style.display = 'none';
+            if (successContainer) successContainer.classList.add('show');
+            
+            // Отправка на сервер (если нужно)
+            var formData = new URLSearchParams();
+            formData.append('name', document.getElementById('userName')?.value.trim() || '');
+            formData.append('phone', phone);
+            formData.append('question', document.getElementById('userQuestion')?.value.trim() || '');
+            formData.append('page', window.location.pathname);
+            formData.append('timestamp', new Date().toISOString());
+            
+            fetch('/send_message', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: formData.toString()
+            }).catch(function(error) {
+                console.error('Ошибка отправки:', error);
+            });
+        }
+        
+        // Навешиваем обработчики на все кнопки
+        for (var i = 0; i < btns.length; i++) {
+            btns[i].onclick = openModal;
+        }
+        
+        if (closeBtn) closeBtn.onclick = closeModal;
+        if (successClose) successClose.onclick = closeModal;
+        if (form) form.onsubmit = handleSubmit;
+        
+        modal.onclick = function(e) {
+            if (e.target === modal) closeModal();
+        };
+        
+        document.onkeydown = function(e) {
+            if (e.key === 'Escape' && modal.classList.contains('show')) closeModal();
+        };
+    }
+    
+    // Cookie баннер
+    function initCookieBanner() {
+        var banner = document.getElementById('cookieBanner');
+        var acceptBtn = document.getElementById('cookieAccept');
+        var declineBtn = document.getElementById('cookieDecline');
+        
+        if (!banner) return;
+        
+        if (!localStorage.getItem('cookieConsent')) {
+            setTimeout(function() { banner.classList.add('show'); }, 500);
+        }
+        
+        function setConsent(accepted) {
+            localStorage.setItem('cookieConsent', accepted ? 'accepted' : 'declined');
+            banner.classList.remove('show');
+        }
+        
+        if (acceptBtn) acceptBtn.onclick = function() { setConsent(true); };
+        if (declineBtn) declineBtn.onclick = function() { setConsent(false); };
+    }
+    
+    // Форма отзывов
+    function initReviewForm() {
+        var reviewForm = document.getElementById('review-form');
+        var reviewSuccess = document.getElementById('review-success');
+        if (!reviewForm || !reviewSuccess) return;
+        
+        reviewForm.onsubmit = function(e) {
+            e.preventDefault();
+            if (!reviewForm.checkValidity()) {
+                reviewForm.reportValidity();
+                return;
+            }
+            reviewSuccess.classList.remove('hidden');
+            reviewForm.reset();
+            setTimeout(function() {
+                reviewSuccess.classList.add('hidden');
+            }, 5000);
+        };
+    }
+    
+    // Action bar скрытие при скролле
+    function initActionBar() {
+        var actionBar = document.querySelector('.fixed-action-bar');
+        if (!actionBar) return;
+        var lastScrollTop = 0;
+        window.onscroll = function() {
+            var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            if (scrollTop > lastScrollTop && scrollTop > 100) {
+                actionBar.classList.add('hide');
+            } else {
+                actionBar.classList.remove('hide');
+            }
+            lastScrollTop = scrollTop;
+        };
+    }
+    
+    // Загрузка компонентов
+    async function loadComponent(elementId, url) {
+        try {
+            const response = await fetch(url);
+            const html = await response.text();
+            document.getElementById(elementId).innerHTML = html;
+        } catch (error) {
+            console.error('Ошибка загрузки ' + url + ':', error);
+        }
+    }
+    
+    // Старт после загрузки DOM
+    document.addEventListener('DOMContentLoaded', function() {
+        loadComponent('header', 'assets/components/header.html');
+        loadComponent('footer', 'assets/components/footer.html');
+        loadComponent('actionBar', 'assets/components/action-bar.html');
+        loadComponent('cookieBanner', 'assets/components/cookie-banner.html');
+        loadComponent('callbackModal', 'assets/components/modal.html');
+        
+        // Инициализируем модальное окно с задержкой (ждём загрузки компонентов)
+        setTimeout(function() {
+            initModal();
+            initCookieBanner();
+            initReviewForm();
+            initActionBar();
+        }, 300);
+    });
+})();
