@@ -1,4 +1,68 @@
 (function() {
+    // Переменная для хранения экземпляра капчи
+    var captchaInstance = null;
+    
+    // Инициализация Yandex SmartCaptcha
+    function initSmartCaptcha() {
+        // Проверяем, что контейнер существует и капча ещё не инициализирована
+        var container = document.getElementById('captcha-container');
+        if (!container) {
+            console.log('Контейнер капчи не найден');
+            return false;
+        }
+        
+        // Проверяем, что библиотека загрузилась
+        if (typeof window.smartCaptcha === 'undefined') {
+            console.log('SmartCaptcha не загружена, ждём...');
+            return false;
+        }
+        
+        // Если уже инициализирована, не делаем повторно
+        if (captchaInstance) {
+            console.log('Капча уже инициализирована');
+            return true;
+        }
+        
+        try {
+            captchaInstance = window.smartCaptcha.render(container, {
+                sitekey: 'ysc1_PGmulRYuGEEEIUU29qpRC3vTyQg1fvOgbSu428yx0097a33c',  // Замените на ваш ключ Yandex
+                callback: function(token) {
+                    console.log('Капча пройдена, токен получен');
+                    document.getElementById('smart-token').value = token;
+                },
+                expiredCallback: function() {
+                    console.log('Капча просрочена');
+                    document.getElementById('smart-token').value = '';
+                }
+            });
+            console.log('SmartCaptcha инициализирована');
+            return true;
+        } catch(e) {
+            console.error('Ошибка инициализации SmartCaptcha:', e);
+            return false;
+        }
+    }
+    
+    // Функция ожидания загрузки библиотеки SmartCaptcha
+    function waitForSmartCaptcha(callback, maxAttempts = 30) {
+        var attempts = 0;
+        
+        function check() {
+            if (typeof window.smartCaptcha !== 'undefined' && typeof window.smartCaptcha.render === 'function') {
+                console.log('SmartCaptcha библиотека загружена');
+                callback();
+            } else if (attempts < maxAttempts) {
+                attempts++;
+                console.log('Ждём загрузку SmartCaptcha, попытка ' + attempts);
+                setTimeout(check, 200);
+            } else {
+                console.error('SmartCaptcha не загрузилась за отведённое время');
+            }
+        }
+        
+        check();
+    }
+    
     // Инициализация модального окна
     function initModal() {
         var modal = document.getElementById('callbackModal');
@@ -21,6 +85,18 @@
             if (e) e.preventDefault();
             modal.classList.add('show');
             document.body.style.overflow = 'hidden';
+            
+            // При открытии окна инициализируем капчу
+            waitForSmartCaptcha(function() {
+                var inited = initSmartCaptcha();
+                if (!inited) {
+                    console.log('Не удалось инициализировать капчу, пробуем сбросить и пересоздать');
+                    // Сбрасываем старый экземпляр и пробуем снова
+                    captchaInstance = null;
+                    setTimeout(initSmartCaptcha, 500);
+                }
+            });
+            
             console.log('Модальное окно открыто');
         }
         
@@ -30,17 +106,33 @@
             if (form) form.reset();
             if (formContainer) formContainer.style.display = 'block';
             if (successContainer) successContainer.classList.remove('show');
+            // Очищаем токен при закрытии
+            document.getElementById('smart-token').value = '';
             console.log('Модальное окно закрыто');
         }
         
         function handleSubmit(e) {
             e.preventDefault();
+            
+            var captchaToken = document.getElementById('smart-token').value;
+            if (!captchaToken) {
+                alert('Пожалуйста, подтвердите, что вы не робот');
+                return;
+            }
+            
             var phone = document.getElementById('userPhone')?.value.trim();
             if (!phone) {
                 alert('Пожалуйста, введите номер телефона');
                 return;
             }
+            
+            var submitBtn = e.target.querySelector('button[type="submit"]');
+            var originalText = submitBtn.innerText;
+            submitBtn.innerText = 'Отправка...';
+            submitBtn.disabled = true;
+            
             console.log('Отправка заявки, телефон:', phone);
+            
             if (formContainer) formContainer.style.display = 'none';
             if (successContainer) successContainer.classList.add('show');
             
@@ -50,13 +142,43 @@
             formData.append('question', document.getElementById('userQuestion')?.value.trim() || '');
             formData.append('page', window.location.pathname);
             formData.append('timestamp', new Date().toISOString());
+            formData.append('smart-token', captchaToken);
             
             fetch('/send_message', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                 body: formData.toString()
-            }).catch(function(error) {
+            })
+            .then(function(response) {
+                return response.json();
+            })
+            .then(function(data) {
+                if (data.status === 'success') {
+                    console.log('Заявка успешно отправлена');
+                } else {
+                    alert('Ошибка: ' + data.message);
+                    if (formContainer) formContainer.style.display = 'block';
+                    if (successContainer) successContainer.classList.remove('show');
+                    // Сбрасываем капчу при ошибке
+                    if (captchaInstance && window.smartCaptcha) {
+                        window.smartCaptcha.reset(captchaInstance);
+                    }
+                    document.getElementById('smart-token').value = '';
+                }
+            })
+            .catch(function(error) {
                 console.error('Ошибка отправки:', error);
+                alert('Произошла ошибка. Пожалуйста, попробуйте позже.');
+                if (formContainer) formContainer.style.display = 'block';
+                if (successContainer) successContainer.classList.remove('show');
+                if (captchaInstance && window.smartCaptcha) {
+                    window.smartCaptcha.reset(captchaInstance);
+                }
+                document.getElementById('smart-token').value = '';
+            })
+            .finally(function() {
+                submitBtn.innerText = originalText;
+                submitBtn.disabled = false;
             });
         }
         
@@ -77,36 +199,26 @@
         };
     }
     
-    // Cookie баннер — ИСПРАВЛЕННАЯ ВЕРСИЯ
+    // Cookie баннер
     function initCookieBanner() {
         var banner = document.getElementById('cookieBanner');
         var acceptBtn = document.getElementById('cookieAccept');
         var declineBtn = document.getElementById('cookieDecline');
         
-        console.log('initCookieBanner вызван, banner:', !!banner);
-        console.log('acceptBtn:', !!acceptBtn, 'declineBtn:', !!declineBtn);
-        
         if (!banner) {
-            console.log('Баннер не найден, повторная попытка через 500ms');
             setTimeout(initCookieBanner, 500);
             return;
         }
         
-        // Проверяем, есть ли сохранённое согласие
         var consent = localStorage.getItem('cookieConsent');
-        console.log('Сохранённое согласие:', consent);
         
         if (!consent) {
-            console.log('Показываем баннер');
             banner.classList.add('show');
-        } else {
-            console.log('Баннер не показываем, уже есть согласие');
         }
         
         function setConsent(accepted) {
             localStorage.setItem('cookieConsent', accepted ? 'accepted' : 'declined');
             banner.classList.remove('show');
-            console.log('Согласие установлено:', accepted ? 'accepted' : 'declined');
         }
         
         if (acceptBtn) acceptBtn.onclick = function() { setConsent(true); };
@@ -133,7 +245,7 @@
         };
     }
     
-    // Action bar скрытие при скролле
+    // Action bar
     function initActionBar() {
         var actionBar = document.querySelector('.fixed-action-bar');
         if (!actionBar) return;
@@ -163,9 +275,8 @@
         }
     }
     
-    // Старт после загрузки DOM
+    // Старт
     document.addEventListener('DOMContentLoaded', function() {
-        // Загружаем все компоненты и ждём их полной загрузки
         Promise.all([
             loadComponent('header', 'assets/components/header.html'),
             loadComponent('footer', 'assets/components/footer.html'),
@@ -174,11 +285,15 @@
             loadComponent('callbackModal', 'assets/components/modal.html')
         ]).then(function() {
             console.log('Все компоненты загружены, запускаем инициализацию');
-            // Теперь все компоненты точно в DOM
             initModal();
             initCookieBanner();
             initReviewForm();
             initActionBar();
+            
+            // Предварительная загрузка капчи (не рендерим, просто убеждаемся, что библиотека готова)
+            waitForSmartCaptcha(function() {
+                console.log('SmartCaptcha библиотека готова для использования');
+            });
         }).catch(function(error) {
             console.error('Ошибка при загрузке компонентов:', error);
         });

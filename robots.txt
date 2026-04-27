@@ -1,7 +1,6 @@
 User-agent: *
 Allow: /
 Disallow: /assets/components/
-Disallow: /foto/
 Disallow: /send_message
 Disallow: /send_review
 

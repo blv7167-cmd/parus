@@ -3,20 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Территория реабилитационного центра «Парус» | Природа и уют | Казань</title>
-    <meta name="description" content="Фотографии территории центра реабилитации зависимых «Парус». Природа, ландшафт, уединение — идеальные условия для восстановления от наркомании и алкоголизма.">
+    <title>Территория центра | Природа и уют | Казань</title>
+    <meta name="description" content="Фотографии территории центра коррекции поведения «Паруса». Природа, ландшафт, уединение — идеальные условия для восстановления от наркомании и алкоголизма.">
+    <meta name="yandex" content="nomedicine">
+    <meta name="googlebot" content="nosnippet">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="icon" href="assets/icon_big.png" type="image/svg+xml">
     <link rel="stylesheet" href="assets/css/styles.css">
+    <script src="assets/js/gallery.js"></script>
     <!-- Скрипт метрики -->
     <script type="text/javascript">
         (function(m,e,t,r,i,k,a){ m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)}; m[i].l=1*new Date(); for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}} k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})(window,document,'script','https://mc.yandex.ru/metrika/tag.js','ym');
         ym(108393368,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",referrer:document.referrer,url:location.href,accurateTrackBounce:true,trackLinks:true});
     </script>
     <noscript><div><img loading="lazy" src="https://mc.yandex.ru/watch/108393368" style="position:absolute; left:-9999px;" /></div></noscript>
+    <script src="https://smartcaptcha.yandexcloud.net/captcha.js" async defer></script>
 </head>
 <body>
 
@@ -90,58 +95,5 @@
     <div id="callbackModal" class="modal"></div>
 
     <script src="assets/js/main.js" defer></script>
-    <script>
-        async function loadComponent(elementId, url) {
-            try {
-                const response = await fetch(url);
-                const html = await response.text();
-                document.getElementById(elementId).innerHTML = html;
-            } catch (error) {
-                console.error(`Ошибка загрузки ${url}:`, error);
-            }
-        }
-        document.addEventListener('DOMContentLoaded', () => {
-            loadComponent('header', 'assets/components/header.html');
-            loadComponent('footer', 'assets/components/footer.html');
-            loadComponent('actionBar', 'assets/components/action-bar.html');
-            loadComponent('cookieBanner', 'assets/components/cookie-banner.html');
-            loadComponent('callbackModal', 'assets/components/modal.html');
-        });
-
-        // Лайтбокс
-        (function () {
-            const lightbox = document.getElementById('lightbox');
-            const lightboxImg = document.getElementById('lightbox-img');
-            if (!lightbox || !lightboxImg) return;
-            const closeBtn = lightbox.querySelector('.lightbox__close');
-            const triggers = document.querySelectorAll('[data-lightbox-src]');
-            function openLightbox(src, alt) {
-                lightboxImg.src = src;
-                lightboxImg.alt = alt || 'Просмотр фотографии';
-                lightbox.classList.remove('hidden');
-                document.body.style.overflow = 'hidden';
-                if (closeBtn) closeBtn.focus();
-            }
-            function closeLightbox() {
-                lightbox.classList.add('hidden');
-                lightboxImg.src = '';
-                document.body.style.overflow = '';
-            }
-            triggers.forEach(btn => {
-                btn.addEventListener('click', function () {
-                    const src = btn.getAttribute('data-lightbox-src');
-                    const img = btn.querySelector('img');
-                    openLightbox(src, img ? img.getAttribute('alt') : '');
-                });
-            });
-            if (closeBtn) closeBtn.addEventListener('click', closeLightbox);
-            lightbox.addEventListener('click', function (e) {
-                if (e.target === lightbox) closeLightbox();
-            });
-            document.addEventListener('keydown', function (e) {
-                if (e.key === "Escape" && !lightbox.classList.contains('hidden')) closeLightbox();
-            });
-        })();
-    </script>
 </body>
 </html>

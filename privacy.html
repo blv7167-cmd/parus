@@ -3,8 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Политика конфиденциальности | Анонимность реабилитации «Парус» Казань</title>
-    <meta name="description" content="Политика обработки персональных данных в центре реабилитации зависимых «Парус». Гарантия анонимности для клиентов из Казани и РТ.">
+    <title>Политика конфиденциальности</title>
+    <meta name="description" content="Политика обработки персональных данных в центре когнитивной терапии «Паруса». Гарантия анонимности для клиентов из Казани и РТ.">
+    <meta name="yandex" content="nomedicine">
+    <meta name="googlebot" content="nosnippet">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&display=swap" rel="stylesheet">
@@ -16,6 +19,7 @@
         ym(108393368,'init',{ssr:true,webvisor:true,clickmap:true,ecommerce:"dataLayer",referrer:document.referrer,url:location.href,accurateTrackBounce:true,trackLinks:true});
     </script>
     <noscript><div><img loading="lazy" src="https://mc.yandex.ru/watch/108393368" style="position:absolute; left:-9999px;" /></div></noscript>
+    <script src="https://smartcaptcha.yandexcloud.net/captcha.js" async defer></script>
 </head>
 <body>
 
@@ -25,7 +29,7 @@
         <section class="hero" style="padding: 40px 0 50px;">
             <div class="container">
                 <div class="hero-content">
-                    <div class="subhead">Центр когнитивной терапии «Парус»</div>
+                    <div class="subhead">Центр когнитивной терапии «Паруса»</div>
                     <h1>Политика конфиденциальности</h1>
                     <p>Мы ценим ваше доверие и обеспечиваем надежную защиту персональных данных.</p>
                 </div>
@@ -48,23 +52,6 @@
     <div id="callbackModal" class="modal"></div>
 
     <script src="assets/js/main.js" defer></script>
-    <script>
-        async function loadComponent(elementId, url) {
-            try {
-                const response = await fetch(url);
-                const html = await response.text();
-                document.getElementById(elementId).innerHTML = html;
-            } catch (error) {
-                console.error(`Ошибка загрузки ${url}:`, error);
-            }
-        }
-        document.addEventListener('DOMContentLoaded', () => {
-            loadComponent('header', 'assets/components/header.html');
-            loadComponent('footer', 'assets/components/footer.html');
-            loadComponent('actionBar', 'assets/components/action-bar.html');
-            loadComponent('cookieBanner', 'assets/components/cookie-banner.html');
-            loadComponent('callbackModal', 'assets/components/modal.html');
-        });
-    </script>
+
 </body>
 </html>

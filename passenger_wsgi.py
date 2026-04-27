@@ -1,6 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 import json
+import os
+
+import dotenv
+import requests
 import smtplib
 import urllib.parse
 
@@ -10,7 +14,7 @@ from email.header import Header
 
 # Импортируем Kindle Chat хендлер
 from kindle_chat_handler import handle_kindle_chat
-
+dotenv.load_dotenv()
 # Конфигурация
 SMTP_SERVER = "smtp.yandex.ru"
 SMTP_PORT = 465
@@ -18,12 +22,51 @@ SMTP_USERNAME = "blv716@yandex.ru"
 SMTP_PASSWORD = "ggzcnbgtyttreusy"
 TARGET_EMAIL = "blv716@yandex.ru"
 
+# ===== YANDEX SMARTCAPTCHA =====
+# Замените эти ключи на свои из Yandex Cloud
+YANDEX_SMARTCAPTCHA_CLIENT_KEY = os.getenv("YANDEX_SMARTCAPTCHA_CLIENT_KEY")  # Публичный ключ (для сайта)
+YANDEX_SMARTCAPTCHA_SERVER_KEY = os.getenv("YANDEX_SMARTCAPTCHA_SERVER_KEY")  # Секретный ключ (для сервера)
+
+
+def verify_smartcaptcha(token):
+    """Проверка Yandex SmartCaptcha"""
+    if not token:
+        print("Нет токена капчи")
+        return False
+
+    try:
+        data = {
+            'secret': YANDEX_SMARTCAPTCHA_SERVER_KEY,
+            'token': token
+        }
+        response = requests.post(
+            'https://smartcaptcha.yandexcloud.net/validate',
+            data=data,
+            timeout=10
+        )
+        result = response.json()
+        print(f"SmartCaptcha ответ: {result}")
+
+        if result.get('status') == 'ok':
+            print("Капча пройдена успешно")
+            return True
+        else:
+            print(f"Ошибка капчи: {result.get('message', 'Неизвестная ошибка')}")
+            return False
+
+    except requests.exceptions.Timeout:
+        print("Таймаут при проверке капчи")
+        return False
+    except Exception as e:
+        print(f"Исключение при проверке капчи: {e}")
+        return False
+
 
 def send_email(data, form_type="callback"):
     """Отправка письма с данными формы"""
     try:
         msg = MIMEMultipart("alternative")
-        
+
         if form_type == "callback":
             msg["Subject"] = Header("🔔 Новая заявка с сайта (обратный звонок)", "utf-8")
             text_template = f"""
@@ -186,7 +229,21 @@ def application(environ, start_response):
     # Обработка обратных звонков
     if method == "POST" and path == "/send_message":
         post_data = parse_post_data(environ)
-        
+
+        # === ПРОВЕРКА YANDEX SMARTCAPTCHA ===
+        captcha_token = post_data.get("smart-token", [""])[0]
+        if not verify_smartcaptcha(captcha_token):
+            response_body = {
+                "status": "error",
+                "message": "Подтвердите, что вы не робот"
+            }
+            status = "400 Bad Request"
+            response_json = json.dumps(response_body, ensure_ascii=False).encode("utf-8")
+            headers.append(("Content-Type", "application/json; charset=utf-8"))
+            headers.append(("Content-Length", str(len(response_json))))
+            start_response(status, headers)
+            return [response_json]
+
         data = {
             "name": post_data.get("name", [""])[0],
             "phone": post_data.get("phone", [""])[0],
@@ -214,7 +271,7 @@ def application(environ, start_response):
     # Обработка отзывов
     if method == "POST" and path == "/send_review":
         post_data = parse_post_data(environ)
-        
+
         data = {
             "name": post_data.get("name", [""])[0],
             "contact": post_data.get("contact", [""])[0],

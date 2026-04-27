@@ -1,4 +1,4 @@
-    <div class="modal__content">
+<div class="modal__content">
         <div class="modal__bg"></div>
         <button class="modal__close" id="modalClose">&times;</button>
         <div id="modalForm" class="modal__form">
@@ -16,6 +16,11 @@
                 <div class="modal__field">
                     <label for="userQuestion">Ваш вопрос (необязательно)</label>
                     <textarea id="userQuestion" name="question" placeholder="Опишите, что вас беспокоит..."></textarea>
+                </div>
+                <!-- ===== КАПЧА (Yandex SmartCaptcha) ===== -->
+                <div class="modal__field">
+                    <div id="captcha-container" class="smart-captcha" data-sitekey="ysc1_PGmulRYuGEEEIUU29qpRC3vTyQg1fvOgbSu428yx0097a33c"></div>
+                    <input type="hidden" name="smart-token" id="smart-token">
                 </div>
                 <button type="submit" class="modal__btn">Отправить заявку</button>
                 <p class="modal__privacy">
